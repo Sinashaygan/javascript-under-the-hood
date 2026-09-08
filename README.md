@@ -1,82 +1,33 @@
-# JavaScript Under the Hood
-
-My JavaScript learning notes and focused exercises while reading
-You Don't Know JS Yet, with practical connections to React, Next.js,
-and TypeScript.
-
-## Goals
-
-- Build precise mental models of JavaScript behavior.
-- Deepen my understanding of scope, closures, functions, this,
-  coercion, prototypes, modules, and asynchronous execution.
-- Connect JavaScript fundamentals to real frontend engineering.
-- Practice through focused examples, output predictions, and debugging.
-
-## Study Approach
-
-Each chapter or section includes:
-
-- A concise summary written in my own words.
-- Core concepts and explanations of their behavior.
-- Practical connections to frontend development.
-- Common mistakes and misleading assumptions.
-- Small exercises with reasoning hints.
-- Short quiz questions.
-- Long-term takeaways.
-
-Notes and code are written in English.
-Study discussions and additional explanations are in Persian.
-
-Exercise solutions are added after attempting and reviewing the exercises.
-
-## Important Distinctions
-
-Throughout these notes, I distinguish between:
-
-- JavaScript language behavior.
-- Browser and Node.js runtime behavior.
-- React's rendering model.
-- TypeScript's compile-time checks.
-
-Connections between these layers are explained without treating them
-as interchangeable.
-
 ## Contents
 
-### Get Started
+### 01. Get Started
 
-- [What Is JavaScript?](notes/01-get-started/01-what-is-javascript/README.md)
-  — Not started
+- [Get### 01. Get Started
 
-## Repository Structure
-```text
-javascript-under-the-hood/
-├── .gitignore
-├── README.md
-└── notes/
-└── 01-get-started/
-└── 01-what-is-javascript/
-├── README.md
-└── exercises.js
+- [GetREADME.md)
+- [Chapter 1: What Is JavaScript?](notes/01-get-started/01-what-is-javascript/README.md)
+- [Chapter 2: Surveying JS](notes/01-get-started/02-surveying-js/README.md)
+- [Chapter 3: Digging to the Roots of JS](notes/01-get-started/03-digging-to-the-roots-of-js/README.md)
+- [Chapter 4: The Bigger Picture](notes/01-get-started/04-the-bigger-picture/README.md)
 
-## Running Exercises
+### 02. Scope & Closures
 
-Run Node.js-compatible exercises from the repository root:
+- [Scope & Closures Overview](notes/02-scope-closures/README.md)
 
-sh
-node notes/01-get-started/01-what-is-javascript/exercises.js
+### 03. Objects & Classes
 
-Exercises that require a browser, React, or a particular module format
-will include their own execution instructions.
+- [Objects & Classes Overview](notes/03-objects-classes/README.md)
 
-The execution environment matters. An example may behave differently
-depending on strict mode, module format, or runtime.
+### 04. Types & Grammar
 
-## Source and Attribution
+- [Types & Grammar Overview](notes/04-types-grammar/README.md)
 
-These are independent study notes based on You Don't Know JS Yet
-by Kyle Simpson.
+## Study Order
 
-This repository contains my own summaries and practice code.
-It is not a reproduction of the books or an official companion.
-`
+1. Get Started
+2. Scope & Closures
+3. Objects & Classes
+4. Types & Grammar
+
+The `Sync & Async` and `ES.Next & Beyond` directories are kept
+outside the main study path because their development was discontinued.
