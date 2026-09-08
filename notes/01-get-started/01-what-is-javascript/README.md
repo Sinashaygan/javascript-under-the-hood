@@ -1,36 +1,26 @@
-```markdown
-# What Is JavaScript?
+# Get Started
 
-**Status:** Not started.
+This is the first book in the You Don't Know JS Yet, 2nd Edition series.
 
-## Chapter Summary
+The goal of this book is to establish a solid mental model of JavaScript
+before moving into more specialized topics.
 
-_To be added after studying the chapter or section._
+## Chapters
 
-## Core Concepts
+1. [What Is JavaScript?](./01-what-is-javascript/README.md)
+2. [Surveying JS](./02-surveying-js/README.md)
+3. [Digging to the Roots of JS](./03-digging-to-the-roots-of-js/README.md)
+4. [The Bigger Picture](./04-the-bigger-picture/README.md)
 
-_To be added._
+## Study Focus
 
-## Why This Matters in Real Frontend Work
+While studying this book, I will focus on:
 
-_Relevant connections to React, Next.js, and TypeScript will be added here._
+- How JavaScript programs are structured and executed.
+- The relationship between source code and runtime behavior.
+- Functions, scope, values, and objects.
+- The major pillars of JavaScript.
+- Connections to React, Next.js, and TypeScript.
 
-## Common Mistakes
-
-_Misconceptions, confusing explanations, and practical traps will be recorded here._
-
-## Practice Exercises
-
-_Small exercises and reasoning hints will be added here._
-
-See [exercises.js](./exercises.js) for runnable practice code.
-
-Solutions will be added after attempting and reviewing the exercises.
-
-## Quiz Questions
-
-_Short questions to check conceptual understanding will be added here._
-
-## Long-Term Takeaways
-
-_The mental models worth remembering will be collected here._
+Each chapter note is written in my own words and is supplemented
+with focused exercises.
