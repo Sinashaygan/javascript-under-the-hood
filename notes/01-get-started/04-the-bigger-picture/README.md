@@ -47,3 +47,18 @@ type assertions do not perform runtime conversion or validation.
 
 The same JavaScript foundations remain relevant in Next.js code running
 in browser and server environments.
+
+## Common Mistakes and Traps
+
+- Assuming that calling a function from another scope changes how its
+  variable references are resolved.
+- Treating hoisting as evidence that JavaScript is not lexically scoped.
+- Thinking a closure only preserves a snapshot of an initial value.
+- Confusing lexical variable lookup with `this` binding.
+- Assuming every JavaScript object requires a class.
+- Treating prototype delegation as property copying.
+- Assuming class-based design is the only useful object design.
+- Treating coercion as random instead of studying its rules.
+- Assuming TypeScript removes the need to understand runtime types.
+- Importing another language's object model without checking JS behavior.
+- Attempting to replace a team's coding practices all at once.
