@@ -62,3 +62,47 @@ in browser and server environments.
 - Assuming TypeScript removes the need to understand runtime types.
 - Importing another language's object model without checking JS behavior.
 - Attempting to replace a team's coding practices all at once.
+
+## Practice Exercises
+
+The following exercises are original study activities based on the
+chapter's themes.
+
+Suggested location for runnable examples:
+[`exercises.js`](./exercises.js).
+
+The exercise file and completed solutions are not included in this README.
+
+1. Define a function in an outer scope and call it from a scope containing
+   a variable with the same name. Predict which variable it reads.
+
+2. Create two counters from the same factory function. Explain why their
+   internal state is independent.
+
+3. Create an object with `Object.create(..)` and call a method found through
+   its prototype. Explain method lookup and `this` separately.
+
+4. Compare `"5" + 1`, `"5" - 1`, and `Number("5") + 1`. Explain each result.
+
+5. Choose a JavaScript claim you have heard. Build a small example that
+   tests the claim and identify the conditions under which it is true.
+
+6. Propose one small improvement to frontend code. Show the before and
+   after versions and explain the practical benefit.
+
+Appendix B of Get Started provides additional practice for the book.
+
+## Quiz Questions
+
+1. What are the three pillars introduced in this chapter?
+2. What does lexical scope determine?
+3. How does closure follow from lexical scope?
+4. Why does hoisting not make JavaScript dynamically scoped?
+5. Can a JavaScript object exist without a class definition?
+6. What is behavior delegation?
+7. Why should prototypes be understood independently of class syntax?
+8. Why is coercion important even when using TypeScript?
+9. What is the difference between a type assertion and runtime conversion?
+10. What does working with the grain of JavaScript mean?
+11. How can a specification help resolve a disagreement about behavior?
+12. Why does the author recommend gradual changes within a team?
