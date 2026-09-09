@@ -28,3 +28,22 @@ series.
 - Static type tools do not replace knowledge of JavaScript runtime rules.
 - Language specifications can help resolve questions about behavior.
 - Team practices should evolve through small, understandable changes.
+
+## Why This Matters in Real Frontend Work
+
+These are practical connections added to the study notes.
+
+Scope and closure help explain callbacks, event handlers, and functions
+created during React renders.
+
+Prototype knowledge helps when inspecting objects and determining where
+properties and methods are found.
+
+Types and coercion matter when processing form values, URL parameters,
+API responses, and other external inputs.
+
+TypeScript can detect many problems before execution, but annotations and
+type assertions do not perform runtime conversion or validation.
+
+The same JavaScript foundations remain relevant in Next.js code running
+in browser and server environments.
