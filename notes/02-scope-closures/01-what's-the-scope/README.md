@@ -74,3 +74,21 @@ URL parameters, and form inputs with explicit validation and transformation.
 
 ### Source
 get-started/ch4.md, lines 52–69.
+
+## Section: Learning and the Grain Metaphor
+Investigate assumptions and use specifications to clarify behavior. Use
+concrete "before-and-after" examples to propose team improvements.
+
+## Section: Reading Roadmap
+1. Get Started
+2. Scope & Closures
+3. Objects & Classes
+4. Types & Grammar
+5. Sync & Async
+6. ES.Next & Beyond
+
+**Frontend Tip:** Use this roadmap to identify which underlying JS topic
+a practical bug or architectural issue belongs to.
+
+### Source
+get-started/ch4.md, lines 70–128.
