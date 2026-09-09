@@ -329,3 +329,93 @@ Definition → new → Instance
 Classic Module:
 Factory Function → Execution → Private Scope + Public API
 ```
+
+## Practice Exercises
+
+### Exercise 1 — Values and Types
+Predict the outputs:
+```javascript
+console.log(typeof "42");
+console.log(typeof 42);
+console.log(typeof null);
+console.log(typeof []);
+```
+
+### Exercise 2 — Reassignment vs. Mutation
+Determine which operations are valid and explain why:
+```javascript
+const user = { name: "Sara" };
+user.name = "Mina";
+user = { name: "Ali" };
+```
+
+### Exercise 3 — Functions as Values
+Explain why this code outputs `"Sara"` without invoking `greet` during assignment:
+```javascript
+function greet(name) {
+  return `Hello, ${name}`;
+}
+const fn = greet;
+console.log(fn("Sara"));
+```
+
+### Exercise 4 — Equality & Identity
+Predict results for:
+```javascript
+console.log(42 === "42");
+console.log(42 == "42");
+console.log(NaN === NaN);
+console.log(Object.is(NaN, NaN));
+console.log({} === {});
+```
+
+### Exercise 5 & 6 — Classes, Overriding, and `super`
+Trace the method resolution:
+```javascript
+class Publication {
+  print() {
+console.log("Publication");
+  }
+}
+class Book extends Publication {
+  print() {
+super.print();
+console.log("Book");
+  }
+}
+new Book().print();
+```
+
+### Exercise 7 — Module Encapsulation
+Explain the output differences:
+```javascript
+function createSecret() {
+  const secret = 123;
+  return {
+readSecret() {
+return secret;
+},
+  };
+}
+const box = createSecret();
+console.log(box.readSecret()); // ?
+console.log(box.secret);       // ?
+```
+
+## Completion Checklist
+
+- [ ] Explain why each JS file is an independent program.
+- [ ] Distinguish primitive values from structural objects.
+- [ ] Understand `typeof` results and legacy behaviors.
+- [ ] Differentiate scoping rules across `var`, `let`, and `const`.
+- [ ] Differentiate variable reassignment from reference mutation.
+- [ ] Distinguish parameters from arguments.
+- [ ] Explain the difference between `return` and side-effect outputs (`console.log`).
+- [ ] Understand functions as first-class citizens.
+- [ ] Explain `===` vs. `==` and relational coercion.
+- [ ] Understand `NaN` uniqueness and `Object.is`.
+- [ ] Explain reference identity in object comparisons.
+- [ ] Define classes, construct instances, and use `this`, `extends`, and `super`.
+- [ ] Implement classic modules via factory functions and closures.
+- [ ] Use ES Module syntax (`import` / `export`).
+- [ ] Treat this chapter as a high-level roadmap for deep study in subsequent books.
