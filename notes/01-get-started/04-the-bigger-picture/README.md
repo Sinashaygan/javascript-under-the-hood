@@ -106,3 +106,37 @@ Appendix B of Get Started provides additional practice for the book.
 10. What does working with the grain of JavaScript mean?
 11. How can a specification help resolve a disagreement about behavior?
 12. Why does the author recommend gradual changes within a team?
+
+## Long-Term Takeaways
+
+- Organize deeper JS learning around scope, objects, and types.
+- Explain behavior using the language's mechanisms.
+- Keep lexical scope and invocation-dependent `this` behavior distinct.
+- Understand prototype links before relying only on class syntax.
+- Learn conversion rules instead of memorizing isolated surprising outputs.
+- Use static tooling together with runtime knowledge.
+- Question assumptions and test them with focused examples.
+- Introduce better practices through concrete, incremental improvements.
+
+## Source Notes
+
+These notes are an independent study companion based on the chapter.
+They are not a reproduction of the original book.
+
+Frontend connections, exercises, and quiz questions are supplementary
+study material.
+
+Reading completion does not imply that the exercises or appendices
+have been completed.
+
+Source file:
+`You-Dont-Know-JS-2nd-ed/get-started/ch4.md`
+
+| Topic | Source lines |
+| :--- | :--- |
+| Opening and chapter framing | 1–11 |
+| Scope and closure | 12–32 |
+| Prototypes | 34–51 |
+| Types and coercion | 52–69 |
+| Learning advice and the grain metaphor | 70–99 |
+| Reading roadmap and closing guidance | 100–128 |
