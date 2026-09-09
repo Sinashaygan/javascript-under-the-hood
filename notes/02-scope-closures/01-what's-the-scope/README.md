@@ -56,3 +56,21 @@ an object's own properties and those inherited via the prototype chain.
 
 ### Source
 get-started/ch4.md, lines 34–51.
+
+## Section: Types and Coercion
+
+### Summary
+Understanding value types and implicit/explicit conversion rules is essential,
+even when using static analysis tools like TypeScript.
+
+### Frontend Takeaway
+Static types do not perform runtime conversion. Handle API responses,
+URL parameters, and form inputs with explicit validation and transformation.
+
+### Common Mistakes
+- Treating coercion as "random" instead of learning the formal rules.
+- Assuming TypeScript removes the need to understand runtime types.
+- Relying on type assertions to bypass runtime logic errors.
+
+### Source
+get-started/ch4.md, lines 52–69.
