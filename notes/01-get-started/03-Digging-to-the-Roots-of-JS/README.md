@@ -46,3 +46,24 @@ a stronger mental model of JavaScript runtime behavior.
 
 - **Asking "Why?":** The practice of investigating the mechanisms behind
   JavaScript behavior instead of only memorizing syntax or outputs.
+## Why This Matters in Real Frontend Work
+
+A strong understanding of these mechanisms makes frontend code easier to
+debug and reason about.
+
+Closures are fundamental to callbacks, event handlers, factory functions, and
+many patterns used in React and other frontend frameworks. Iterables provide
+standard ways to work with arrays, strings, maps, sets, and custom data streams.
+
+Understanding `this` helps explain method calls, explicit context injection,
+and behavior in older JavaScript APIs.
+
+Prototype knowledge is useful when inspecting objects, understanding property
+lookup, debugging library code, and distinguishing delegation from copying.
+
+TypeScript adds static type information, but it does not replace JavaScript's
+runtime rules for closures, `this`, iteration, or prototypes.
+
+The chapter's main practical lesson is to investigate runtime behavior instead
+of relying only on syntax, framework conventions, or assumptions from other
+programming languages.
