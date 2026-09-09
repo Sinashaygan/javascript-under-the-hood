@@ -276,3 +276,37 @@ console.log(counter.count);      // undefined (hidden from outer scope)
 | **Result** | Concrete instance | Public API object |
 | **Core Mechanism**| `class`, `extends`, `this` | Closures, function scope |
 ```
+## 7. ES Modules (ESM)
+
+ES Modules represent the official ECMAScript standard for file-based
+modularization using `import` and `export`.
+
+### Named Exports
+```javascript
+// math.js
+export const version = "1.0";
+export function add(a, b) {
+  return a + b;
+}
+```
+```javascript
+// app.js
+import { version, add as sum } from "./math.js";
+console.log(sum(2, 3)); // 5
+```
+### Default Exports
+```javascript
+// greet.js
+export default function greet(name) {
+  return `Hello, ${name}`;
+}
+```
+```javascript
+// app.js
+import customGreet from "./greet.js";
+```
+### Encapsulation and File Boundaries
+ES Modules provide clean architectural boundaries by:
+- Scoping code strictly to individual files (avoiding global namespace pollution).
+- Making dependencies and public contracts explicit.
+- Supporting static analysis for tree-shaking and bundling optimizations.
