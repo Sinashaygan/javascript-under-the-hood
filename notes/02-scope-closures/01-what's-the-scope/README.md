@@ -38,3 +38,21 @@ environment in which the function was created to determine accessible variables.
 
 ### Source
 get-started/ch4.md, lines 12–32.
+
+## Section: Prototypes
+
+### Summary
+JavaScript supports direct object creation and links between objects,
+enabling behavior delegation instead of class-based copying.
+
+### Frontend Takeaway
+When inspecting objects (e.g., in Browser DevTools), distinguish between
+an object's own properties and those inherited via the prototype chain.
+
+### Common Mistakes
+- Assuming every object requires a class.
+- Treating prototype delegation as property copying.
+- Assuming class-based design is the only valid architecture.
+
+### Source
+get-started/ch4.md, lines 34–51.
