@@ -1,55 +1,44 @@
-# Chapter 2 — Surveying JS
+# Chapter 2: Surveying JS
 
-> Independent study notes for *You Don't Know JS Yet*, 2nd Edition,
-> Get Started, Chapter 2.
+> Independent study notes for *You Don't Know JS Yet*, 2nd Edition, Get Started, Chapter 2.
 
-## Main Idea
+**Source:** `get-started/ch2.md`  
+**Status:** Completed
 
-JavaScript is a language with several connected parts:
+## Chapter Summary
 
-- values and types;
-- variables;
-- functions;
-- comparisons;
-- objects and classes;
-- modules;
-- ES Modules.
+JavaScript is a language composed of several connected systems: values and types,
+variables, functions, comparisons, objects, classes, and module systems. This
+chapter provides a high-level survey to build a foundational map of the language
+before subsequent books explore each area in depth.
 
-This chapter provides a high-level survey of these concepts. It is not
-intended to explain every detail. Its purpose is to create a map of the
-language before the following chapters examine each subject more deeply.
-
-The goal is to understand the basic nature of JavaScript and to build
-accurate expectations about how its core features behave.
+The main goal is to understand JavaScript's foundational nature and establish
+accurate mental models for how its core mechanisms behave.
 
 ## Study Method
 
-Use the following cycle:
+Use the active learning cycle:
 
-Read → Predict → Run → Explain
+**Read → Predict → Run → Explain**
 
-1. Read each example carefully.
-2. Predict the result before executing it.
-3. Run the example in a known JavaScript environment.
-4. Explain the result using JavaScript concepts.
-5. Modify the example and predict the new result.
+1. **Read** each code snippet carefully.
+2. **Predict** the evaluation and output before execution.
+3. **Run** the example in a clean JavaScript environment.
+4. **Explain** the underlying mechanism behind the result.
+5. **Modify** parameters or references and predict the new output.
 
-Pay special attention to:
-
-- the type of each value;
-- whether two variables share the same reference;
-- the scope in which a variable exists;
-- whether an operation performs coercion;
-- whether a function returns a value or only produces a side effect.
+Focus areas during analysis:
+- The precise type of each value.
+- Whether variables share a reference or hold independent values.
+- The lexical scope in which a binding exists.
+- Where implicit type coercion takes place.
+- Whether a function returns a value or produces side effects.
 
 ## 1. Each File Is a Program
 
-In JavaScript, each file can be treated as an independent program.
-
-A project may contain many JavaScript files. Build tools can analyze their
-dependencies and combine or prepare them for execution.
-
-A useful model is:
+Each JavaScript file is processed as an independent program. Build tools and
+bundlers analyze dependency graphs between files and assemble them into
+executable applications.
 ```text
 Several source files
 ↓
@@ -58,26 +47,15 @@ Dependency analysis
 Build or bundling process
 ↓
 Executable application
+```
 
-The organization of source files is therefore part of how a JavaScript
-application is structured.
+## 2. Values and Types
 
-## 2. Values
+Programs manipulate values. Values can be assigned, passed, returned, stored,
+and compared.
 
-JavaScript programs work with values.
-
-Values can be:
-
-- assigned to variables;
-- passed to functions;
-- returned from functions;
-- stored in objects and arrays;
-- compared with other values.
-
-### Primitive Values
-
-The primitive value types discussed in this chapter include:
-
+### Primitive Types
+JavaScript primitives include:
 - `string`
 - `number`
 - `boolean`
@@ -86,9 +64,8 @@ The primitive value types discussed in this chapter include:
 - `bigint`
 - `symbol`
 
-Examples:
-
-js
+```
+javascript
 const name = "Sara";
 const age = 25;
 const active = true;
@@ -96,459 +73,146 @@ const emptyValue = null;
 let result;
 const largeNumber = 123n;
 const identifier = Symbol("id");
+```
 
-### Objects
+### Objects and Arrays
+Objects and arrays are reference types that hold collections of properties:
 
-Objects are values that can contain properties.
-
-js
+```
+javascript
 const user = {
   name: "Sara",
   age: 25,
 };
 
-Arrays are also objects:
-
-js
 const numbers = [1, 2, 3];
+```
 
-An object or array can contain other values, including functions.
+### The `typeof` Operator
+`typeof` returns a string classifying the type of an operand:
 
-### `typeof`
-
-The `typeof` operator returns a string describing the type of a value.
-
-js
+```
+javascript
 typeof "hello";    // "string"
 typeof 42;         // "number"
 typeof true;       // "boolean"
 typeof undefined;  // "undefined"
 
-Some results require special attention:
-
-js
-typeof null; // "object"
-typeof [];   // "object"
-
-`typeof null` returns `"object"` because of a historical behavior in
-JavaScript.
-
-`typeof` is useful, but it does not always provide a complete or precise
-classification of a value.
+// Historical legacy behaviors:
+typeof null;       // "object"
+typeof [];         // "object"
+```
 
 ## 3. Declaring and Using Variables
 
-Variables provide names through which values can be accessed.
+### Declarations and Scope
+- `var`: Function-scoped, ignores standard block boundaries.
+- `let`: Block-scoped, reassignable.
+- `const`: Block-scoped, prevents reassignment (must be initialized).
 
-JavaScript has three main variable declarations:
-
-- `var`
-- `let`
-- `const`
-
-### `var`
-
-`var` is function-scoped.
-
-js
-function example() {
-  var value = 10;
-
-  console.log(value);
-}
-
-A `var` declaration belongs to the surrounding function scope rather than
-to an individual block.
-
-### `let`
-
-`let` is block-scoped.
-
-js
-{
-  let value = 10;
-  console.log(value);
-}
-
-// value is not available here
-
-The variable exists only inside the block where it is declared.
-
-### `const`
-
-`const` is also block-scoped, but it does not allow reassignment.
-
-js
-const score = 100;
-
-score = 200; // TypeError
-
-The variable must also be initialized when it is declared:
-
-js
-const name = "Sara";
-
-### Reassignment and Mutation
-
-Reassignment and mutation are different operations.
-
-**Reassignment** changes what a variable refers to:
-
-js
-let value = 1;
-
-value = 2;
-
-**Mutation** changes the contents of an object or array:
-
-js
-const user = {
-  name: "Sara",
-};
-
-user.name = "Mina";
-
-The second example is valid. The variable `user` still refers to the same
-object; only the object's contents changed.
-
-Therefore:
-
-text
-const prevents reassignment.
-const does not automatically make an object immutable.
-
-Arrays can also be mutated through a `const` binding:
-
-js
-const numbers = [1, 2];
-
-numbers.push(3); // valid
-
-But assigning a new array is not allowed:
-
-js
-numbers = [4, 5]; // TypeError
-
-### Scope
-
-Scope determines where a variable can be accessed.
-
-A useful distinction is:
-
+```
 text
 var   → function scope
 let   → block scope
 const → block scope
+```
 
-Understanding scope is essential for understanding functions, modules, and
-closures.
+### Reassignment vs. Mutation
+
+- **Reassignment:** Modifying which value/reference a variable identifier points to.
+- **Mutation:** Modifying the internal contents of an existing object or array.
+
+```
+javascript
+const user = { name: "Sara" };
+user.name = "Mina"; // VALID: Object mutation
+
+user = { name: "Ali" }; // ERROR (TypeError): Variable reassignment
+
+text
+const prevents identifier reassignment.
+const does not make underlying objects immutable.
+
+```
 
 ## 4. Functions
 
-A function is a reusable unit of behavior.
+Functions are reusable, callable units of behavior and first-class values.
 
-js
-function greet(name) {
-  return `Hello, ${name}`;
-}
+### Parameters vs. Arguments
+```text
+Parameter → Name defined in function signature
+Argument  → Concrete value passed during invocation
 
-console.log(greet("Sara"));
-// Hello, Sara
+### Return Values vs. Side Effects
+- `return` yields an explicit value back to the caller.
+- `console.log` produces a side effect (standard output) and returns `undefined`.
 
-### Parameters and Arguments
+### First-Class Functions
+Functions can be treated like any other value: assigned to variables, passed
+into other functions (callbacks), and returned.
 
-A parameter is the name used in a function definition:
-
-js
-function greet(name) {
-  // name is a parameter
-}
-
-An argument is the value supplied during a function call:
-
-js
-greet("Sara");
-// "Sara" is an argument
-
-text
-Parameter → appears in the function definition
-Argument  → appears in the function call
-
-### Return Values
-
-`return` sends a value back to the code that called the function:
-
-js
-function add(a, b) {
-  return a + b;
-}
-
-const result = add(2, 3);
-
-console.log(result); // 5
-
-`console.log` is different:
-
-js
-function showSum(a, b) {
-  console.log(a + b);
-}
-
-This function displays a value, but it does not necessarily return that
-value to the caller.
-
-text
-return      → produces a value for the caller
-console.log → displays a value as a side effect
-
-### Functions Are Values
-
-Functions are first-class values in JavaScript.
-
-They can be:
-
-- assigned to variables;
-- passed as arguments;
-- returned from other functions;
-- stored in objects;
-- stored in arrays.
-
-js
+javascript
 function greet() {
   return "Hello";
 }
 
-const fn = greet;
-
-console.log(fn());
-// Hello
-
-The function itself was assigned to `fn`; it was not called during the
-assignment.
-
-### Passing Functions as Arguments
-
-js
-function runOperation(operation) {
-  return operation();
-}
-
-function getMessage() {
-  return "Done";
-}
-
-console.log(runOperation(getMessage));
-// Done
-
-This ability is central to callbacks, functional programming, and many
-JavaScript APIs.
+const fn = greet; // Assigned reference, not invoked
+console.log(fn()); // "Hello"
+```
 
 ## 5. Comparisons
 
-Comparisons produce boolean results:
-
-js
-10 > 5;  // true
-10 === 5; // false
-
-JavaScript provides several comparison operators with different behavior.
-
-### Strict Equality: `===`
-
-`===` compares values without performing ordinary implicit type coercion.
-
-js
-42 === 42;    // true
-42 === "42";  // false
-
-The second comparison is false because the values have different types.
-
-### Loose Equality: `==`
-
-`==` may perform type coercion before comparing values:
-
-js
-42 == "42"; // true
-
-The string is converted for the purpose of comparison.
-
-This can produce results that are difficult to predict unless the coercion
-rules are understood.
-
-### Important Examples
-
-js
+### Strict Equality (`===`) vs. Loose Equality (`==`)
+- `===` (Strict): Checks both type and value without implicit coercion.
+- `==` (Loose): Allows implicit type coercion before comparison.
+```
+javascript
+42 === "42"; // false (different types)
+42 == "42";  // true (string coerced to number)
 0 == false;  // true
 0 === false; // false
+```
 
-The strict comparison makes the type difference visible.
+### `NaN` (Not a Number)
+`NaN` is of type `number`, but is not equal to anything, including itself:
 
-### `NaN`
+```
+javascript
+NaN === NaN;           // false
+Object.is(NaN, NaN);   // true
+```
 
-`NaN` means “Not a Number,” but it is still a value of the number type.
+### Object Reference Equality
+Objects are compared by reference identity, not structural content:
 
-A notable behavior is:
+```
+javascript
+{} === {}; // false (distinct instances)
 
-js
-NaN === NaN; // false
-
-`NaN` is not equal to itself under ordinary equality.
-
-`Object.is` treats the two `NaN` values as the same:
-
-js
-Object.is(NaN, NaN); // true
-
-### Comparing Objects
-
-Objects are compared by reference, not by their contents.
-
-js
-{} === {}; // false
-
-These are two different object values.
-
-Even though they look identical, they occupy different references.
-
-js
-const first = {};
-const second = first;
-
-first === second; // true
-
-Here both variables refer to the same object.
-
-This distinction is important:
-
-text
-Same contents  ≠ necessarily the same object
-Same reference = the same object
+const a = {};
+const b = a;
+a === b;   // true (shared memory reference)
+```
 
 ### Relational Comparisons
+Relational operators (`<`, `>`) compare numbers numerically and strings
+lexicographically (character code order):
 
-Relational operators such as `<` and `>` can perform different kinds of
-comparison depending on the operands.
+```
+javascript
+10 < 9;     // false (numeric)
+"10" < "9"; // true (lexical: "1" comes before "9")
+```
 
-Numbers are compared numerically:
+## 6. Code Organization Patterns
 
-js
-10 < 9; // false
+JavaScript provides multiple strategies to encapsulate state and logic.
 
-Strings can be compared lexically:
+## 6.1 Classes and Prototypes
 
-js
-"10" < "9"; // true
-
-The strings are compared as text, character by character, rather than as
-the numbers 10 and 9.
-
-## 6. How We Organize in JS
-
-JavaScript provides multiple ways to organize related data and behavior.
-
-Two important approaches are:
-
-- classes;
-- modules.
-
-## 6.1 Classes
-
-A class can be used as a pattern for creating objects.
-
-js
-class Notebook {
-  constructor() {
-this.pages = [];
-  }
-
-  addPage(text) {
-this.pages.push(text);
-  }
-
-  print() {
-console.log(this.pages);
-  }
-}
-
-Creating an instance:
-
-js
-const notebook = new Notebook();
-
-notebook.addPage("Learn JavaScript");
-notebook.print();
-
-### Class and Instance
-
-The class is the definition or pattern:
-
-text
-Notebook → class
-
-An object created from that class is an instance:
-
-js
-const firstNotebook = new Notebook();
-const secondNotebook = new Notebook();
-
-Each instance can have its own state.
-
-### `this`
-
-`this` is commonly used to access data belonging to the current instance.
-
-js
-class Counter {
-  constructor() {
-this.count = 0;
-  }
-
-  increment() {
-this.count++;
-  }
-}
-
-const counter = new Counter();
-
-counter.increment();
-
-console.log(counter.count);
-// 1
-
-In this example, `this.count` refers to the `count` property of the
-instance on which `increment` is called.
-
-### Inheritance with `extends`
-
-A class can extend another class:
-
-js
-class Publication {
-  print() {
-console.log("Publication");
-  }
-}
-
-class Book extends Publication {
-  read() {
-console.log("Reading book");
-  }
-}
-
-A `Book` instance can use both methods:
-
-js
-const book = new Book();
-
-book.print();
-book.read();
-
-### Method Overriding
-
-A child class can define a method with the same name as a method in the
-parent class:
-
-js
+Classes act as templates for instantiating objects with shared behavior.
+```javascript
 class Publication {
   print() {
 console.log("Publication");
@@ -557,45 +221,29 @@ console.log("Publication");
 
 class Book extends Publication {
   print() {
+super.print(); // Calls parent method
 console.log("Book");
   }
 }
 
 const book = new Book();
-
 book.print();
+// Publication
 // Book
 
-The child implementation overrides the inherited implementation for the
-`Book` instance.
+- **`this`**: Contextually references the active instance at call time.
+- **`extends` & `super`**: Establishes inheritance delegation and enables method overriding.
+```
 
-### `super`
+## 6.2 Classic Modules (Factory Functions)
 
-`super` can be used to call the parent implementation:
+Classic modules use factory functions and closures to establish private state
+and expose a selective public API.
 
-js
-class Book extends Publication {
-  print() {
-super.print();
-console.log("Book");
-  }
-}
-
-The result is:
-
-text
-Publication
-Book
-
-`super.print()` calls the `print` method from the parent class.
-
-## 6.2 Classic Modules
-
-A classic module can be created with a factory function.
-
-js
+```
+javascript
 function createCounter() {
-  let count = 0;
+  let count = 0; // Private state via closure
 
   function increment() {
 count++;
@@ -607,401 +255,167 @@ return count;
 
   return {
 increment,
-getCount,
+getCount, // Public API
   };
 }
 
-Usage:
-
-js
 const counter = createCounter();
-
 counter.increment();
-counter.increment();
+console.log(counter.getCount()); // 2
+console.log(counter.count);      // undefined (hidden from outer scope)
+```
 
-console.log(counter.getCount());
-// 2
+### Classes vs. Classic Modules
 
-### Private State
+```
+| Feature | Class | Classic Module |
+| :--- | :--- | :--- |
+| **Primary Goal** | Object template / Shared prototype | Encapsulated state & scope |
+| **Creation** | `new ClassName()` | Factory function call |
+| **State Access** | Instance properties (`this`) | Lexical scope & closures |
+| **Result** | Concrete instance | Public API object |
+| **Core Mechanism**| `class`, `extends`, `this` | Closures, function scope |
+```
+## 7. ES Modules (ESM)
 
-The `count` variable is inside the function's scope:
+ES Modules represent the official ECMAScript standard for file-based
+modularization using `import` and `export`.
 
-js
-let count = 0;
-
-It is not directly exposed through the returned object.
-
-js
-console.log(counter.count);
-// undefined
-
-However, the returned functions can still access it:
-
-js
-counter.getCount();
-// 2
-
-This is possible because the functions retain access to the surrounding
-scope. This behavior is associated with closures.
-
-### Public API
-
-The returned object defines the module's public API:
-
-js
-return {
-  increment,
-  getCount,
-};
-
-Only the properties placed on this object are directly available to code
-outside the module.
-
-text
-Private:
-- count
-
-Public:
-- increment
-- getCount
-
-### Class and Module
-
-| Feature | Class | Module |
-| --- | --- | --- |
-| Main purpose | Define a pattern for objects | Encapsulate data and behavior |
-| Usual creation | `new ClassName()` | Calling a factory function |
-| State access | Often through `this` | Through closure and scope |
-| Result | An instance | A public API |
-| Common tools | `class`, `extends`, `super` | Functions, scope, closures |
-
-A simple mental model:
-
-text
-Class:
-definition → new → instance
-
-Module:
-factory function → execution → private scope + public API
-
-## 7. ES Modules
-
-ES Modules are JavaScript's standardized module system.
-
-They use:
-
-- `export` to make values available;
-- `import` to use exported values from another module.
-
-### Exporting Values
-
-js
+### Named Exports
+```javascript
 // math.js
+export const version = "1.0";
 export function add(a, b) {
   return a + b;
 }
-
-A named export can be imported by another file:
-
-js
+```
+```javascript
 // app.js
-import { add } from "./math.js";
-
-console.log(add(2, 3));
-// 5
-
-### Named Exports
-
-Named exports are imported using their exported names:
-
-js
-export const version = "1.0";
-export function greet(name) {
+import { version, add as sum } from "./math.js";
+console.log(sum(2, 3)); // 5
+```
+### Default Exports
+```javascript
+// greet.js
+export default function greet(name) {
   return `Hello, ${name}`;
 }
+```
+```javascript
+// app.js
+import customGreet from "./greet.js";
+```
+### Encapsulation and File Boundaries
+ES Modules provide clean architectural boundaries by:
+- Scoping code strictly to individual files (avoiding global namespace pollution).
+- Making dependencies and public contracts explicit.
+- Supporting static analysis for tree-shaking and bundling optimizations.
 
-js
-import { version, greet } from "./library.js";
+## Key Distinctions and Mental Models
 
-An alias can be used locally:
+| Concept Pair | Distinguishing Difference |
+| :--- | :--- |
+| **Primitive vs. Object** | Immutable scalar value vs. mutable container of properties |
+| **Reassignment vs. Mutation** | Pointing a binding to a new value vs. altering object internals |
+| **Parameter vs. Argument** | Named variable in declaration vs. actual value passed at call time |
+| **`return` vs. `console.log`** | Producing program data vs. triggering runtime diagnostic output |
+| **`===` vs. `==`** | Type-strict equality vs. coercive loose equality |
+| **Object Equality** | Evaluated strictly by memory reference identity, not structural shape |
+| **Class vs. Module** | Prototype-based instantiation vs. closure-based encapsulation |
+```text
+Class:
+Definition → new → Instance
 
-js
-import { add as sum } from "./math.js";
+Classic Module:
+Factory Function → Execution → Private Scope + Public API
+```
 
-console.log(sum(2, 3));
-
-### Default Exports
-
-A module can also provide a default export:
-
-js
-export default function greet() {
-  return "Hello";
-}
-
-It can be imported with a local name:
-
-js
-import greet from "./greet.js";
-
-The local name does not have to match the original function name.
-
-### Module Boundaries
-
-ES Modules help define explicit boundaries between files.
-
-A module can:
-
-- hide implementation details;
-- expose a deliberate public API;
-- declare its dependencies;
-- reduce reliance on global variables;
-- make a project easier to maintain.
-
-Each module is evaluated as a module, and imported references are managed
-through the module system.
-
-## 8. The Rabbit Hole Deepens
-
-This chapter is a broad survey rather than a complete explanation of every
-JavaScript feature.
-
-It is normal for some topics to remain unclear after a first reading.
-The following chapters will examine these ideas in greater detail.
-
-The chapter should be revisited several times because it provides the
-foundation for deeper study.
-
-The main lesson is:
-
-text
-This chapter provides a map of JavaScript.
-The following chapters explore the individual areas in depth.
-
-## Key Distinctions
-
-### Primitive vs. Object
-
-text
-Primitive → basic JavaScript value
-Object    → value that can contain properties
-
-### Reassignment vs. Mutation
-
-text
-Reassignment → changing what a variable refers to
-Mutation     → changing the contents of an object or array
-
-### Parameter vs. Argument
-
-text
-Parameter → name in the function definition
-Argument  → value supplied in the function call
-
-### `return` vs. `console.log`
-
-text
-return      → sends a value back to the caller
-console.log → displays a value
-
-### `===` vs. `==`
-
-text
-=== → strict comparison without ordinary implicit coercion
-==  → comparison that may perform type coercion
-
-### Class vs. Module
-
-text
-Class  → pattern for creating instances
-Module → encapsulated scope with a public API
-
-### Object Contents vs. Object Reference
-
-text
-Equal-looking objects may still be different objects.
-Two variables are equal by reference when they point to the same object.
-
-## Practice
+## Practice Exercises
 
 ### Exercise 1 — Values and Types
-
-Predict the result:
-
-js
+Predict the outputs:
+```javascript
 console.log(typeof "42");
 console.log(typeof 42);
 console.log(typeof null);
 console.log(typeof []);
+```
 
-Explain each result.
-
-### Exercise 2 — Reassignment and Mutation
-
-Predict which lines are valid:
-
-js
-const user = {
-  name: "Sara",
-};
-
+### Exercise 2 — Reassignment vs. Mutation
+Determine which operations are valid and explain why:
+```javascript
+const user = { name: "Sara" };
 user.name = "Mina";
-user = {
-  name: "Ali",
-};
-
-Explain the difference between the two operations.
+user = { name: "Ali" };
+```
 
 ### Exercise 3 — Functions as Values
-
-What is printed?
-
-js
+Explain why this code outputs `"Sara"` without invoking `greet` during assignment:
+```javascript
 function greet(name) {
   return `Hello, ${name}`;
 }
-
 const fn = greet;
-
 console.log(fn("Sara"));
+```
 
-Explain why assigning `greet` to `fn` does not call the function immediately.
-
-### Exercise 4 — Equality
-
-Predict the result of each comparison:
-
-js
+### Exercise 4 — Equality & Identity
+Predict results for:
+```javascript
 console.log(42 === "42");
 console.log(42 == "42");
 console.log(NaN === NaN);
 console.log(Object.is(NaN, NaN));
 console.log({} === {});
+```
 
-Explain the role of type coercion, special `NaN` behavior, and references.
-
-### Exercise 5 — Classes
-
-What is printed?
-
-js
-class Animal {
-  speak() {
-console.log("Animal sound");
-  }
-}
-
-class Dog extends Animal {
-  speak() {
-console.log("Woof");
-  }
-}
-
-const dog = new Dog();
-
-dog.speak();
-
-Explain why the `Dog` implementation is used.
-
-### Exercise 6 — `super`
-
-Predict the output:
-
-js
+### Exercise 5 & 6 — Classes, Overriding, and `super`
+Trace the method resolution:
+```javascript
 class Publication {
   print() {
 console.log("Publication");
   }
 }
-
 class Book extends Publication {
   print() {
 super.print();
 console.log("Book");
   }
 }
-
 new Book().print();
+```
 
-### Exercise 7 — Module Privacy
-
-What are the two outputs?
-
-js
+### Exercise 7 — Module Encapsulation
+Explain the output differences:
+```javascript
 function createSecret() {
   const secret = 123;
-
   return {
 readSecret() {
 return secret;
 },
   };
 }
-
 const box = createSecret();
-
-console.log(box.readSecret());
-console.log(box.secret);
-
-Explain why the first expression returns `123` and the second produces
-`undefined`.
-
-### Exercise 8 — ES Modules
-
-Assume the following files exist.
-
-js
-// math.js
-export function multiply(a, b) {
-  return a * b;
-}
-
-js
-// app.js
-import { multiply } from "./math.js";
-
-console.log(multiply(4, 5));
-
-What is printed? Which file defines the function, and which file uses it?
+console.log(box.readSecret()); // ?
+console.log(box.secret);       // ?
+```
 
 ## Completion Checklist
 
-- [ ] I can explain why each JavaScript file can be treated as a program.
-- [ ] I can distinguish primitive values from objects.
-- [ ] I understand the important behavior of `typeof`.
-- [ ] I can explain the scope differences between `var`, `let`, and `const`.
-- [ ] I can distinguish reassignment from mutation.
-- [ ] I can distinguish parameters from arguments.
-- [ ] I understand the difference between `return` and `console.log`.
-- [ ] I understand that functions are first-class values.
-- [ ] I can explain the difference between `===` and `==`.
-- [ ] I understand why `NaN === NaN` is false.
-- [ ] I understand reference-based object comparison.
-- [ ] I can create a class and an instance.
-- [ ] I can explain the roles of `this`, `extends`, and `super`.
-- [ ] I understand how a factory function can create a module.
-- [ ] I understand how closure can preserve access to private state.
-- [ ] I can identify a module's public API.
-- [ ] I understand the basic roles of `import` and `export`.
-- [ ] I can explain why this chapter is a survey rather than a complete
-treatment of JavaScript.
-
-## Long-Term Goal
-
-Explain JavaScript behavior using the language's underlying concepts:
-
-- values and types;
-- scope and references;
-- functions and closures;
-- coercion and comparison;
-- objects and inheritance;
-- modules and boundaries.
-
-The aim is to understand unfamiliar JavaScript code from first principles
-instead of relying on memorized outputs or framework-specific assumptions.
-
-These notes are an independent study companion and are not a reproduction
-of the original book.
-
-
-**منبع فصل:** `You-Dont-Know-JS-2nd-ed/get-started/ch2.md`، خطوط ۱۸ تا ۸۷۷.
+- [ ] Explain why each JS file is an independent program.
+- [ ] Distinguish primitive values from structural objects.
+- [ ] Understand `typeof` results and legacy behaviors.
+- [ ] Differentiate scoping rules across `var`, `let`, and `const`.
+- [ ] Differentiate variable reassignment from reference mutation.
+- [ ] Distinguish parameters from arguments.
+- [ ] Explain the difference between `return` and side-effect outputs (`console.log`).
+- [ ] Understand functions as first-class citizens.
+- [ ] Explain `===` vs. `==` and relational coercion.
+- [ ] Understand `NaN` uniqueness and `Object.is`.
+- [ ] Explain reference identity in object comparisons.
+- [ ] Define classes, construct instances, and use `this`, `extends`, and `super`.
+- [ ] Implement classic modules via factory functions and closures.
+- [ ] Use ES Module syntax (`import` / `export`).
+- [ ] Treat this chapter as a high-level roadmap for deep study in subsequent books.
