@@ -310,3 +310,22 @@ ES Modules provide clean architectural boundaries by:
 - Scoping code strictly to individual files (avoiding global namespace pollution).
 - Making dependencies and public contracts explicit.
 - Supporting static analysis for tree-shaking and bundling optimizations.
+
+## Key Distinctions and Mental Models
+
+| Concept Pair | Distinguishing Difference |
+| :--- | :--- |
+| **Primitive vs. Object** | Immutable scalar value vs. mutable container of properties |
+| **Reassignment vs. Mutation** | Pointing a binding to a new value vs. altering object internals |
+| **Parameter vs. Argument** | Named variable in declaration vs. actual value passed at call time |
+| **`return` vs. `console.log`** | Producing program data vs. triggering runtime diagnostic output |
+| **`===` vs. `==`** | Type-strict equality vs. coercive loose equality |
+| **Object Equality** | Evaluated strictly by memory reference identity, not structural shape |
+| **Class vs. Module** | Prototype-based instantiation vs. closure-based encapsulation |
+```text
+Class:
+Definition → new → Instance
+
+Classic Module:
+Factory Function → Execution → Private Scope + Public API
+```
