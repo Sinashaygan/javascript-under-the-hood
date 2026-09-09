@@ -130,4 +130,68 @@ const does not make underlying objects immutable.
 
 **Commit Message:**
 ```bash
+
+## 4. Functions
+
+Functions are reusable, callable units of behavior and first-class values.
+
+### Parameters vs. Arguments
+```text
+Parameter → Name defined in function signature
+Argument  → Concrete value passed during invocation
+
+### Return Values vs. Side Effects
+- `return` yields an explicit value back to the caller.
+- `console.log` produces a side effect (standard output) and returns `undefined`.
+
+### First-Class Functions
+Functions can be treated like any other value: assigned to variables, passed
+into other functions (callbacks), and returned.
+
+javascript
+function greet() {
+  return "Hello";
+}
+
+const fn = greet; // Assigned reference, not invoked
+console.log(fn()); // "Hello"
+
+## 5. Comparisons
+
+### Strict Equality (`===`) vs. Loose Equality (`==`)
+- `===` (Strict): Checks both type and value without implicit coercion.
+- `==` (Loose): Allows implicit type coercion before comparison.
+
+javascript
+42 === "42"; // false (different types)
+42 == "42";  // true (string coerced to number)
+0 == false;  // true
+0 === false; // false
+
+### `NaN` (Not a Number)
+`NaN` is of type `number`, but is not equal to anything, including itself:
+
+javascript
+NaN === NaN;           // false
+Object.is(NaN, NaN);   // true
+
+### Object Reference Equality
+Objects are compared by reference identity, not structural content:
+
+javascript
+{} === {}; // false (distinct instances)
+
+const a = {};
+const b = a;
+a === b;   // true (shared memory reference)
+
+### Relational Comparisons
+Relational operators (`<`, `>`) compare numbers numerically and strings
+lexicographically (character code order):
+
+javascript
+10 < 9;     // false (numeric)
+"10" < "9"; // true (lexical: "1" comes before "9")
+```
+
 docs(ch2): explain function mechanics, return values, and comparison rules
