@@ -204,3 +204,75 @@ javascript
 10 < 9;     // false (numeric)
 "10" < "9"; // true (lexical: "1" comes before "9")
 ```
+
+## 6. Code Organization Patterns
+
+JavaScript provides multiple strategies to encapsulate state and logic.
+
+## 6.1 Classes and Prototypes
+
+Classes act as templates for instantiating objects with shared behavior.
+```javascript
+class Publication {
+  print() {
+console.log("Publication");
+  }
+}
+
+class Book extends Publication {
+  print() {
+super.print(); // Calls parent method
+console.log("Book");
+  }
+}
+
+const book = new Book();
+book.print();
+// Publication
+// Book
+
+- **`this`**: Contextually references the active instance at call time.
+- **`extends` & `super`**: Establishes inheritance delegation and enables method overriding.
+```
+
+## 6.2 Classic Modules (Factory Functions)
+
+Classic modules use factory functions and closures to establish private state
+and expose a selective public API.
+
+```
+javascript
+function createCounter() {
+  let count = 0; // Private state via closure
+
+  function increment() {
+count++;
+  }
+
+  function getCount() {
+return count;
+  }
+
+  return {
+increment,
+getCount, // Public API
+  };
+}
+
+const counter = createCounter();
+counter.increment();
+console.log(counter.getCount()); // 2
+console.log(counter.count);      // undefined (hidden from outer scope)
+```
+
+### Classes vs. Classic Modules
+
+```
+| Feature | Class | Classic Module |
+| :--- | :--- | :--- |
+| **Primary Goal** | Object template / Shared prototype | Encapsulated state & scope |
+| **Creation** | `new ClassName()` | Factory function call |
+| **State Access** | Instance properties (`this`) | Lexical scope & closures |
+| **Result** | Concrete instance | Public API object |
+| **Core Mechanism**| `class`, `extends`, `this` | Closures, function scope |
+```
