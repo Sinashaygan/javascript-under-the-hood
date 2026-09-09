@@ -105,3 +105,18 @@ get-started/ch4.md, lines 70–128.
 3. What is the difference between behavior delegation and class inheritance?
 4. Why is coercion important in TypeScript projects?
 5. Why should you introduce team practices incrementally?
+
+## Long-Term Takeaways
+- Explain behavior using language mechanisms, not guesses.
+- Keep `this` (invocation-based) and Lexical Scope (definition-based) distinct.
+- Learn conversion rules rather than memorizing isolated errors.
+- Use static tooling as a supplement to, not a replacement for, runtime knowledge.
+
+## Source Mapping
+| Topic | Source lines |
+| :--- | :--- |
+| Framework & Methodology | 1–11, 70–99 |
+| Scope & Closure | 12–32 |
+| Prototypes | 34–51 |
+| Types & Coercion | 52–69 |
+| Roadmap | 100–128 |
