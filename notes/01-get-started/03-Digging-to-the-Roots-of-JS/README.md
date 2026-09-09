@@ -67,3 +67,18 @@ runtime rules for closures, `this`, iteration, or prototypes.
 The chapter's main practical lesson is to investigate runtime behavior instead
 of relying only on syntax, framework conventions, or assumptions from other
 programming languages.
+## Common Mistakes and Traps
+
+- Confusing an `Iterator` with an `Iterable`.
+- Confusing `for..of` with `for..in`.
+- Assuming that prototype properties are copied into the child object.
+- Assuming that assigning a property on a child object changes the prototype.
+- Forgetting that a child property can shadow a prototype property.
+- Determining `this` from where a function was defined instead of how it was
+  called.
+- Confusing lexical scope and closures with the dynamic behavior of `this`.
+- Assuming that `Object.create(null)` provides the usual object prototype
+  methods.
+- Memorizing an output without understanding the mechanism that produced it.
+- Failing to ask why a property or method was found at a particular point in
+  the prototype chain.
