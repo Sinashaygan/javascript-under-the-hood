@@ -113,3 +113,43 @@ See [`./exercises.js`](./exercises.js) for runnable examples.
 10. What is the difference between a closure and `this`?
 11. What happens when `Object.create(null)` is used?
 12. Why is asking "why?" more useful than only memorizing output?
+## Long-Term Takeaways
+
+- JavaScript behavior is often deeper than its surface syntax suggests.
+- Iteration is based on a protocol, not only on loop syntax.
+- Closures preserve access to lexical environments.
+- `this` depends on invocation context.
+- Prototypes provide delegation-based property lookup.
+- Prototype properties are not automatically copied into child objects.
+- Shadowing can hide a prototype property without modifying it.
+- Runtime behavior should be explained through mechanisms, not guessed from
+  appearance.
+- Asking precise questions is a core skill for becoming a stronger developer.
+- Learning JavaScript is an ongoing process; understanding one layer reveals the next.
+
+---
+
+These notes are an independent study companion based on the chapter.
+They are not a reproduction of the original book.
+
+| Section | Source lines | Main focus |
+| :--- | :---: | :--- |
+| **Intro** | 1–11 | Looking beneath the surface of JavaScript |
+| **Iteration** | 12–29 | Iterators and step-by-step data processing |
+| **Consuming Iterators** | 30–115 | Consuming iterable values with `for..of` and spread |
+| **Closure** | 169–234 | Retaining access to an outer lexical scope |
+| **`this` Keyword** | 268–340 | Call-site-based execution context |
+| **Prototypes** | 341–469 | Prototype chains, `Object.create(..)`, and shadowing |
+| **Asking "Why?"** | 470–478 | Curiosity and asking precise questions about code behavior |
+
+## Final Note
+
+The central lesson of this chapter is not just how to use iteration, closures,
+`this`, or prototypes. It is learning to investigate the rules underneath
+those features.
+
+When JavaScript behaves unexpectedly, ask:
+
+> Why did the language produce this result?
+
+That question is the starting point for deeper understanding.
