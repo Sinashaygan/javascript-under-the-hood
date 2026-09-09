@@ -82,3 +82,19 @@ programming languages.
 - Memorizing an output without understanding the mechanism that produced it.
 - Failing to ask why a property or method was found at a particular point in
   the prototype chain.
+## Suggested Exercises
+
+See [`./exercises.js`](./exercises.js) for runnable examples.
+
+1. Create a manual iterator that returns `{ value, done }`.
+2. Consume an iterable with `for..of` and the spread operator.
+3. Write a factory function that demonstrates closure.
+4. Experiment with default and implicit bindings of `this`.
+5. Use `call()` to provide an explicit execution context.
+6. Create a prototype relationship with `Object.create(..)`.
+7. Demonstrate property lookup through a prototype chain.
+8. Create a shadowing example and verify that the prototype property remains
+   unchanged.
+9. Predict the output of a program before executing it.
+10. For each result, write a short explanation answering the question:
+    "Why did this happen?"
