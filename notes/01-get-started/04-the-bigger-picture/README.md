@@ -140,3 +140,63 @@ Source file:
 | Types and coercion | 52–69 |
 | Learning advice and the grain metaphor | 70–99 |
 | Reading roadmap and closing guidance | 100–128 |
+
+## Section: Scope and Closure
+
+### Summary
+JavaScript uses lexical scope. Functions can retain access to surrounding
+variables through closure.
+
+### Core Concepts
+- Scope relationships are established from code structure.
+- Hoisting does not contradict lexical scope.
+- Closures preserve access to variables.
+- Scope and closure support module patterns.
+
+### Frontend Takeaway
+When investigating a callback, identify the environment in which it was
+created and the variables it can access.
+
+### Source
+`get-started/ch4.md`, lines 12–32.
+
+---
+
+## Section: Prototypes
+
+### Summary
+JavaScript supports direct object creation and links between objects.
+These links enable behavior delegation.
+
+### Core Concepts
+- Objects do not require class declarations.
+- Prototype lookup follows links between objects.
+- Delegation does not require copying methods.
+- Classes are one pattern built on the object system.
+
+### Frontend Takeaway
+When inspecting an object, distinguish its own properties from properties
+available through its prototype chain.
+
+### Source
+`get-started/ch4.md`, lines 34–51.
+
+---
+
+## Section: Types and Coercion
+
+### Summary
+Understanding values and conversion rules is a central part of learning
+JavaScript, including when static type tools are used.
+
+### Core Concepts
+- Types affect how operations behave.
+- Coercion follows language rules.
+- Static analysis does not replace runtime semantics.
+
+### Frontend Takeaway
+Handle input conversion and validation explicitly where the application
+requires them.
+
+### Source
+`get-started/ch4.md`, lines 52–69.
