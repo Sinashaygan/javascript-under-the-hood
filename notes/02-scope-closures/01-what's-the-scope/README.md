@@ -20,3 +20,21 @@ incremental changes in team environments.
 1. **Investigate:** Don't accept myths (like "hoisting means dynamic scope").
 2. **Verify:** Use the language specification to resolve disagreements.
 3. **Increment:** Introduce better practices via small, understandable changes.
+
+## Section: Scope and Closure
+
+### Summary
+JavaScript uses lexical scope. Functions retain access to surrounding
+variables through closure, supporting patterns like modules.
+
+### Frontend Takeaway
+When debugging callbacks, event handlers, or React renders, identify the
+environment in which the function was created to determine accessible variables.
+
+### Common Mistakes
+- Confusing lexical lookup with `this` binding.
+- Thinking closure preserves a snapshot of a value (rather than a variable reference).
+- Treating hoisting as evidence that JS is not lexically scoped.
+
+### Source
+get-started/ch4.md, lines 12–32.
