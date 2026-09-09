@@ -47,6 +47,7 @@ Dependency analysis
 Build or bundling process
 ↓
 Executable application
+```
 
 ## 2. Values and Types
 
@@ -63,6 +64,7 @@ JavaScript primitives include:
 - `bigint`
 - `symbol`
 
+```
 javascript
 const name = "Sara";
 const age = 25;
@@ -71,10 +73,12 @@ const emptyValue = null;
 let result;
 const largeNumber = 123n;
 const identifier = Symbol("id");
+```
 
 ### Objects and Arrays
 Objects and arrays are reference types that hold collections of properties:
 
+```
 javascript
 const user = {
   name: "Sara",
@@ -82,10 +86,12 @@ const user = {
 };
 
 const numbers = [1, 2, 3];
+```
 
 ### The `typeof` Operator
 `typeof` returns a string classifying the type of an operand:
 
+```
 javascript
 typeof "hello";    // "string"
 typeof 42;         // "number"
@@ -95,6 +101,7 @@ typeof undefined;  // "undefined"
 // Historical legacy behaviors:
 typeof null;       // "object"
 typeof [];         // "object"
+```
 
 ## 3. Declaring and Using Variables
 
@@ -103,16 +110,19 @@ typeof [];         // "object"
 - `let`: Block-scoped, reassignable.
 - `const`: Block-scoped, prevents reassignment (must be initialized).
 
+```
 text
 var   → function scope
 let   → block scope
 const → block scope
+```
 
 ### Reassignment vs. Mutation
 
 - **Reassignment:** Modifying which value/reference a variable identifier points to.
 - **Mutation:** Modifying the internal contents of an existing object or array.
 
+```
 javascript
 const user = { name: "Sara" };
 user.name = "Mina"; // VALID: Object mutation
@@ -123,13 +133,7 @@ text
 const prevents identifier reassignment.
 const does not make underlying objects immutable.
 
-
----
-
-### بخش ۳: توابع و عملگرهای مقایسه (Functions & Comparisons)
-
-**Commit Message:**
-```bash
+```
 
 ## 4. Functions
 
@@ -155,43 +159,48 @@ function greet() {
 
 const fn = greet; // Assigned reference, not invoked
 console.log(fn()); // "Hello"
+```
 
 ## 5. Comparisons
 
 ### Strict Equality (`===`) vs. Loose Equality (`==`)
 - `===` (Strict): Checks both type and value without implicit coercion.
 - `==` (Loose): Allows implicit type coercion before comparison.
-
+```
 javascript
 42 === "42"; // false (different types)
 42 == "42";  // true (string coerced to number)
 0 == false;  // true
 0 === false; // false
+```
 
 ### `NaN` (Not a Number)
 `NaN` is of type `number`, but is not equal to anything, including itself:
 
+```
 javascript
 NaN === NaN;           // false
 Object.is(NaN, NaN);   // true
+```
 
 ### Object Reference Equality
 Objects are compared by reference identity, not structural content:
 
+```
 javascript
 {} === {}; // false (distinct instances)
 
 const a = {};
 const b = a;
 a === b;   // true (shared memory reference)
+```
 
 ### Relational Comparisons
 Relational operators (`<`, `>`) compare numbers numerically and strings
 lexicographically (character code order):
 
+```
 javascript
 10 < 9;     // false (numeric)
 "10" < "9"; // true (lexical: "1" comes before "9")
 ```
-
-docs(ch2): explain function mechanics, return values, and comparison rules
