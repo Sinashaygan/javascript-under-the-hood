@@ -98,3 +98,18 @@ See [`./exercises.js`](./exercises.js) for runnable examples.
 9. Predict the output of a program before executing it.
 10. For each result, write a short explanation answering the question:
     "Why did this happen?"
+## Quiz Questions
+
+1. What is the difference between an iterator and an iterable?
+2. What object does an iterator's `next()` method return?
+3. How do `for..of` and the spread operator consume iterable values?
+4. What does a closure preserve access to?
+5. Why is `this` determined by the call-site?
+6. How is a method found through a prototype chain?
+7. Does `Object.create(..)` copy the properties of its argument?
+8. What is shadowing?
+9. Why does assigning a property to a child object usually not modify its
+   prototype?
+10. What is the difference between a closure and `this`?
+11. What happens when `Object.create(null)` is used?
+12. Why is asking "why?" more useful than only memorizing output?
