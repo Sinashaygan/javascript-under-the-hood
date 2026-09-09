@@ -92,3 +92,16 @@ a practical bug or architectural issue belongs to.
 
 ### Source
 get-started/ch4.md, lines 70–128.
+
+## Practice Exercises
+1. **Scope:** Define/call a function in nested scopes with shared names.
+2. **Closure:** Create two independent counters via factory function.
+3. **Prototypes:** Create an object with `Object.create` and trace delegation.
+4. **Coercion:** Compare `"5" + 1` vs `"5" - 1`.
+
+## Quiz Questions
+1. What are the three pillars?
+2. Why does hoisting not contradict lexical scope?
+3. What is the difference between behavior delegation and class inheritance?
+4. Why is coercion important in TypeScript projects?
+5. Why should you introduce team practices incrementally?
