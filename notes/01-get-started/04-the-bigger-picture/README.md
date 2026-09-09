@@ -200,3 +200,43 @@ requires them.
 
 ### Source
 `get-started/ch4.md`, lines 52–69.
+
+## Section: Learning and the Grain Metaphor
+
+### Summary
+Investigate common assumptions, learn JavaScript's own mechanisms, and
+introduce improvements gradually within a team.
+
+### Core Concepts
+- Popular explanations may need verification.
+- Specifications can clarify language behavior.
+- Experience with another language does not determine JS semantics.
+- Small before-and-after examples can support team discussions.
+
+### Frontend Takeaway
+Propose a focused change with a concrete benefit that teammates can review.
+
+### Source
+`get-started/ch4.md`, lines 70–99.
+
+---
+
+## Section: Reading Roadmap
+
+### Summary
+The chapter places Get Started within the broader learning sequence.
+
+### Core Concepts
+1. Get Started
+2. Scope & Closures
+3. Objects & Classes
+4. Types & Grammar
+5. Sync & Async
+6. ES.Next & Beyond
+
+### Frontend Takeaway
+Use the roadmap to identify the underlying JS topic behind a practical
+problem and choose the next area to study.
+
+### Source
+`get-started/ch4.md`, lines 100–128.
