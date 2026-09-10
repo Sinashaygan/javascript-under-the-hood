@@ -70,3 +70,18 @@ They do *not* magically handle scope differently than normal functions; they are
 
 ### Source
 scope-closures/ch3.md, lines 348–395.
+
+## Summary Takeaways
+- Scope chain = hierarchical nesting.
+- Shadowing = inner variable obscures outer variable.
+- `window.x` is a dangerous fallback for accessing shadowed globals.
+- `let` vs `var` shadowing rules are strict regarding scope boundaries.
+- Function expressions have name identifiers scoped internally, not externally.
+- Arrow functions are just shorter syntax with the same scope mechanics.
+
+## Practice
+1. Write a snippet that demonstrates illegal shadowing and fix it.
+2. Verify that an arrow function creates a new scope by declaring a variable inside it.
+
+### Source
+scope-closures/ch3.md, lines 396–410.
