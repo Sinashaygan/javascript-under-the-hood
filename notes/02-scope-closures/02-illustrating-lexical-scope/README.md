@@ -11,3 +11,18 @@ Visualizing scope boundaries as colored bubbles helps prevent bugs where you inc
 
 ### Source
 get-started/ch2.md, lines 9–76.
+
+## Section: Scope Resolution
+
+### Summary
+- Scopes are nested.
+- A bubble's variables are available to that bubble and its nested children.
+- Variable colors are determined during compilation, not runtime.
+- Lookup: If a variable isn't in the current scope, the JS engine checks the outer parent scope.
+
+### Common Mistakes
+- Thinking variables are colored based on where they are accessed. They are colored based on where they are *declared*.
+- Forgetting that object properties (e.g., `id`, `name`) are not "marbles" and don't follow these scoping rules.
+
+### Source
+get-started/ch2.md, lines 77–110.
