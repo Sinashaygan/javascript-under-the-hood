@@ -57,3 +57,16 @@ scope-closures/ch3.md, lines 249–300.
 
 ### Source
 scope-closures/ch3.md, lines 301–347.
+
+## Section: Arrow Functions
+
+### Truths
+- Arrow functions (`=>`) are lexically anonymous.
+- They have the **same** lexical scope rules as standard `function` functions.
+- They create their own nested scope bucket.
+
+### Myth
+They do *not* magically handle scope differently than normal functions; they are simply a syntactically shorter form.
+
+### Source
+scope-closures/ch3.md, lines 348–395.
