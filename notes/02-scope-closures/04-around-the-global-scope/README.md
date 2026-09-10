@@ -79,3 +79,20 @@
 
 ### Source
 - *get-started/ch4.md, lines 234-290.*
+
+## Section: Globally Aware
+
+### Summary
+- Understanding the "Global Scope" means understanding the rules of the specific JS environment your code is running in.
+- The modern approach (ESM, Node.js) strongly favors encapsulating files into modules, minimizing the use of the shared global scope.
+- True global scope is still necessary for environment-provided utilities and, in rare cases, for application-wide constants or systems.
+
+### Architectural Takeaway
+- **Is your code...**
+    - A standalone script? -> It uses the classic browser `window` global scope.
+    - An ES Module? -> Its top level is a private module scope.
+    - A Node.js file? -> Its top level is a private module scope.
+- When writing code that needs to work everywhere, use `globalThis` to interact with the global object.
+
+### Source
+- *get-started/ch4.md, lines 291-306.*
