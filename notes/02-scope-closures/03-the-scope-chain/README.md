@@ -20,3 +20,17 @@ Be aware that shadowing is intentional but can obscure variables. It is lexicall
 
 ### Source
 scope-closures/ch3.md, lines 67–134.
+
+## Section: Global Unshadowing Trick
+
+### Summary
+While you generally cannot access a shadowed variable, global variables declared with `var` or `function` are properties of the **global object** (`window` in browsers).
+- You can access these via `window.varName`.
+
+### Warning
+- **Avoid this practice.** It is confusing and prone to bugs.
+- Only works for global variables; does not work for shadowed variables in nested function scopes.
+- `let`, `const`, and `class` declarations in global scope do **not** become properties on the global object.
+
+### Source
+scope-closures/ch3.md, lines 135–224.
