@@ -10,3 +10,18 @@
 
 ### Source
 - *get-started/ch4.md, lines 1-54.*
+
+## Section: The Browser Env
+
+### Summary
+- In browsers, the global scope and the `window` object are linked.
+- Declarations with `var` and `function` create properties on the `window` object (mirroring).
+- Declarations with `let`, `const`, and `class` create global variables, but they do **not** become properties of `window`. This is known as **Divergence**.
+- Browser history also created "DOM Globals": elements with `id` attributes automatically become global variables. This is a bad practice to rely on.
+
+### Frontend Takeaway
+- **Avoid `var` in the global scope.** Use `let` or `const` to prevent polluting the `window` object and avoid conflicts with its built-in properties (like `window.name` or `window.top`).
+- Never rely on DOM Globals. Always get element references with `document.querySelector` or similar methods.
+
+### Source
+- *get-started/ch4.md, lines 55-141.*
