@@ -38,3 +38,16 @@
 
 ### Source
 - *get-started/ch4.md, lines 142-160.*
+
+## Section: ESM & DevTools Console
+
+### Summary
+- In an ES Module file (using `import`/`export`), top-level variable declarations are **not global**. They are "module-wide" and private to that module unless explicitly exported.
+- The DevTools console can be misleading. It often emulates a "global scope" for ease of use, but its behavior doesn't perfectly match how code runs in a real script or module.
+
+### Frontend Takeaway
+- **ESM is the standard for encapsulation.** Variables you define at the top of a module file will not accidentally collide with globals or variables in other modules.
+- Be cautious when testing scope behavior in the console. It's a useful tool, but not a 100% accurate simulation of file-based execution.
+
+### Source
+- *get-started/ch4.md, lines 161-196.*
