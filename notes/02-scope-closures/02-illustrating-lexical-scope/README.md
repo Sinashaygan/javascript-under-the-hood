@@ -49,3 +49,16 @@ JS processes declarations in two steps:
 
 ### Source
 get-started/ch2.md, lines 154–209.
+
+## Section: Nested Scope & Failures
+
+### Core Concepts
+- If a variable isn't found in the current scope, look up the chain until the global scope.
+- **ReferenceError:** Thrown when a *source* reference (or strict-mode *target*) cannot be found anywhere in the scope chain.
+
+### Common Mistakes
+- Confusing "Not Defined" (Undeclared) with "Undefined" (Declared but no value).
+- `typeof` returning "undefined" for both cases, masking the underlying error.
+
+### Source
+get-started/ch2.md, lines 210–267.
