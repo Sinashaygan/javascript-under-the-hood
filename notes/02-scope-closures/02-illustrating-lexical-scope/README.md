@@ -62,3 +62,14 @@ get-started/ch2.md, lines 154–209.
 
 ### Source
 get-started/ch2.md, lines 210–267.
+
+## Section: Accidental Globals
+
+### Summary
+In non-strict mode, assigning to a non-existent variable creates it as a global property. This is a primary source of bugs.
+
+### Frontend Takeaway
+**Always use strict-mode.** It forces the engine to throw a `ReferenceError` instead of creating an accidental global variable, allowing you to catch errors immediately.
+
+### Source
+get-started/ch2.md, lines 268–301.
