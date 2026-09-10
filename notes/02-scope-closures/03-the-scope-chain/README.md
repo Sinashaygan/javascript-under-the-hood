@@ -47,3 +47,13 @@ Attempting an illegal shadow throws a `SyntaxError` because the `var` is trying 
 
 ### Source
 scope-closures/ch3.md, lines 249–300.
+
+## Section: Function Name Scope
+
+### Core Concepts
+- **Function Declarations:** The name ends up in the enclosing scope.
+- **Named Function Expressions:** The name identifier is scope-bound **inside** the function itself, not outside.
+- **Immutability:** The name identifier of a named function expression is read-only inside its own scope.
+
+### Source
+scope-closures/ch3.md, lines 301–347.
