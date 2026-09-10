@@ -64,3 +64,18 @@
 
 ### Source
 - *get-started/ch4.md, lines 197-233.*
+
+## Section: globalThis
+
+### Summary
+- The name of the global object has always been inconsistent across JavaScript environments:
+    - **Browser (main thread):** `window`
+    - **Web Worker:** `self`
+    - **Node.js:** `global`
+- **`globalThis`** (introduced in ES2020) provides a single, standardized way to access the global object, regardless of the current environment.
+
+### Best Practice
+- **Use `globalThis`** whenever you need to reliably access the global object in code that might run in different environments (isomorphic code). This avoids manual checks like `typeof window !== "undefined"`.
+
+### Source
+- *get-started/ch4.md, lines 234-290.*
