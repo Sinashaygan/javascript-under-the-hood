@@ -26,3 +26,16 @@ get-started/ch2.md, lines 9–76.
 
 ### Source
 get-started/ch2.md, lines 77–110.
+
+## Section: The JS Engine Conversations
+
+### Core Concepts
+- **Engine:** Executes code.
+- **Compiler:** Lexes/parses code, asks Scope Manager about declarations.
+- **Scope Manager:** Maintains the lookup list of declared variables.
+
+### Frontend Takeaway
+Thinking like the "Engine" helps you understand why some variables are available (hoisted) and others result in `ReferenceError`.
+
+### Source
+get-started/ch2.md, lines 112–153.
