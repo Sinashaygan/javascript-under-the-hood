@@ -51,3 +51,16 @@
 
 ### Source
 - *get-started/ch4.md, lines 161-196.*
+
+## Section: The Node.js Env
+
+### Core Concepts
+- Similar to ESM, Node.js treats every file as a separate module (using the CommonJS format by default).
+- Node wraps the code in each file inside a function. Therefore, top-level `var` or `let`/`const` declarations are local to that module's function scope, **not global**.
+- To create a true global variable in Node, you must explicitly assign it as a property of the `global` object.
+
+### Key Insight
+- Identifiers like `require`, `module`, `exports`, `__dirname`, and `__filename` seem global but are actually parameters passed to the module-wrapping function.
+
+### Source
+- *get-started/ch4.md, lines 197-233.*
