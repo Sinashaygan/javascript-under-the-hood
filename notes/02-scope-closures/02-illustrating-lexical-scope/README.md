@@ -39,3 +39,13 @@ Thinking like the "Engine" helps you understand why some variables are available
 
 ### Source
 get-started/ch2.md, lines 112–153.
+
+## Section: Processing Statements (var students = [...])
+
+### Summary
+JS processes declarations in two steps:
+1. **Compiler:** Checks if the variable exists in the current scope; if not, creates it.
+2. **Engine:** Executes the assignment at runtime.
+
+### Source
+get-started/ch2.md, lines 154–209.
