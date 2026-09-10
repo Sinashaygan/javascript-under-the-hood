@@ -25,3 +25,16 @@
 
 ### Source
 - *get-started/ch4.md, lines 55-141.*
+
+## Section: Web Workers
+
+### Core Concepts
+- A Web Worker runs in a separate thread with its own completely separate and isolated global scope.
+- It has **no access** to the main UI thread's `window` object or the DOM.
+- The global object reference inside a worker is `self`, not `window`.
+
+### Key Insight
+- The same `var` vs. `let`/`const` behavior applies: `var` declarations in a worker's top-level scope will create properties on the `self` object, while `let`/`const` will not.
+
+### Source
+- *get-started/ch4.md, lines 142-160.*
