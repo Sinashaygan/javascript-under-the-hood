@@ -73,3 +73,16 @@ In non-strict mode, assigning to a non-existent variable creates it as a global 
 
 ### Source
 get-started/ch2.md, lines 268–301.
+
+## Exercises
+1. Find code in a project. Speak the "Engine" and "Scope Manager" dialogue out loud for a variable declaration and a variable access.
+2. Draw "Scope Bubbles" for a complex nested function in your current codebase.
+
+## Takeaways
+- Scopes are buckets; variables are marbles.
+- Compilation determines scope; runtime executes lookups.
+- "Not defined" = Undeclared.
+- "Strict mode" is mandatory for safe development.
+
+### Source
+get-started/ch2.md, lines 302–315.
