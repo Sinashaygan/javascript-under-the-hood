@@ -276,6 +276,7 @@ console.log(counter.count);      // undefined (hidden from outer scope)
 | **Result** | Concrete instance | Public API object |
 | **Core Mechanism**| `class`, `extends`, `this` | Closures, function scope |
 ```
+
 ## 7. ES Modules (ESM)
 
 ES Modules represent the official ECMAScript standard for file-based
