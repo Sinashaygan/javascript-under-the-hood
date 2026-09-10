@@ -34,3 +34,16 @@ While you generally cannot access a shadowed variable, global variables declared
 
 ### Source
 scope-closures/ch3.md, lines 135–224.
+
+## Section: Illegal Shadowing
+
+### Rules
+- `let` can shadow `var`.
+- `var` **cannot** shadow `let` if they are in the same scope boundary.
+- If there is a function boundary between them, the `var` is allowed.
+
+### Error
+Attempting an illegal shadow throws a `SyntaxError` because the `var` is trying to cross a `let` scope boundary.
+
+### Source
+scope-closures/ch3.md, lines 249–300.
