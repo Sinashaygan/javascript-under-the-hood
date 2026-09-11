@@ -40,3 +40,16 @@
 
 ### Source
 - *scope-closures/ch6.md, lines 216-255.*
+
+## Section: Scoping with Blocks
+
+### Core Concepts
+- Curly braces `{ .. }` define statements that act as blocks, but they only become **scopes** when they contain block-scoped declarations (`let` or `const`).
+- Object literals, `class` bodies, and `switch` statements use `{}` but are not independent lexical scopes.
+- **Explicit Block Scoping:** Introducing a standalone `{ ... }` block inside a function or outer block provides a localized scope slice for temporary variables (e.g., intermediate regex capture results).
+
+### Key Insight
+- Explicit block scopes drastically reduce Temporal Dead Zone (TDZ) exposure by localizing `let`/`const` declarations strictly to the sub-lines where they are needed.
+
+### Source
+- *scope-closures/ch6.md, lines 256-405.*
