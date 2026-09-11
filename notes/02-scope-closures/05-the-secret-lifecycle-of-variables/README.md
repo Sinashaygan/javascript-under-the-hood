@@ -11,3 +11,16 @@
 
 ### Source
 - *get-started/ch5.md, lines 1-100.*
+
+## Section: Hoisting: Yet Another Metaphor
+
+### Summary
+- The common metaphor of hoisting describes the JS engine physically "moving" or "lifting" declarations to the top of the file before running.
+- In reality, JS does not rewrite or re-order source code at runtime.
+- Hoisting is actually a **compile-time operation**: during the parsing/compilation phase, the engine finds all declarations and sets up instructions to register variables at scope boundaries before execution begins.
+
+### Key Insight
+- Thinking of JS as a single-pass interpreter leads to incorrect mental models. Recognizing the distinct **two-phase model (compile/parse, then execute)** clarifies how identifiers are known before execution reaches their lines.
+
+### Source
+- *get-started/ch5.md, lines 101-165.*
