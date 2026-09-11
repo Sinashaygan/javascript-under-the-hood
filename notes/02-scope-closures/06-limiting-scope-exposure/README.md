@@ -53,3 +53,18 @@
 
 ### Source
 - *scope-closures/ch6.md, lines 256-405.*
+
+## Section: var and let / Where To let?
+
+### Summary
+- Rather than viewing `let` as a complete replacement for `var`, each serves distinct semantic roles:
+  - `var` signals: *"This variable belongs to the entire enclosing function scope."*
+  - `let` signals: *"This variable is localized strictly to this block."*
+- `var` declarations inside inner blocks still attach to the outer function scope, which can confuse readers; reserve `var` for the top-level function scope.
+- Loop counters (`for (let i = 0; ...)`) should use `let` to prevent iterator exposure outside the loop. If an iteration exit value is needed post-loop, declare a dedicated `var` outside.
+
+### Architectural Takeaway
+- Choose keywords based on scope requirement: decide the minimum necessary exposure first via POLE, then declare with `let` for blocks or `var` for function-wide state.
+
+### Source
+- *scope-closures/ch6.md, lines 406-545.*
