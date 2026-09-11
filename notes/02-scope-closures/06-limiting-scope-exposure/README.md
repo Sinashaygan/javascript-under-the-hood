@@ -25,3 +25,18 @@
 
 ### Source
 - *scope-closures/ch6.md, lines 86-215.*
+
+## Section: Function Boundaries
+
+### Core Concepts
+- Wrapping existing code blocks in an IIFE alters execution semantics because a true **function boundary** is introduced:
+  - `return` statements now exit only the local IIFE, not the outer enclosing function.
+  - `this` binding can be altered (unless using arrow functions).
+  - Control-flow constructs like `break` and `continue` cannot cross the IIFE boundary to manipulate outer loops or switch blocks.
+- Standalone IIFEs strictly require surrounding parentheses `(function(){ ... })()` to force the parser into expression mode rather than statement declaration mode.
+
+### Frontend Takeaway
+- If your code segment requires control jumps (`break`, `continue`, `return`) relative to outer logic, use block scoping (`let` with `{}`) rather than an IIFE.
+
+### Source
+- *scope-closures/ch6.md, lines 216-255.*
