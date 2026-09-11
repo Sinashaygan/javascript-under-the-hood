@@ -37,3 +37,17 @@
 
 ### Source
 - *get-started/ch5.md, lines 166-260.*
+
+## Section: Constants
+
+### Summary
+- `const` requires an immediate initialization assignment at declaration; omitting it throws a `SyntaxError`.
+- `const` declarations cannot be re-assigned. Attempting to re-assign a `const` throws a runtime `TypeError`.
+- Because `const` forbids re-assignment and requires initialization, re-declaring a `const` would inherently imply a re-assignment, making `const` re-declaration technically impossible.
+
+### Key Insight
+- `SyntaxError` prevents the script from starting execution at all.
+- `TypeError` occurs at runtime when an invalid operation (like mutating an immutable binding) is attempted during execution.
+
+### Source
+- *get-started/ch5.md, lines 261-295.*
