@@ -24,3 +24,16 @@
 
 ### Source
 - *get-started/ch5.md, lines 101-165.*
+
+## Section: Re-declaration?
+
+### Core Concepts
+- Repeating `var studentName;` with the same identifier in the same scope is a compile-time **no-op** (does nothing and does not reset the value).
+- Re-declaring an identifier in the same scope where either declaration uses `let` or `const` triggers an immediate compile-time `SyntaxError` (e.g., "identifier has already been declared").
+- `var studentName;` is fundamentally different from `var studentName = undefined;`. The former is a no-op if already registered; the latter performs an explicit runtime reassignment.
+
+### Frontend Takeaway
+- Disallowing `let`/`const` re-declaration prevents accidental variable shadowing collisions and sloppy state resetting within the same scope.
+
+### Source
+- *get-started/ch5.md, lines 166-260.*
