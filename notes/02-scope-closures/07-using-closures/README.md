@@ -26,3 +26,19 @@
 
 ### Source
 - *scope-closures/ch7.md, lines 176-320.*
+
+## Section: Common Closures & What If I Can't See It?
+
+### Summary
+- **Everyday Closures:** Asynchronous callbacks (Ajax responses, Timers, DOM Event Listeners) are the most pervasive real-world examples of closure, retaining access to parameter state long after the outer function has completed execution.
+- **False Closures (Non-Observable):**
+  1. *Same-scope invocation:* Calling a nested helper function within its own parent scope is ordinary lexical lookup, not closure.
+  2. *Global variable access:* Global variables are ubiquitously accessible from everywhere; referencing them does not constitute closure.
+  3. *Unreferenced variables:* Outer variables never referenced by the inner function are eligible for garbage collection.
+  4. *Uninvoked functions:* Functions that are created but never executed or passed around never manifest closure behavior.
+
+### Key Criteria
+- For closure to be meaningful, the function must be invoked outside the original lexical scope branch where the closed-over identifier was created.
+
+### Source
+- *scope-closures/ch7.md, lines 321-435.*
