@@ -67,3 +67,20 @@
 
 ### Source
 - *get-started/ch5.md, lines 296-390.*
+
+## Section: Uninitialized Variables (aka, TDZ)
+
+### Summary
+- Unlike `var` (which auto-initializes to `undefined`), `let` and `const` remain **uninitialized** from scope entry until their declaration statement is executed.
+- **Temporal Dead Zone (TDZ):** The time window between entering a scope and the actual execution of the variable's declaration/initialization.
+- Accessing or assigning to a variable while in its TDZ throws a `ReferenceError` ("Cannot access identifier before initialization").
+- TDZ is **temporal** (time-based), not spatial: calling a function before the declaration line will still throw if the function runs before the declaration executes.
+
+### Proof of Hoisting
+- Shadowing proves `let`/`const` hoist: if an inner block has `let x` and you read `x` before its line, it throws a TDZ error instead of reading the outer `x`. This proves the inner `x` was registered at block entry.
+
+### Best Practice
+- Always place `let` and `const` declarations at the top of their enclosing scope to reduce the TDZ window to near zero.
+
+### Source
+- *get-started/ch5.md, lines 391-490.*
