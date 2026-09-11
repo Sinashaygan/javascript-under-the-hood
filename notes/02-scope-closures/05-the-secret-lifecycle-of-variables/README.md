@@ -84,3 +84,18 @@
 
 ### Source
 - *get-started/ch5.md, lines 391-490.*
+
+## Section: Finally Initialized
+
+### Summary
+- Variable lifecycle is governed by compile-time identifier registration and runtime initialization steps.
+- Hoisting is best understood as compile-time setup of scope registrations, not physical source transformation.
+- `var` auto-initializes to `undefined` on scope entry; `let` and `const` initialize only when execution reaches their declaration line.
+- TDZ and re-declaration errors exist to catch unintended state pollution and ordering bugs early.
+
+### Architectural Takeaway
+- Declare block-scoped variables (`let`, `const`) at the very top of their respective blocks.
+- Distinguish between compilation errors (`SyntaxError`) and execution errors (`TypeError`, `ReferenceError`) when debugging scope and initialization issues.
+
+### Source
+- *get-started/ch5.md, lines 491-520.*
