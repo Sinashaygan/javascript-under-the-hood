@@ -55,3 +55,16 @@
 
 ### Source
 - *scope-closures/ch7.md, lines 436-515.*
+
+## Section: Per Variable or Per Scope?
+
+### Summary
+- **Conceptual vs. Implementation:** Conceptually, closure is *per variable*. However, in engine implementations, closure is created *per scope* and then optionally optimized/trimmed down by modern engines to exclude unreferenced variables.
+- **Optimization Hazards:** Cheats like `eval(..)` prevent the JavaScript engine from applying closure trimming optimizations, forcing the entire scope chain to stay retained in memory.
+- **Manual De-referencing Pattern:** In performance-critical paths involving massive datasets (e.g., large arrays), setting large unused variables to `null` (`studentRecords = null`) ensures memory can be reclaimed even if the scope container persists.
+
+### Architectural Takeaway
+- Do not blindly rely on optional engine optimizations for large in-memory objects; manually disconnect large references when their initial use is done.
+
+### Source
+- *scope-closures/ch7.md, lines 516-640.*
