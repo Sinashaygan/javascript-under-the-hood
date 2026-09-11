@@ -42,3 +42,16 @@
 
 ### Source
 - *scope-closures/ch7.md, lines 321-435.*
+
+## Section: The Closure Lifecycle and Garbage Collection (GC)
+
+### Core Concepts
+- A closed-over variable remains preserved in memory for as long as at least **one** referencing function instance remains alive and reachable.
+- Once all function instances referencing that variable are discarded, the closure disappears and the variable becomes eligible for Garbage Collection (GC).
+- **Memory Leak Pitfall:** Unmanaged long-lived callbacks (e.g., neglected DOM event listeners) keep their closed-over scopes alive indefinitely.
+
+### Best Practice
+- Explicitly unsubscribe event handlers and clear references (`clickHandlers = []`) when UI elements or operations are decommissioned to release underlying memory.
+
+### Source
+- *scope-closures/ch7.md, lines 436-515.*
