@@ -81,3 +81,18 @@
 
 ### Source
 - *scope-closures/ch7.md, lines 641-725.*
+
+## Section: Why Closure? & Closer to Closure
+
+### Core Applications
+- **Avoiding Redundant Computations/Lookups:** Initializing and remembering fixed parameters (like parsing `dataset.kind` or pre-resolving API endpoints) once at setup time, rather than re-querying the DOM on every event dispatch.
+- **Encapsulation & POLE:** Limiting state exposure to specialized inner closures rather than polluting outer/global namespaces.
+- **Partial Application & Currying (Functional Programming):**
+  - Supplying configuration inputs up front to generate specialized handler functions (`defineHandler(url, data)`).
+  - The returned function encapsulates the pre-configured parameters via closure, allowing cleaner, semantically named call sites.
+
+### Final Summary
+- Closure empowers functions to have private, persistent state without relying on global scope, bridging lexical scoping with flexible runtime modularity.
+
+### Source
+- *scope-closures/ch7.md, lines 726-830.*
