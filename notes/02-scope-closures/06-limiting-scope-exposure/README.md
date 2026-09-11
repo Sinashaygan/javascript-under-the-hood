@@ -68,3 +68,16 @@
 
 ### Source
 - *scope-closures/ch6.md, lines 406-545.*
+
+## Section: What's the Catch?
+
+### Core Concepts
+- Since ES3, the parameter identifier in a `catch (err)` clause is strictly block-scoped to that `catch` block.
+- `let`/`const` variables inside `catch` are block-scoped, while any `var` declared inside hoists to the outer function/global scope.
+- **Optional Catch Binding (ES2019):** If the error object is not inspected, developers can omit the declaration (`catch { ... }`), eliminating the creation of an unnecessary identifier and scope overhead.
+
+### Key Insight
+- `try..catch` was JavaScript's original native block-scoping construct prior to ES6 `let`/`const`.
+
+### Source
+- *scope-closures/ch6.md, lines 546-590.*
