@@ -68,3 +68,16 @@
 
 ### Source
 - *scope-closures/ch7.md, lines 516-640.*
+
+## Section: An Alternative Perspective
+
+### Core Concepts
+- **Academic Model (Figure 4):** Functions are "first-class values" moving across scopes, dragging a hidden link back to their original lexical environment.
+- **Implementational Model (Figure 5):**
+  - Function instances **stay in place** inside their originating scope environments.
+  - What actually gets passed around and returned to outer scopes is merely a **reference** to that in-place function.
+  - When the reference is invoked from an outer scope, execution occurs naturally within the intact, in-place scope chain.
+- In this model, closure is not "magic scope transportation," but the mechanism of **keeping a function instance and its scope chain alive** as long as any reference to it exists.
+
+### Source
+- *scope-closures/ch7.md, lines 641-725.*
