@@ -51,3 +51,19 @@
 
 ### Source
 - *get-started/ch5.md, lines 261-295.*
+
+## Section: Loops
+
+### Core Concepts
+- Scope rules apply **per scope instance**. Each iteration of a loop enters a new scope instance, resetting per-iteration declarations.
+- A `let` inside a `while` or `for` loop body is declared once per iteration, not re-declared.
+- In `for (let i = 0; i < 3; i++)`, the variable `i` belongs to the per-iteration loop scope, receiving the incremented value each turn.
+- `const` is valid in `for..in` and `for..of` loops (and `while` bodies) because each iteration creates a brand new binding.
+- `const` **fails** in standard counting `for (const i = 0; i < 3; i++)` because `i++` requires re-assignment of the same binding across updates.
+
+### Frontend Takeaway
+- Use `let` for counting `for` loops.
+- Use `const` in `for..of` / `for..in` when the value is read-only within each iteration.
+
+### Source
+- *get-started/ch5.md, lines 296-390.*
