@@ -81,3 +81,17 @@
 
 ### Source
 - *scope-closures/ch6.md, lines 546-590.*
+
+## Section: Function Declarations in Blocks (FiB)
+
+### Summary
+- The official ECMAScript specification states that `function` declarations inside blocks are block-scoped.
+- **Appendix B Inconsistencies:** For legacy backward compatibility, browser engines (and V8/Node) hoist the function name outside the block while leaving its initialization value `undefined` until the block runs.
+- Calling a conditionally declared function outside its block leads to erratic cross-platform differences (`ReferenceError` vs `TypeError` vs success).
+
+### Best Practice & Anti-pattern
+- **Rule:** Never place a `function` declaration directly inside a block (`if`, `for`, `while`).
+- **Alternative:** Use top-level function declarations with internal conditional branches, or conditionally assign **function expressions** to an outer-scoped variable.
+
+### Source
+- *scope-closures/ch6.md, lines 591-725.*
