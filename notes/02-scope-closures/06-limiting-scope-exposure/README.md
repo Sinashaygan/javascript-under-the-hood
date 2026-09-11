@@ -12,3 +12,16 @@
 
 ### Source
 - *scope-closures/ch6.md, lines 1-85.*
+
+## Section: Hiding in Plain (Function) Scope
+
+### Summary
+- State that needs to persist across invocations (like a cache/memoization table) can be encapsulated within an intermediate function scope to prevent global leakage.
+- **Function Expression Encapsulation:** Using a named function expression avoids polluting the outer scope with auxiliary setup function names; the expression identifier remains scoped inside itself.
+- **Immediately Invoked Function Expression (IIFE):** A function expression defined and executed immediately `(function(){ ... })()`. It is ideal for defining a private execution boundary on demand.
+
+### Best Practice
+- Name function expressions semantically even when used purely for scope isolation; this improves stack traces and internal recursion clarity.
+
+### Source
+- *scope-closures/ch6.md, lines 86-215.*
