@@ -37,4 +37,17 @@ Avoid relying on implicit object-to-string coercion for keys; migrate key-value 
 
 ### Source
 *objects-classes/ch1.md, "Property Names" & "Symbols As Property Names"*
-    
+
+    ## Section: Concise Syntax Patterns
+
+### Core Concepts
+- **Concise Properties:** When an in-scope identifier matches the intended property name, `{ prop }` provides shorthand for `{ prop: prop }`.
+- **Concise Method Definitions:** Syntactic sugar `method() { .. }` replaces `method: function() { .. }`.
+- **Concise Generators:** Expressed directly using `*generatorMethod() { yield .. }`.
+- **Dynamic Concise Definitions:** Concise methods and generators support quoted identifiers (`"prop-name"() { .. }`) and computed names (`[expr]() { .. }`).
+
+### Architectural Takeaway
+Concise syntax drastically reduces lexical boilerplate in declarative code without altering underlying property assignment semantics.
+
+### Source
+*objects-classes/ch1.md, "Concise Properties" & "Concise Methods"*
