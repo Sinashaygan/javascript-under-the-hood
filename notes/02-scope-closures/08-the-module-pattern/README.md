@@ -11,3 +11,19 @@
 
 ### Source
 - *scope-closures/ch8.md, lines 1-60.*
+
+## Section: What Is a Module?
+
+### Summary & Comparisons
+- **Namespace (Stateless Grouping):** A collection of grouped utility functions without internal persistent state (e.g., `Utils.isValidEmail(..)`). Grouping functions alone does not make a module.
+- **Data Structure (Stateful Grouping without Access Control):** Bundles state and methods (e.g., a plain object literal with properties and `this` methods) but leaves all internal properties publicly accessible, lacking visibility control.
+- **True Module (Stateful Access Control):** Combines three pillars:
+  1. Grouping of related data and functions.
+  2. Maintained state over time (stateful).
+  3. Strict access control dividing hidden *private* details from an exposed *public API*.
+
+### Criteria Checklist
+- A structure is only a module if it manages state **and** hides internal data behind a controlled public API.
+
+### Source
+- *scope-closures/ch8.md, lines 61-140.*
