@@ -89,3 +89,22 @@ Destructuring provides a declarative contract for extracting multiple properties
 
 ### Source
 *objects-classes/ch1.md, "Accessing Properties", "Object Entries", & "Destructuring"*
+
+## Section: Optional Chaining and Primitive Boxing
+
+### Core Concepts
+- **Optional Chaining (`?.` and `?.[]`):**
+  - Short-circuits to `undefined` if the operand on the left is nullish (`null` or `undefined`).
+  - Should be reserved for truly unpredictable data boundaries rather than overused across deterministic internal models.
+- **The Dangers of Optional Call (`?.(`):**
+  - Only checks if the target is non-nullish; does **not** ensure the value is callable.
+  - If target holds a primitive non-function value (e.g., `true`, `"str"`), `?.(` attempts execution and throws a runtime `TypeError`.
+- **Implicit Primitive Boxing:**
+  - Property access on primitives (e.g., `(42).toString()`) triggers temporary implicit object wrapper instantiation (`Number(42)`).
+  - Unboxing reverses this wrapper back to a primitive during mathematical evaluations.
+
+### Architectural Takeaway
+Avoid `?.(` as a pseudo type-guard for callable functions. Rely on explicit type verification (`typeof fn === "function"`) when handling polymorphic inputs.
+
+### Source
+*objects-classes/ch1.md, "Conditional Property Access" & "Accessing Properties On Non-Objects"*
