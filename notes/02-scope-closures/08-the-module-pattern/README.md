@@ -47,4 +47,16 @@ return { getName };
 ### Source
 - *scope-closures/ch8.md, lines 141-210.*
 
-<br>
+## Section: Module Factory (Multiple Instances)
+
+### Summary
+- **Module Factory:** Converting an IIFE into a standalone callable function (`function defineStudent() { ... }`) allows producing multiple independent module instances on demand.
+- **Independent State & Closures:** Each call to the factory produces a separate lexical scope environment; methods on instance A close over instance A's state without interfering with instance B.
+
+### Three Requirements of Classic Modules
+1. An outer enclosing scope (run via factory or IIFE at least once).
+2. Hidden state inside that inner scope.
+3. A returned public API containing at least one function with closure over the hidden state.
+
+### Source
+- *scope-closures/ch8.md, lines 211-260.*
