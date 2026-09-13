@@ -27,3 +27,24 @@
 
 ### Source
 - *scope-closures/ch8.md, lines 61-140.*
+
+## Section: Classic Modules (Singleton via IIFE)
+
+### Core Concepts
+- **Revealing Module Pattern:** An outer function creates an enclosed lexical scope holding private variables. It returns a `publicAPI` object containing references to inner functions.
+- **Closure Mechanism:** Public methods maintain live closures back to the enclosed variables (`records`) inside the factory/IIFE scope.
+- **Singleton by Execution:** Wrapping the module definition in an IIFE `(function defineStudent(){ ... })()` instantiates the module exactly once at startup.
+- **Private by Default:** Any variable or helper function not explicitly exported in the returned object remains unreachable outside the module.
+
+### Code Pattern
+```js
+var Student = (function defineStudent(){
+var records = [ /* private state */ ];
+function getName(id) { /* accesses records via closure */ }
+return { getName };
+})();
+
+### Source
+- *scope-closures/ch8.md, lines 141-210.*
+
+<br>
