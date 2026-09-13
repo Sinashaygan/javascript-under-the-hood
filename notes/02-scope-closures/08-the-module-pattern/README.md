@@ -60,3 +60,14 @@ return { getName };
 
 ### Source
 - *scope-closures/ch8.md, lines 211-260.*
+
+## Section: Node CommonJS Modules
+
+### Core Concepts
+- **File-Based & Module-Scoped:** One module per file. Top-level variables reside in the module wrapper scope (not global scope) and are private by default.
+- **Exposing API:** Properties are attached to `module.exports` (e.g., `module.exports.getName = getName;`).
+- **Object Replacement Caveat:** Reassigning `module.exports = { ... }` directly can break circular dependency references. Prefer adding properties or using `Object.assign(module.exports, { ... })`.
+- **Singleton Behavior & require:** Calling `require("/path/to/module.js")` executes the module once and caches the result; subsequent `require` calls return references to the same singleton instance.
+
+### Source
+- *scope-closures/ch8.md, lines 261-355.*
