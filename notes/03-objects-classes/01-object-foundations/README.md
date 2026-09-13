@@ -18,3 +18,23 @@ Objects form the foundation of JavaScript's second pillar (the prototype and `cl
 
 ### Source
 *objects-classes/ch1.md, "Objects As Containers" & "Looks Like JSON?"*
+
+## Section: Property Naming, String Coercion, and Symbols
+
+### Core Concepts
+- **Property Name Stringification:** Most property names are coerced to string values. Exceptions:
+  - Integer / integer-like keys are treated as numeric indices.
+  - Symbols remain primitive symbols without coercion.
+- **Object Coercion Hazard:** Passing an object as a property key coerced it to `"[object Object]"`. When distinct object keys are needed, developers must use `Map` rather than regular objects.
+- **Computed Property Names (`[expr]`):** Introduced in ES6, allows dynamic evaluation of property keys at literal definition time.
+- **Symbols as Unique Keys:**
+  - Instantiated via `Symbol("desc")` without `new`.
+  - Provide globally unique, collision-free property identifiers.
+  - Opaque to the runtime; descriptions are strictly used for developer debugging.
+
+### Architectural Takeaway
+Avoid relying on implicit object-to-string coercion for keys; migrate key-value mappings requiring object references to `Map` collections, and leverage `Symbol` to prevent property name collisions across decoupled modules.
+
+### Source
+*objects-classes/ch1.md, "Property Names" & "Symbols As Property Names"*
+    
