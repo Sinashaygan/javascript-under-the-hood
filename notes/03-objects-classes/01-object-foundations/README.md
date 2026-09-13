@@ -108,3 +108,26 @@ Avoid `?.(` as a pseudo type-guard for callable functions. Rely on explicit type
 
 ### Source
 *objects-classes/ch1.md, "Conditional Property Access" & "Accessing Properties On Non-Objects"*
+
+## Section: Property Mutation, Deletion, and Introspection
+
+### Core Concepts
+- **Multi-Property Assignment:** `Object.assign(target, ...sources)` performs shallow assignment of owned enumerable properties into an existing target instance.
+- **The `delete` Operator Realities:**
+  - Removes the property binding directly from the target object.
+  - Does **not** free memory directly or force Garbage Collection; it merely detaches the reference.
+  - Distinct from setting `obj.prop = undefined` (where the property key persists during enumeration).
+- **Introspection and Existence Verification:**
+  - `in` operator: Traverses both the owned container and the entire prototype chain (`[[Prototype]]`).
+  - `Object.prototype.hasOwnProperty(..)`: Checks owned properties, but vulnerable to prototype poisoning or `Object.create(null)`.
+  - `Object.hasOwn(obj, prop)`: Standardized static method (ES2022) ensuring safe, isolated ownership checks.
+- **Reflection Spectrum:**
+  - `Object.keys(obj)` / `Object.values(obj)`: Owned enumerable string keys/values.
+  - `Object.getOwnPropertyNames(obj)`: Owned enumerable + non-enumerable string keys.
+  - `Object.getOwnPropertySymbols(obj)`: Owned Symbol properties.
+
+### Architectural Takeaway
+Standardize all property ownership checks on the static `Object.hasOwn(..)` helper and understand that `delete` affects object topology rather than executing immediate garbage collection.
+
+### Source
+*objects-classes/ch1.md, "Assigning Properties", "Deleting Properties", & "Determining Container Contents"*
