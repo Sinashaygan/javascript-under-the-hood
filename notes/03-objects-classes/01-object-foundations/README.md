@@ -69,3 +69,23 @@ Use object spread `{ ...obj }` strictly for flat data models. Prefer platform-le
 
 ### Source
 *objects-classes/ch1.md, "Object Spread" & "Deep Object Copy"*
+
+## Section: Property Access, Reflection, and Destructuring
+
+### Core Concepts
+- **Access Modalities:**
+  - Dot notation (`obj.prop`) for valid identifier tokens.
+  - Bracket notation (`obj[expr]`) for numeric keys, special characters, or evaluated expressions.
+- **Reflection APIs:**
+  - `Object.entries(obj)`: Extracts `[ [key, value], ... ]` tuples for owned enumerable properties.
+  - `Object.fromEntries(entries)`: Symmetric utility transforming entry lists back into objects.
+- **Declarative Destructuring:**
+  - Pattern matching extraction: `{ favoriteNumber = 12 } = obj`.
+  - Target aliasing / renaming: `{ isDeveloper: isDev } = obj`.
+  - Target assignment without declaration: `({ prop: target } = obj)` (requires wrapping parentheses to prevent block-statement parsing ambiguity).
+
+### Architectural Takeaway
+Destructuring provides a declarative contract for extracting multiple properties into local scopes. Objects function cleanly as temporary multi-value transport mechanisms across function boundaries.
+
+### Source
+*objects-classes/ch1.md, "Accessing Properties", "Object Entries", & "Destructuring"*
