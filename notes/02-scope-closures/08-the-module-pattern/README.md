@@ -71,3 +71,20 @@ return { getName };
 
 ### Source
 - *scope-closures/ch8.md, lines 261-355.*
+
+## Section: Modern ES Modules (ESM)
+
+### Core Features
+- **Strict by Default:** All ESM files are automatically parsed and executed in strict mode.
+- **Top-Level Constraint:** `import` and `export` statements must strictly reside at the top-level scope (cannot be nested inside blocks or functions).
+- **Export Variations:**
+  - *Named exports:* `export { getName };` or `export function getName() {}` (the latter is hoisted).
+  - *Default export:* `export default function getName() {}`.
+- **Import Variations:**
+  - *Named import:* `import { getName } from "./students.js";`
+  - *Renamed import:* `import { getName as getStudentName } from "./students.js";`
+  - *Default import:* `import getName from "./students.js";`
+  - *Namespace import:* `import * as Student from "./students.js";`
+
+### Source
+- *scope-closures/ch8.md, lines 356-470.*
