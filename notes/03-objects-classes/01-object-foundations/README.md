@@ -51,3 +51,21 @@ Concise syntax drastically reduces lexical boilerplate in declarative code witho
 
 ### Source
 *objects-classes/ch1.md, "Concise Properties" & "Concise Methods"*
+
+## Section: Object Duplication Mechanics
+
+### Core Concepts
+- **Object Spread (`...`):**
+  - Executes a shallow copy of owned, enumerable properties from source to target.
+  - Overwrites previous properties in lexical order (top-to-bottom).
+  - Retains shared references to nested objects/functions.
+- **Deep Copy Limitations & Strategies:**
+  - `JSON.parse(JSON.stringify(..))`: Primitive round-trip workaround; destroys non-JSON serializable values (functions, undefined, BigInt) and breaks on circular references.
+  - `structuredClone(..)`: Modern platform standard; cleanly handles circular references, Set, Map, Date, and TypedArrays.
+  - **Unclonable Targets:** Functions and DOM elements cannot be duplicated via `structuredClone` (throws `DataCloneError`).
+
+### Architectural Takeaway
+Use object spread `{ ...obj }` strictly for flat data models. Prefer platform-level `structuredClone(..)` for state duplication with complex data types or recursive structures, recognizing that behavioral members (methods/functions) must remain reference-shared.
+
+### Source
+*objects-classes/ch1.md, "Object Spread" & "Deep Object Copy"*
