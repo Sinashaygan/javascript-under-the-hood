@@ -111,4 +111,26 @@ Extensibility controls prevent accidental shape pollution across complex data pi
 
 ### Source
 *objects-classes/ch2.md, "Object Characteristics: Extensible"*
-    
+
+    ## Section: [[Prototype]] Chain, Delegation, and Prototype Disambiguation
+
+### Core Concepts
+- **Internal `[[Prototype]]` Linkage:** Every object inherently possesses a hidden internal link pointing to another object (terminating at `Object.prototype`, whose own `[[Prototype]]` is `null`).
+- **Delegation vs Inheritance:** When a property/method access fails on the immediate object, the engine delegates the lookup up the `[[Prototype]]` chain. It is dynamic runtime delegation, not copy-down class inheritance.
+- **Ownership Verification:**
+  - Avoid instance method `obj.hasOwnProperty(..)` due to prototype shadowing and failures with prototype-less objects (`Object.create(null)`).
+  - Standardize on ES2022 `Object.hasOwn(obj, prop)` as the static, null-safe alternative.
+- **Custom Linkage Configurations:**
+  - `Object.create(proto)`: Instantiates a new empty object directly linked to `proto`.
+  - `Object.create(null)` / `{ __proto__: null }`: Creates completely empty dictionary objects immune to prototype collision and unexpected inherited keys.
+  - `__proto__`: Standardized strictly in spec **Appendix B** (web compatibility); should be avoided in favor of `Object.create(..)`.
+- **Disambiguation: `[[Prototype]]` vs `prototype`:**
+  - `[[Prototype]]`: The actual internal delegation link on an individual object instance.
+  - `fn.prototype`: A regular public property existing on function objects. It dictates what object will be assigned as the `[[Prototype]]` link for instances created via `new fn()`.
+  - Functions themselves, as objects, link their internal `[[Prototype]]` to `Function.prototype`.
+
+### Architectural Takeaway
+JavaScript does not copy behaviors from parent to child. It links objects horizontally through runtime delegation chains. Always decouple instance checks using static `Object.hasOwn(..)`.
+
+### Source
+*objects-classes/ch2.md, "[[Prototype]] Chain" & "[[Prototype]] vs prototype"*
