@@ -56,3 +56,21 @@ True immutability on an individual property requires locking both `writable: fal
 
 ### Source
 *objects-classes/ch2.md, "Enumerable, Writable, Configurable"*
+
+    ## Section: Object Sub-Types: Arrays and Empty Slots
+
+### Core Concepts
+- **Specialized Numerical Indexing:** Arrays are derived object sub-types explicitly optimized for 0-based integer indexing.
+- **Index Coercion:** String keys that evaluate as valid integer numbers (e.g., `"2"`) are coerced and treated as integer indexes (`2`). Adding arbitrary string-named properties to arrays is an anti-pattern.
+- **The `length` Mechanism:**
+  - The `length` property automatically tracks the maximum assigned index plus one.
+  - *Performance Myth:* `length` is **not** an expensive accessor getter. Caching `arr.length` prior to non-mutating iteration is an obsolete 10-year-old anti-pattern; modern JS engines optimize property lookups internally.
+- **Empty Slots (Sparse Arrays):**
+  - Assigning beyond the array boundary (e.g., `arr[14] = "x"` on an array of length 3) creates empty slots rather than explicit `undefined` values.
+  - Built-in higher-order methods (such as `map(..)`, `filter(..)`, and `forEach(..)`) **silently skip** empty slots, creating unexpected edge cases and bugs.
+
+### Architectural Takeaway
+Never intentionally create sparse arrays with empty slots. Treat array indices strictly as dense numerical sequences.
+
+### Source
+*objects-classes/ch2.md, "Object Sub-Types: Arrays" & "Empty Slots"*
