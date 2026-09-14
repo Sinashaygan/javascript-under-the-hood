@@ -74,3 +74,21 @@ Never intentionally create sparse arrays with empty slots. Treat array indices s
 
 ### Source
 *objects-classes/ch2.md, "Object Sub-Types: Arrays" & "Empty Slots"*
+
+## Section: Object Sub-Types: Functions
+
+### Core Concepts
+- **First-Class Callable Objects:** Functions are specialized object sub-types capable of being invoked while concurrently exposing owned properties.
+- **Built-in Reflection Properties:**
+  - `fn.name`: Holds the lexical identifier or inferred name of the function.
+  - `fn.length` (Arity): Indicates the count of formal declared parameters.
+- **Arity Calculation Boundaries:**
+  - Parameters with default initializers (`param = 42`) and rest parameters (`...rest`) are **excluded** from `fn.length`.
+  - `length` counts only explicit, non-default parameters appearing prior to the first default or rest parameter.
+- **Property Mutation Anti-Pattern:** Storing arbitrary application state directly on function objects pollutes function definitions. Use decoupled `Map` or `WeakMap` collections with the function instance as the key.
+
+### Architectural Takeaway
+Keep function objects pure and executable. Extract dynamic state association into `WeakMap` structures rather than attaching arbitrary properties directly to function instances.
+
+### Source
+*objects-classes/ch2.md, "Object Sub-Types: Functions"*
