@@ -36,3 +36,23 @@ Accessor properties expose functional execution behind standard property access 
 
 ### Source
 *objects-classes/ch2.md, "Accessor Properties"*
+
+## Section: Descriptor Flags (Enumerable, Writable, Configurable)
+
+### Core Concepts
+- **`enumerable`:**
+  - Dictates visibility during enumeration sweeps: `Object.keys(..)`, `Object.entries(..)`, `for..in` loops, and shallow copy operations (`...`, `Object.assign`).
+  - Non-enumerable properties remain directly accessible via `obj.prop` and discoverable via `Object.getOwnPropertyNames(..)`.
+- **`writable`:**
+  - Dictates whether value assignment via `=` is permitted.
+  - Setting `writable: false` creates a read-only property. However, if `configurable: true` persists, the value can still be mutated by redefining the descriptor with `Object.defineProperty(..)`.
+- **`configurable` (The One-Way Gate):**
+  - Dictates whether a property's descriptor can be re-defined, switched between data/accessor types, or deleted via `delete`.
+  - Once set to `configurable: false`, it cannot be reversed back to `true`.
+  - *Exception:* If `configurable: false`, the runtime allows transitioning `writable` from `true` to `false`, but never from `false` to `true`.
+
+### Architectural Takeaway
+True immutability on an individual property requires locking both `writable: false` and `configurable: false` simultaneously.
+
+### Source
+*objects-classes/ch2.md, "Enumerable, Writable, Configurable"*
