@@ -18,3 +18,21 @@ Property descriptors allow fine-grained control over API contracts on objects. N
 
 ### Source
 *objects-classes/ch2.md, "Property Descriptors"*
+
+## Section: Accessor Properties (Getters & Setters)
+
+### Core Concepts
+- **Accessor vs Data Descriptors:** Unlike data properties (which hold a fixed `value` and a `writable` boolean), accessor properties replace them with `get()` and/or `set(v)` methods.
+- **Execution Under the Hood:**
+  - Property access (`obj.prop`) transparently executes the underlying `get()` function.
+  - Property assignment (`obj.prop = val`) transparently executes the underlying `set(val)` function.
+- **Mutation Suppression:**
+  - Defining a getter without a setter turns the property effectively read-only.
+  - In non-strict mode, assigning to a getter-only property silently fails; in strict mode, it throws a `TypeError`.
+  - Defining a custom setter allows intercepting, transforming, validating, or completely ignoring inbound values.
+
+### Architectural Takeaway
+Accessor properties expose functional execution behind standard property access syntax, enabling dynamic validation and calculated state without breaking consumption interfaces.
+
+### Source
+*objects-classes/ch2.md, "Accessor Properties"*
