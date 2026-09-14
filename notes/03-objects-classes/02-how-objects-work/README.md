@@ -92,3 +92,23 @@ Keep function objects pure and executable. Extract dynamic state association int
 
 ### Source
 *objects-classes/ch2.md, "Object Sub-Types: Functions"*
+
+## Section: Object-Level Characteristics
+
+### Core Concepts
+- **MOP Object-Level Switches:** MOP allows locking down entire objects across three progressive tiers: Extensible, Sealed, and Frozen.
+- **Extensibility (`Object.preventExtensions`):**
+  - By default, all objects are extensible (properties can be added dynamically).
+  - `Object.preventExtensions(obj)` forbids adding new properties to the target instance permanently.
+  - Existing properties can still be modified (if writable) or deleted (if configurable).
+  - In strict mode (`"use strict"`), attempting to add new properties throws a `TypeError`; in non-strict mode, the mutation silently fails.
+- **Sealed & Frozen Progression (Conceptual Preview):**
+  - `Object.seal(..)`: Prevents extensions and marks all existing properties as `configurable: false`.
+  - `Object.freeze(..)`: Seals the object and marks all existing data properties as `writable: false`.
+
+### Architectural Takeaway
+Extensibility controls prevent accidental shape pollution across complex data pipelines. Enforcing non-extensibility establishes strict, stable object boundaries.
+
+### Source
+*objects-classes/ch2.md, "Object Characteristics: Extensible"*
+    
