@@ -87,13 +87,28 @@
   - Can use `this` to refer to the class itself.
   - **Static Blocks (`static { .. }`):** ES2022 feature for more sophisticated initialization (e.g., `try..catch`).
 
-
 ## Section: Static Inheritance / Private Class Behavior
 
 - **Static Inheritance:**
-    - Statics are inherited by subclasses via the `[[Prototype]]` chain.
-    - This was a specific ES6 feature that went beyond "syntactic sugar" and couldn't be emulated pre-ES6.
+  - Statics are inherited by subclasses via the `[[Prototype]]` chain.
+  - This was a specific ES6 feature that went beyond "syntactic sugar" and couldn't be emulated pre-ES6.
 - **Private Class Behavior:**
-    - **Motivation:** "Principle of Least Privilege" (POLP) – hide implementation details to prevent namespace collisions and defensive design issues.
-    - **The "Too Private" Problem:** JS privates are **not** inherited by subclasses. This is a major limitation compared to languages with `protected` visibility.
-    - **JS Limitation:** JS does not have `protected` visibility and likely never will due to the nature of the `[[Prototype]]` pillar.
+  - **Motivation:** "Principle of Least Privilege" (POLP) – hide implementation details to prevent namespace collisions and defensive design issues.
+  - **The "Too Private" Problem:** JS privates are **not** inherited by subclasses. This is a major limitation compared to languages with `protected` visibility.
+  - **JS Limitation:** JS does not have `protected` visibility and likely never will due to the nature of the `[[Prototype]]` pillar.
+
+  ## Section: Private Members/Methods / Private Statics
+
+- **Syntax:** Uses the `#` prefix (e.g., `#ID`, `#assignID()`).
+  - Must be declared in the class body.
+  - Cannot be added dynamically in the constructor.
+  - Cannot be `delete`d.
+- **Subclassing + Privates:**
+  - A subclass **cannot** access private members/methods of a base class.
+  - Inherited methods (from the base) _can_ access privates in the base class.
+- **Brand Checks:**
+  - **Ergonomic Brand Check:** `#ID in object` (safe, boolean result).
+  - **Exfiltration:** Privates can be extracted (e.g., passed as callbacks), losing their privacy.
+- **Private Statics:**
+  - Can be marked private (`static #errorMsg`).
+  - **Gotcha:** Private statics are **not** inherited. If a static method is inherited and uses `this.#private`, it will throw an error. Use the explicit class name (`Point2d.#private`) instead.
