@@ -83,3 +83,36 @@ Use explicit binding when an existing function needs to operate against a differ
 ### Source
 
 *objects-classes/ch4.md, "Explicit Context Invocation" & "New Context Invocation"*
+
+## Section: This Binding Precedence
+
+### Core Concepts
+
+* **Four Binding Rules:** Regular function calls can determine `this` through four major mechanisms:
+
+  1. `new` binding
+  2. Explicit binding
+  3. Implicit binding
+  4. Default binding
+
+* **Binding Precedence:** When multiple rules could appear relevant, the higher-priority rule wins.
+
+```text
+new
+ ↓
+explicit
+ ↓
+implicit
+ ↓
+default
+```
+
+* **Call-Site Analysis:** The correct way to determine `this` is to first identify the actual call-site and then apply the binding rules according to their precedence.
+
+### Architectural Takeaway
+
+When debugging `this`, identify the call-site and evaluate the binding rules in order of precedence. Do not rely on where the function was defined or which object originally contained it.
+
+### Source
+
+*objects-classes/ch4.md, "Review This"*
