@@ -152,3 +152,33 @@ Use arrow functions when lexical `this` is the desired behavior. Do not treat ar
 ### Source
 
 *objects-classes/ch4.md, "An Arrow Points Somewhere" & "Lexical This"*
+
+## Section: Callbacks, Event Handlers, and the Correct Call-Site
+
+### Core Concepts
+
+* **Callback Problem:** Passing a method as a callback can separate the function from the object that originally contained it.
+
+```js
+this.submitBtn.addEventListener(
+    "click",
+    this.clickHandler,
+    false
+);
+```
+
+* **Hidden Call-Site:** When a callback is passed to a framework, library, or native API, the actual invocation may happen somewhere outside the visible code.
+
+* **Context Mismatch:** The callback may receive a `this` value that is different from the context expected by the function.
+
+* **Call-Site Analysis:** The relevant call-site is the function invocation that actually assigns a `this` context.
+
+* **Lexical Workaround:** Older JavaScript code commonly captured the surrounding context in a variable and referenced that variable inside the callback.
+
+### Architectural Takeaway
+
+When a function is passed as a callback, do not assume that the surrounding object remains its `this`. If the context must be preserved, use an explicit strategy such as an arrow function or `bind()`.
+
+### Source
+
+*objects-classes/ch4.md, "Hidden From Sight" & "Fixing `this`"*
