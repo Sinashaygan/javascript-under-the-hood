@@ -19,3 +19,31 @@ Treat `this` as a dynamically assigned context rather than a reference to the fu
 ### Source
 
 *objects-classes/ch4.md, "This Aware" & "So What Is This?"*
+
+## Section: Implicit and Default Context
+
+### Core Concepts
+
+* **Implicit Context:** Calling a function through an object reference, such as `obj.method()`, implicitly assigns `obj` as the function's `this`.
+
+* **Method Extraction:** Extracting a method into a standalone variable removes the object reference from the call-site.
+
+```js
+const init = point.init;
+
+init(3, 4);
+```
+
+* **Default Context:** When no other `this`-assignment rule applies, the function receives the default context.
+
+* **Strict Mode:** In strict mode, a standalone regular function invocation receives `undefined` as `this`.
+
+* **Non-Strict Mode:** In non-strict mode, the default context is `globalThis`.
+
+### Architectural Takeaway
+
+Never assume that a function originally defined as an object method will retain that object's context when passed around. Always inspect the actual call-site.
+
+### Source
+
+*objects-classes/ch4.md, "Implicit Context Invocation" & "Default Context Invocation"*
