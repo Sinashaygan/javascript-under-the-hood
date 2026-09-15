@@ -16,3 +16,16 @@
     - **Inheritance:** A base class defines operations like `totalTime()`, and subclasses inherit this capability.
     - **Composition:** Entities are defined as collections of other entities.
 - **Single vs. Multiple:** If you only ever need one concrete "thing" (e.g., just one `Computer`), class-orientation may not be the most efficient pattern. If you need multiple instances and inheritance, `class` is a good candidate.
+
+## Section: Keep It `class`y
+
+- **Syntax:** `class` defines a declaration or expression.
+    - **Declaration:** `class Point2d { .. }`
+    - **Expression:** `const pointClass = class Point2d { .. };` (Named or Anonymous)
+- **Body:** Contains method definitions without the `function` keyword or separators (`,` or `;`).
+- **Strict Mode:** All code inside a `class` block runs in strict-mode by default.
+- **The Constructor:**
+    - A special method invoked when `new` is used.
+    - If omitted, a default empty constructor is assumed.
+    - It is a special function type; it **cannot** be invoked without `new` (throws `TypeError`).
+    - **Instances:** Each instance (`one`, `two`, `three`) is an independent object with a `[[Prototype]]` linkage to `Point2d.prototype`.
