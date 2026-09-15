@@ -182,3 +182,38 @@ When a function is passed as a callback, do not assume that the surrounding obje
 ### Source
 
 *objects-classes/ch4.md, "Hidden From Sight" & "Fixing `this`"*
+
+## Section: `bind()` and Pre-Bound Function Contexts
+
+### Core Concepts
+
+* **`bind()`:** Unlike `call()` and `apply()`, `bind()` does not immediately invoke the function.
+
+* **Bound Function:** `bind()` creates a new function whose `this` context is preset.
+
+```js
+const boundFn = fn.bind(obj);
+
+boundFn();
+```
+
+* **Callback Safety:** A bound function can safely be passed to APIs such as event handlers when a specific `this` context must be preserved.
+
+```js
+button.addEventListener(
+    "click",
+    handler.bind(this)
+);
+```
+
+* **Binding Persistence:** The bound `this` cannot normally be replaced through another `call()`, `apply()`, or implicit object context.
+
+* **`new` Exception:** The `new` rule has higher precedence than a hard-bound `this` and can establish a new `this` for construction.
+
+### Architectural Takeaway
+
+Use `bind()` when a regular function must retain a specific `this` context while being passed around as a callback or function reference. Remember that `bind()` creates a new function rather than immediately executing the original one.
+
+### Source
+
+*objects-classes/ch4.md, "This Is Bound To Come Up" & "Pre-Binding Function Contexts"*
