@@ -47,3 +47,39 @@ Never assume that a function originally defined as an object method will retain 
 ### Source
 
 *objects-classes/ch4.md, "Implicit Context Invocation" & "Default Context Invocation"*
+
+## Section: Explicit Context and New Context Invocation
+
+### Core Concepts
+
+* **Explicit Context:** `call()` and `apply()` allow the caller to explicitly provide the `this` value.
+
+```js
+fn.call(obj, arg1, arg2);
+
+fn.apply(obj, [arg1, arg2]);
+```
+
+* **`call()`:** Invokes the function immediately and accepts arguments individually.
+
+* **`apply()`:** Invokes the function immediately and receives the function arguments as an array-like collection.
+
+* **Function Borrowing:** A method can be reused with another object by explicitly assigning that object as `this`.
+
+```js
+point.init.call(anotherPoint, 5, 6);
+```
+
+* **`new` Binding:** Invoking a function with `new` creates a new object and uses that object as the function's `this`.
+
+```js
+const point = new Point(3, 4);
+```
+
+### Architectural Takeaway
+
+Use explicit binding when an existing function needs to operate against a different object context. `call()` and `apply()` immediately invoke the function, while `new` creates a new object context for construction.
+
+### Source
+
+*objects-classes/ch4.md, "Explicit Context Invocation" & "New Context Invocation"*
