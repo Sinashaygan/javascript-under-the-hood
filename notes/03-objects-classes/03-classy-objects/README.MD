@@ -112,3 +112,21 @@
 - **Private Statics:**
   - Can be marked private (`static #errorMsg`).
   - **Gotcha:** Private statics are **not** inherited. If a static method is inherited and uses `this.#private`, it will throw an error. Use the explicit class name (`Point2d.#private`) instead.
+
+## Section: Class Example
+
+- **`CalendarItem` (Abstract Base Class):**
+    - Uses `static #UNSET` and `Symbol`.
+    - Uses a `static` block to initialize error messages.
+    - Uses `new.target` to throw an error if instantiated directly.
+    - Uses private fields (`#ID`) and methods (`#setID`).
+- **`Reminder` (Subclass):**
+    - Extends `CalendarItem`.
+    - Uses `#complete` private field.
+    - Uses `Symbol.toStringTag`.
+    - Overrides `summary()` and uses `super.summary()`.
+- **`Meeting` (Subclass):**
+    - Extends `CalendarItem`.
+    - Uses `#getEndDateTimeStr()` private method.
+    - Overrides `getDateTimeStr()` and uses `super.getDateTimeStr()`.
+- **Usage:** Demonstrates instantiation, inheritance checks (`instanceof`), and static method usage (`isSameItem`).
