@@ -59,3 +59,17 @@
 - **`super` Keyword:**
     - Used to access inherited methods even if overridden (e.g., `super.getX()`).
     - **Polymorphism:** The ability for methods of the same name to exhibit different behavior based on the level of the hierarchy.
+
+    ## Section: That's Super! / But Which Kind Of Instance?
+
+- **Constructor `super(..)`:**
+    - A subclass constructor **must** call `super(..)` before accessing `this`.
+    - If omitted, the default constructor automatically calls `super()`.
+- **Field Initialization Order:**
+    - In a subclass with an explicit constructor, field initializations occur **between** the `super(..)` call and the subsequent code.
+- **`new.target`:** A pseudo-property to determine if a class is being instantiated directly or via a subclass.
+- **`instanceof` Operator:**
+    - Checks if an object is an instance of a class by traversing the `[[Prototype]]` chain.
+    - `anotherPoint instanceof Point2d` is `true` if `Point3d` extends `Point2d`.
+- **`isPrototypeOf(..)`:** A less ergonomic but explicit way to check the prototype chain.
+- **`constructor` Property:** Checks if an object was *directly* created by a specific class (`point.constructor === Point2d`).
