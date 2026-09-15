@@ -48,3 +48,14 @@
   - **Bad Practice:** Defining methods as arrow functions in the constructor or as fields (e.g., `getDoubleX = () => this.x * 2`).
   - **Why:** It creates a new function property for **each instance** rather than sharing it on the prototype. This wastes memory and invalidates the power of dynamic `this`.
   - **Solution:** If you need static context binding, use **closure**, not classes.
+
+## Section: Class Extension
+
+- **`extends` Keyword:** Defines inheritance (e.g., `class Point3d extends Point2d`).
+- **Behavior:** The subclass (`Point3d`) inherits fields and methods from the base (`Point2d`).
+- **Overriding:**
+    - **Fields:** Subclass can re-initialize inherited fields (e.g., `x = 21`).
+    - **Methods:** Subclass can redefine a method with the same name.
+- **`super` Keyword:**
+    - Used to access inherited methods even if overridden (e.g., `super.getX()`).
+    - **Polymorphism:** The ability for methods of the same name to exhibit different behavior based on the level of the hierarchy.
