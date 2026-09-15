@@ -217,3 +217,35 @@ Use `bind()` when a regular function must retain a specific `this` context while
 ### Source
 
 *objects-classes/ch4.md, "This Is Bound To Come Up" & "Pre-Binding Function Contexts"*
+
+## Final Takeaway
+
+The central rule of this chapter is:
+
+> **For regular functions, `this` is determined by how the function is invoked, not where it is defined.**
+
+The four major binding rules are:
+
+```text
+1. new
+      ↓
+2. explicit: call / apply
+      ↓
+3. implicit: obj.method()
+      ↓
+4. default: undefined / globalThis
+```
+
+Arrow functions are different because they do not have their own `this`; they use **lexical `this`** from their surrounding scope.
+
+When debugging `this`:
+
+1. Find the actual call-site.
+2. Determine whether the function is regular or an arrow function.
+3. For regular functions, check `new`.
+4. Check explicit binding.
+5. Check implicit binding.
+6. Fall back to default binding.
+7. For arrow functions, move outward through the lexical scope to find the surrounding `this`.
+
+The chapter ultimately emphasizes that `this` is a powerful but context-sensitive mechanism. Understanding the call-site and binding rules is essential for correctly working with methods, callbacks, event handlers, classes, and function references.
