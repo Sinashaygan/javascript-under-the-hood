@@ -54,22 +54,35 @@
 - **`extends` Keyword:** Defines inheritance (e.g., `class Point3d extends Point2d`).
 - **Behavior:** The subclass (`Point3d`) inherits fields and methods from the base (`Point2d`).
 - **Overriding:**
-    - **Fields:** Subclass can re-initialize inherited fields (e.g., `x = 21`).
-    - **Methods:** Subclass can redefine a method with the same name.
+  - **Fields:** Subclass can re-initialize inherited fields (e.g., `x = 21`).
+  - **Methods:** Subclass can redefine a method with the same name.
 - **`super` Keyword:**
-    - Used to access inherited methods even if overridden (e.g., `super.getX()`).
-    - **Polymorphism:** The ability for methods of the same name to exhibit different behavior based on the level of the hierarchy.
+  - Used to access inherited methods even if overridden (e.g., `super.getX()`).
+  - **Polymorphism:** The ability for methods of the same name to exhibit different behavior based on the level of the hierarchy.
 
-    ## Section: That's Super! / But Which Kind Of Instance?
+  ## Section: That's Super! / But Which Kind Of Instance?
 
 - **Constructor `super(..)`:**
-    - A subclass constructor **must** call `super(..)` before accessing `this`.
-    - If omitted, the default constructor automatically calls `super()`.
+  - A subclass constructor **must** call `super(..)` before accessing `this`.
+  - If omitted, the default constructor automatically calls `super()`.
 - **Field Initialization Order:**
-    - In a subclass with an explicit constructor, field initializations occur **between** the `super(..)` call and the subsequent code.
+  - In a subclass with an explicit constructor, field initializations occur **between** the `super(..)` call and the subsequent code.
 - **`new.target`:** A pseudo-property to determine if a class is being instantiated directly or via a subclass.
 - **`instanceof` Operator:**
-    - Checks if an object is an instance of a class by traversing the `[[Prototype]]` chain.
-    - `anotherPoint instanceof Point2d` is `true` if `Point3d` extends `Point2d`.
+  - Checks if an object is an instance of a class by traversing the `[[Prototype]]` chain.
+  - `anotherPoint instanceof Point2d` is `true` if `Point3d` extends `Point2d`.
 - **`isPrototypeOf(..)`:** A less ergonomic but explicit way to check the prototype chain.
-- **`constructor` Property:** Checks if an object was *directly* created by a specific class (`point.constructor === Point2d`).
+- **`constructor` Property:** Checks if an object was _directly_ created by a specific class (`point.constructor === Point2d`).
+
+## Section: "Inheritance" Is Sharing, Not Copying / Static Class Behavior
+
+- **Sharing vs. Copying:** JS does not copy methods down the chain. Methods stay on the prototype object and are **shared** via the `[[Prototype]]` chain.
+- **Static Behavior:**
+  - A third location for data/behavior (besides prototype and instance).
+  - Defined using the `static` keyword.
+  - **Static Properties:** Data attached to the constructor function itself (e.g., `Point2d.origin`).
+  - **Static Functions:** Functions that do not need instance context (e.g., `Point2d.distance(..)`).
+- **Static Initialization:**
+  - Runs **immediately** after the class is defined (unlike instance fields which wait for `new`).
+  - Can use `this` to refer to the class itself.
+  - **Static Blocks (`static { .. }`):** ES2022 feature for more sophisticated initialization (e.g., `try..catch`).
