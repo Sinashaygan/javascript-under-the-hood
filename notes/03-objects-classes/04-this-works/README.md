@@ -116,3 +116,39 @@ When debugging `this`, identify the call-site and evaluate the binding rules in 
 ### Source
 
 *objects-classes/ch4.md, "Review This"*
+
+## Section: Arrow Functions and Lexical `this`
+
+### Core Concepts
+
+* **Arrow Functions:** Arrow functions behave differently from regular functions because they do not define their own `this`.
+
+* **Lexical `this`:** An arrow function obtains `this` from its surrounding lexical scope.
+
+```js
+function outer() {
+    const inner = () => {
+        console.log(this.value);
+    };
+
+    return inner;
+}
+```
+
+* **Ignoring Explicit Binding:** Calling an arrow function with `call()` or `apply()` does not change its lexical `this`.
+
+```js
+innerFn.call(otherObject);
+```
+
+* **No `new`:** Arrow functions cannot be used as constructors with `new`.
+
+* **Not Just Shorter Syntax:** Arrow functions are not simply a shorter syntax for regular functions. Their lexical `this` behavior is one of their most important characteristics.
+
+### Architectural Takeaway
+
+Use arrow functions when lexical `this` is the desired behavior. Do not treat arrow functions as a shorter replacement for every regular function, especially when dynamic `this` binding is required.
+
+### Source
+
+*objects-classes/ch4.md, "An Arrow Points Somewhere" & "Lexical This"*
