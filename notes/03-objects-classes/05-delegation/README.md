@@ -158,3 +158,38 @@ The goal of delegation is not merely replacing `class` syntax. It changes the wa
 
 *objects-classes/ch5.md, "Ditching Class Thinking"*
 
+## Section: Delegation
+
+### Core Concepts
+
+* **Delegation:** Delegation is about multiple objects sharing the effort of completing a task.
+
+* **Peer Objects:** Objects are organized as independent peers rather than parent and child classes.
+
+* **Explicit Delegation:** A function can be invoked with another object as its `this` context using `call()`.
+
+```js
+Coordinates.setXY.call(point, 3, 4);
+
+Inspect.toString.call(point);
+```
+
+* **Implicit Delegation:** An object can delegate property lookup through its `[[Prototype]]` chain.
+
+```js
+var anotherPoint = Object.create(Coordinates);
+
+anotherPoint.setXY(5, 6);
+```
+
+* **Shared `this`:** Delegated methods can operate on the receiving object because the `this` context remains the object from which the method was invoked.
+
+* **Runtime Composition:** Multiple independent objects can cooperate during execution without being merged into a single class hierarchy.
+
+### Architectural Takeaway
+
+Delegation composes behavior at runtime rather than through inheritance. Objects can share functionality by delegating method lookup and sharing `this` context during function invocation.
+
+### Source
+
+*objects-classes/ch5.md, "Delegation Illustrated"*
