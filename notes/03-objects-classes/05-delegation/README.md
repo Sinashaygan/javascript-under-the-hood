@@ -221,3 +221,25 @@ Virtual composition allows behavior to be assembled dynamically through `this` a
 ### Source
 
 *objects-classes/ch5.md, "Composing Peer Objects"*
+
+## Section: Flexible Context
+
+### Core Concepts
+
+* **Reusable Behaviors:** Delegated behavior can operate against different objects as long as the expected properties and methods are available.
+
+* **Context-Based Behavior:** Methods rely on `this` rather than hard-coding a specific object.
+
+* **Prototype Replacement:** `Object.setPrototypeOf()` can dynamically change an object's `[[Prototype]]` relationship.
+
+* **Testing with Mocks:** Prototype links or delegated methods can be redirected to mock objects for isolated testing.
+
+* **Dynamic Composition:** Different objects can participate in the same behavior structure without belonging to the same class hierarchy.
+
+### Architectural Takeaway
+
+Delegation can make behavior highly flexible because functions depend on the runtime `this` context rather than a fixed object type. This can also make certain parts of the system easier to replace or test independently.
+
+### Source
+
+*objects-classes/ch5.md, "Flexible Context"*
