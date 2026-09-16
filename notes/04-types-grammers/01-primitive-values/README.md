@@ -84,3 +84,39 @@ JavaScript object construction does not require classes or constructors. A regul
 ### Source
 
 *objects-classes/ch5.md, "What's A Constructor, Anyway?"*
+
+## Section: Prototype Linking
+
+### Core Concepts
+
+* **`[[Prototype]]`:** Objects can be linked to other objects through their internal `[[Prototype]]` relationship.
+
+* **Shared Behavior:** An object can delegate method lookup to another object that stores reusable behavior.
+
+```js
+var prototypeObj = {
+    toString() {
+        return `(${this.x},${this.y})`;
+    }
+};
+
+var point = {
+    __proto__: prototypeObj,
+    x: 3,
+    y: 4
+};
+
+point.toString(); // (3,4)
+```
+
+* **Delegated Lookup:** If a property or method is not found directly on `point`, JavaScript searches through its prototype chain.
+
+* **`this` Preservation:** When `point.toString()` is invoked, `this` still refers to `point`, even though `toString()` is found on `prototypeObj`.
+
+### Architectural Takeaway
+
+Prototype linkage separates data from shared behavior. Objects can delegate behavior to other objects while keeping the receiving object as the `this` context.
+
+### Source
+
+*objects-classes/ch5.md, "What's A Constructor, Anyway?" & "Factory Initialization"*
