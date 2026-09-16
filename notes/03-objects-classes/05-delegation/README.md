@@ -133,3 +133,28 @@ function make(objType, ...args) {
 ### Source
 
 *objects-classes/ch5.md, "Factory Initialization" & "Help Me Reconstruct!"*
+
+## Section: Ditching Class Thinking
+
+### Core Concepts
+
+* **Class Hierarchy:** Class-oriented design organizes behavior into parent and child relationships.
+
+* **Classification:** A base class represents generalized behavior, while subclasses represent specialized forms.
+
+* **Vertical Composition:** Behavior is composed through layers of an inheritance hierarchy.
+
+* **Mixins:** Some designs attempt to flatten inheritance hierarchies through horizontal composition.
+
+* **Delegation Alternative:** Delegation moves away from class hierarchy thinking and instead focuses on independent objects cooperating with each other.
+
+* **Peer Objects:** Delegation treats participating objects as peers rather than parent and child classes.
+
+### Architectural Takeaway
+
+The goal of delegation is not merely replacing `class` syntax. It changes the way the program is structured: instead of organizing behavior into an inheritance hierarchy, behavior is divided among independent objects that cooperate at runtime.
+
+### Source
+
+*objects-classes/ch5.md, "Ditching Class Thinking"*
+
