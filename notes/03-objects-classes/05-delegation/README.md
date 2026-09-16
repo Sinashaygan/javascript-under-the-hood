@@ -86,3 +86,50 @@ Object creation does not inherently require classes or constructors. A factory f
 ### Source
 
 *objects-classes/ch5.md, "What's A Constructor, Anyway?"*
+
+## Section: `Object.create()` and Factory Initialization
+
+### Core Concepts
+
+* **`Object.create()`:** Creates a new object and links its `[[Prototype]]` to the specified object.
+
+```js
+var Point2d = {
+    init(x, y) {
+        this.x = x;
+        this.y = y;
+    },
+
+    toString() {
+        return `(${this.x},${this.y})`;
+    }
+};
+
+var point = Object.create(Point2d);
+
+point.init(3, 4);
+```
+
+* **Prototype Delegation:** `point.init()` is not defined directly on `point`. The lookup delegates to `Point2d`.
+
+* **Implicit `this`:** Because the call is `point.init()`, the `this` context inside `init()` is `point`.
+
+* **Separated Operations:** Object creation and initialization are separated into two operations.
+
+* **Factory Helper:** A reusable helper can combine those operations.
+
+```js
+function make(objType, ...args) {
+    var instance = Object.create(objType);
+    instance.init(...args);
+    return instance;
+}
+```
+
+### Architectural Takeaway
+
+`Object.create()` exposes the object-creation and prototype-linking mechanisms more directly than `class` syntax. Initialization can then be delegated through a method such as `init()`.
+
+### Source
+
+*objects-classes/ch5.md, "Factory Initialization" & "Help Me Reconstruct!"*
