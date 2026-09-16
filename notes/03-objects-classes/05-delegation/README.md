@@ -273,3 +273,65 @@ The chapter presents delegation as a way to avoid repeatedly passing context thr
 ### Source
 
 *objects-classes/ch5.md, "Why This?"*
+
+## Final Takeaway
+
+The central idea of this chapter is that JavaScript's object model can be used through **delegation** instead of class-oriented inheritance.
+
+The basic structure is:
+
+```text
+Objects
+   ↓
+[[Prototype]] links
+   ↓
+Method delegation
+   ↓
+this context sharing
+   ↓
+Runtime composition
+```
+
+The key concepts are:
+
+1. `class` syntax can be deconstructed into lower-level object operations.
+2. Factory functions can create and initialize objects without `class` or `new`.
+3. `Object.create()` can create an object and establish its prototype relationship.
+4. Delegation focuses on peer objects rather than parent/child class hierarchies.
+5. `call()` enables explicit delegation through `this`.
+6. `[[Prototype]]` enables implicit delegation through property lookup.
+7. `this` allows multiple objects to cooperate while operating on the same runtime context.
+8. Virtual composition allows behavior to be combined dynamically.
+9. Delegation can provide flexible contexts and can support certain testing strategies.
+10. Explicit context passing is an alternative, but it requires additional parameters throughout function signatures and call-sites.
+
+The overall perspective of this chapter is that JavaScript's prototypal nature can be used directly: objects can be linked together, delegate behavior to one another, and cooperate through shared `this` context without requiring a class hierarchy.
+
+### Core Pattern
+
+```js
+var Coordinates = {
+    setX(x) {
+        this.x = x;
+    },
+
+    setY(y) {
+        this.y = y;
+    },
+
+    setXY(x, y) {
+        this.setX(x);
+        this.setY(y);
+    }
+};
+
+var point = Object.create(Coordinates);
+
+point.setXY(3, 4);
+```
+
+Here, `point` does not inherit from a traditional class. Instead, it delegates the lookup of `setXY()` to `Coordinates`, while `this` remains `point`.
+
+### Source
+
+*objects-classes/ch5.md, "Delegation Illustrated", "Composing Peer Objects", and "Why This?"*
