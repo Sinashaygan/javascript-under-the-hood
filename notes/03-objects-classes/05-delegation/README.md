@@ -243,3 +243,33 @@ Delegation can make behavior highly flexible because functions depend on the run
 ### Source
 
 *objects-classes/ch5.md, "Flexible Context"*
+
+## Section: Why `this`?
+
+### Core Concepts
+
+* **Implicit Context:** Delegation relies heavily on `this` to share the current object context between cooperating behaviors.
+
+* **Explicit Context Passing:** An alternative is to pass the required context explicitly as function arguments.
+
+```js
+Coordinates.setXY(this, x, y);
+```
+
+* **Signature Clutter:** Explicit context passing requires additional parameters in function definitions and corresponding call-sites.
+
+* **Delegation Style:** With delegation, the receiving object is already available through `this`.
+
+```js
+this.render();
+```
+
+* **Trade-Off:** Explicit context passing can make dependencies more visible, while delegation can reduce repeated context parameters at the cost of requiring deeper understanding of `this` and `[[Prototype]]`.
+
+### Architectural Takeaway
+
+The chapter presents delegation as a way to avoid repeatedly passing context through function parameters. Instead, `this` provides the shared runtime context, while `[[Prototype]]` provides a mechanism for finding delegated behavior.
+
+### Source
+
+*objects-classes/ch5.md, "Why This?"*
