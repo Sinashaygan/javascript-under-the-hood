@@ -49,3 +49,40 @@ The `class` and `new` syntax hides several separate operations. Understanding th
 ### Source
 
 *objects-classes/ch5.md, "What's A Constructor, Anyway?"*
+
+## Section: Factory Functions
+
+### Core Concepts
+
+* **Factory Function:** A factory function is a regular function that creates, initializes, and returns an object.
+
+```js
+function Point2d(x, y) {
+    var instance = {};
+
+    instance.x = x;
+    instance.y = y;
+
+    return instance;
+}
+```
+
+* **No `class`:** Factory functions do not require the `class` keyword.
+
+* **No `new`:** The function can be invoked as a normal function.
+
+```js
+var point = Point2d(3, 4);
+```
+
+* **Explicit Initialization:** Properties can be assigned directly to the newly created object.
+
+* **Prototype Delegation:** The created object can be linked to another object so that behavior can be shared through `[[Prototype]]`.
+
+### Architectural Takeaway
+
+Object creation does not inherently require classes or constructors. A factory function can explicitly perform creation and initialization while prototype linkage can provide shared behavior.
+
+### Source
+
+*objects-classes/ch5.md, "What's A Constructor, Anyway?"*
