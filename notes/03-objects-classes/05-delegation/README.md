@@ -193,3 +193,31 @@ Delegation composes behavior at runtime rather than through inheritance. Objects
 ### Source
 
 *objects-classes/ch5.md, "Delegation Illustrated"*
+
+## Section: Virtual Composition
+
+### Core Concepts
+
+* **Virtual Composition:** Independent objects can behave together as if their functionality were composed into a single object.
+
+* **`this` Context Sharing:** Delegated functions continue operating against the original receiving object through `this`.
+
+* **Dynamic Cooperation:** Objects can invoke methods belonging to other objects while preserving the current `this` context.
+
+* **Flexible Behavior:** A method such as:
+
+```js
+this.draw();
+```
+
+does not hard-code a specific object implementation. The method resolved through `this` can vary depending on the receiving object.
+
+* **Peer Collaboration:** `Canvas`, `Coordinates`, and `ControlPoint` can each contain separate behavior while cooperating during runtime.
+
+### Architectural Takeaway
+
+Virtual composition allows behavior to be assembled dynamically through `this` and `[[Prototype]]`. Instead of permanently composing behaviors into an inheritance hierarchy, the program can combine them when functions are invoked.
+
+### Source
+
+*objects-classes/ch5.md, "Composing Peer Objects"*
