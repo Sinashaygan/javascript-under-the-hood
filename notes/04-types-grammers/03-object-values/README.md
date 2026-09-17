@@ -149,3 +149,31 @@ The original value is still a primitive:
 typeof name;
 // "string"
 ```
+
+## Built-in Objects
+
+JavaScript provides many built-in object types for specialized tasks.
+
+Examples include:
+
+```js
+const date = new Date();
+
+const error = new Error("Something went wrong");
+
+const users = new Map();
+
+const numbers = new Set();
+```
+
+Other built-in objects include:
+
+```text
+WeakMap
+WeakSet
+ArrayBuffer
+SharedArrayBuffer
+Typed Arrays
+```
+
+These objects provide specialized behavior beyond ordinary objects.
