@@ -104,3 +104,55 @@ This is an important JavaScript rule:
 ```
 
 They are objects, and objects are truthy regardless of whether they contain any properties or elements.
+
+# Boolean Contexts
+
+JavaScript automatically performs Boolean coercion in several contexts.
+
+Common examples include:
+
+```text
+if
+while
+for
+&&
+||
+?:
+```
+
+For example:
+
+```js
+const name = "Sina";
+
+if (name) {
+    console.log("Hello");
+}
+```
+
+The `if` statement needs a Boolean value, so JavaScript conceptually performs:
+
+```js
+Boolean("Sina"); // true
+```
+
+Boolean coercion can also be written explicitly:
+
+```js
+Boolean(value);
+```
+
+or with double negation:
+
+```js
+!!value;
+```
+
+For example:
+
+```js
+Boolean("hello"); // true
+!!"hello";        // true
+```
+
+`!!value` works because it applies the logical NOT operator twice.
