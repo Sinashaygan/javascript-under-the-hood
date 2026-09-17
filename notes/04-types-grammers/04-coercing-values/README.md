@@ -230,3 +230,45 @@ undefined  → NaN
 ```
 
 This difference appears frequently in JavaScript coercion behavior.
+
+# ToPrimitive()
+
+Objects are not primitive values, so JavaScript sometimes needs to convert an object into a primitive value.
+
+During this process, JavaScript can use:
+
+```js
+valueOf()
+toString()
+```
+
+For example:
+
+```js
+const obj = {
+    valueOf() {
+        return 42;
+    },
+
+    toString() {
+        return "hello";
+    }
+};
+
+Number(obj); // 42
+String(obj); // "hello"
+```
+
+The conversion process depends on the context and the expected type.
+
+Conceptually:
+
+```text
+Object
+  ↓
+ToPrimitive
+  ↓
+Primitive value
+```
+
+If the conversion methods fail to produce a primitive value, JavaScript can throw a `TypeError`.
