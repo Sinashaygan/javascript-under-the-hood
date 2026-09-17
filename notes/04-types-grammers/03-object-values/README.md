@@ -76,3 +76,35 @@ Modern JavaScript also provides:
 ```js
 Object.hasOwn(user, "name");
 ```
+
+## Fundamental Objects
+
+JavaScript provides wrapper objects for several primitive types:
+
+```js
+String
+Number
+Boolean
+Symbol
+BigInt
+```
+
+For example:
+
+```js
+const name = "Sina";
+
+typeof name;
+// "string"
+```
+
+But:
+
+```js
+const name = new String("Sina");
+
+typeof name;
+// "object"
+```
+
+`new String()`, `new Number()`, and `new Boolean()` create objects rather than primitive values, so primitive values are generally preferred.
