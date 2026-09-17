@@ -246,3 +246,23 @@ Result:
 ```
 
 Understanding precedence helps avoid unexpected expression results.
+
+## Short-Circuit Evaluation
+
+Logical operators can stop evaluating as soon as the final result is known.
+
+For `&&`, if the left side is falsy, the right side is not evaluated.
+
+```js
+false && doSomething();
+```
+
+For `||`, if the left side is truthy, the right side is not evaluated.
+
+```js
+true || doSomething();
+```
+
+This behavior is called **short-circuit evaluation**.
+
+It is commonly used for conditional execution and default values.
