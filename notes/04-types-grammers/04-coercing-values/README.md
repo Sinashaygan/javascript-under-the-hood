@@ -191,3 +191,42 @@ Symbol("ok") + "";
 ```
 
 So explicit `String()` conversion and implicit string coercion are not always identical.
+
+# ToNumber()
+
+`ToNumber()` converts values into numbers.
+
+Examples:
+
+```js
+Number("42");    // 42
+Number("-3");    // -3
+Number("1.23");  // 1.23
+```
+
+Invalid numeric strings produce `NaN`:
+
+```js
+Number("hello"); // NaN
+Number("123px"); // NaN
+```
+
+Some important conversions:
+
+```js
+Number(true);       // 1
+Number(false);      // 0
+Number(null);       // 0
+Number(undefined);  // NaN
+Number("");         // 0
+Number("   ");      // 0
+```
+
+A useful distinction is:
+
+```text
+null       → 0
+undefined  → NaN
+```
+
+This difference appears frequently in JavaScript coercion behavior.
