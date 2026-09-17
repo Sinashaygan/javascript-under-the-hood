@@ -210,3 +210,39 @@ else {
 ```
 
 Using braces consistently generally makes code easier to read and maintain.
+
+## Operator Precedence
+
+Operator precedence determines how an expression is grouped.
+
+For example:
+
+```js
+var result = 2 + 3 * 4;
+```
+
+Multiplication has higher precedence than addition, so this is evaluated as:
+
+```js
+2 + (3 * 4);
+```
+
+Result:
+
+```js
+14
+```
+
+Parentheses can explicitly control grouping:
+
+```js
+var result = (2 + 3) * 4;
+```
+
+Result:
+
+```js
+20
+```
+
+Understanding precedence helps avoid unexpected expression results.
