@@ -305,3 +305,32 @@ The common hints are:
 ```
 
 This mechanism gives an object direct control over how it is converted into a primitive value.
+
+# Operators and Coercion
+
+Most mathematical operators expect numbers, so JavaScript performs numeric coercion when necessary.
+
+```js
+"42" - 2; // 40
+"42" * 2; // 84
+"42" / 2; // 21
+```
+
+The `+` operator is special because it can perform either numeric addition or string concatenation.
+
+```js
+"42" + 2; // "422"
+```
+
+Compare:
+
+```js
+"42" - 2; // 40
+"42" + 2; // "422"
+```
+
+The `-` operator converts the string into a number.
+
+The `+` operator can instead choose string concatenation when a string is involved.
+
+Understanding this difference is essential when working with JavaScript coercion.
