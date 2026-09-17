@@ -207,3 +207,62 @@ numbers.map(v => v * 2);
 numbers.includes(42);
 // true
 ```
+
+## Array Methods
+
+Array methods can be grouped by how they affect the array.
+
+### Mutating methods
+
+These modify the original array:
+
+```js
+const numbers = [1, 2, 3];
+
+numbers.push(4);
+
+console.log(numbers);
+// [1, 2, 3, 4]
+```
+
+Examples:
+
+```text
+push()
+pop()
+sort()
+```
+
+### Non-mutating methods
+
+These can create a new array:
+
+```js
+const numbers = [1, 2, 3];
+
+const doubled = numbers.map(v => v * 2);
+
+console.log(doubled);
+// [2, 4, 6]
+
+console.log(numbers);
+// [1, 2, 3]
+```
+
+Examples:
+
+```text
+map()
+slice()
+concat()
+```
+
+Some methods simply return information:
+
+```js
+numbers.includes(2);
+// true
+
+numbers.indexOf(3);
+// 2
+```
