@@ -439,3 +439,37 @@ function foo(...args) {
 ```
 
 Rest parameters are clearer and more convenient for handling variable numbers of arguments.
+
+## `try...finally`
+
+The `finally` block executes after the `try` block, even when the `try` block uses `return`.
+
+```js
+function foo() {
+    try {
+        return 42;
+    }
+    finally {
+        console.log("cleanup");
+    }
+}
+```
+
+The `finally` block runs before the function actually returns.
+
+A `return` inside `finally` can override an earlier return:
+
+```js
+function foo() {
+    try {
+        return 42;
+    }
+    finally {
+        return 100;
+    }
+}
+
+foo(); // 100
+```
+
+For this reason, returning from `finally` should generally be avoided unless intentionally required.
