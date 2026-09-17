@@ -223,3 +223,58 @@ NaN === NaN;
 
 ---
 
+## 7. String Operations & Coercion
+
+The `+` operator can perform String concatenation:
+
+```js
+"Hello " + "Sina";
+// "Hello Sina"
+
+"5" + 2;
+// "52"
+```
+
+Other arithmetic operators generally coerce Strings to Numbers:
+
+```js
+"5" - 2;
+// 3
+
+"5" * 2;
+// 10
+
+"5" / 2;
+// 2.5
+```
+
+Unary `+` can also convert a numeric String:
+
+```js
++"42";
+// 42
+```
+
+Useful String methods include:
+
+```js
+"hello".toUpperCase();
+// "HELLO"
+
+"hello".includes("ell");
+// true
+
+"hello".startsWith("he");
+// true
+
+"hello".slice(1, 4);
+// "ell"
+
+"hello world".split(" ");
+// ["hello", "world"]
+```
+
+String methods do not mutate the original String.
+
+---
+
