@@ -382,3 +382,143 @@ Not:
 ```js
 `use strict`;
 ```
+
+## Number
+
+JavaScript uses the IEEE-754 double-precision floating-point format for its `number` type.
+
+Integers and floating-point values use the same type:
+
+```js
+42
+42.0
+42.5
+```
+
+```js
+typeof 42; // "number"
+```
+
+### Parsing vs Conversion
+
+`parseInt()` and `parseFloat()` parse a value from the beginning and may stop when they encounter an invalid character:
+
+```js
+parseInt("123px", 10);   // 123
+parseFloat("12.5px");    // 12.5
+```
+
+By contrast, `Number()` and unary `+` require the complete value to be valid:
+
+```js
+Number("123px"); // NaN
++"123px";        // NaN
+```
+
+Always specify the radix when using `parseInt()`:
+
+```js
+parseInt("101", 2);  // 5
+parseInt("101", 10); // 101
+```
+
+### Number Literals
+
+JavaScript supports different bases:
+
+```js
+0b1010; // binary
+0o755;  // octal
+0xFF;   // hexadecimal
+```
+
+Numbers can also use scientific notation:
+
+```js
+1e3; // 1000
+```
+
+Numeric separators improve readability:
+
+```js
+1_000_000;
+```
+
+### Safe Integers
+
+JavaScript has a limited range of integers that can be represented exactly.
+
+```js
+Number.MIN_SAFE_INTEGER;
+Number.MAX_SAFE_INTEGER;
+```
+
+For values outside this range, `number` may not represent every integer precisely.
+
+Do not confuse:
+
+```js
+Number.MAX_SAFE_INTEGER
+```
+
+with:
+
+```js
+Number.MAX_VALUE
+```
+
+`MAX_VALUE` is the largest finite `number`, while `MAX_SAFE_INTEGER` is about exact integer representation.
+
+Similarly, `Number.MIN_VALUE` is the smallest positive representable number, **not** the most negative number.
+
+### Infinity
+
+Numbers can overflow to infinity:
+
+```js
+1e308 * 1e308; // Infinity
+```
+
+There is also negative infinity:
+
+```js
+-Infinity
+```
+
+### `NaN`
+
+`NaN` means "Not-a-Number", but its type is still `number`:
+
+```js
+typeof NaN; // "number"
+```
+
+It is also not equal to itself:
+
+```js
+NaN === NaN; // false
+```
+
+Prefer:
+
+```js
+Number.isNaN(value);
+```
+
+over the global:
+
+```js
+isNaN(value);
+```
+
+because the global `isNaN()` performs coercion first.
+
+### `0` and `-0`
+
+JavaScript has both positive zero and negative zero:
+
+```js
+0 === -0; // true
+
+Object.is(0, -0); // false
+```
