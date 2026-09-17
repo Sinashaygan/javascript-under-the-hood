@@ -57,3 +57,31 @@ age = 43;
 
 ---
 
+## 2. `const` Does Not Mean Immutable
+
+`const` prevents **reassignment**, not mutation of an object.
+
+```js
+const user = {
+    name: "Sina"
+};
+
+user.name = "Ali"; // ✅
+```
+
+But:
+
+```js
+const age = 42;
+
+age = 43; // ❌ TypeError
+```
+
+Therefore:
+
+```text
+const !== immutable
+```
+
+---
+
