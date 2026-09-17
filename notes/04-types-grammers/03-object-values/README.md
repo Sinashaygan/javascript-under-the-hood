@@ -108,3 +108,44 @@ typeof name;
 ```
 
 `new String()`, `new Number()`, and `new Boolean()` create objects rather than primitive values, so primitive values are generally preferred.
+
+## Auto-Boxing
+
+Primitive values can temporarily behave like objects when we access their properties or methods.
+
+```js
+const name = "Sina";
+
+name.toUpperCase();
+// "SINA"
+
+name.length;
+// 4
+```
+
+Conceptually, JavaScript temporarily wraps the primitive:
+
+```js
+const temp = new String("Sina");
+
+temp.toUpperCase();
+```
+
+This temporary wrapper allows primitives to access methods from their prototypes.
+
+```text
+"Sina"
+   ↓
+Temporary String object
+   ↓
+String.prototype
+   ↓
+toUpperCase()
+```
+
+The original value is still a primitive:
+
+```js
+typeof name;
+// "string"
+```
