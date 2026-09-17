@@ -280,3 +280,23 @@ function hello() {
 Because functions are objects, they can have properties and participate in the prototype system.
 
 The chapter mentions functions and regular expressions, while leaving their detailed discussion for later parts of the book.
+
+## Records & Tuples
+
+The chapter also mentions the Records & Tuples proposal.
+
+The idea was to introduce immutable, primitive-like structures similar to objects and arrays:
+
+```js
+#{ name: "Sina" }
+```
+
+and:
+
+```js
+#[1, 2, 3]
+```
+
+A Record would be similar to an object, while a Tuple would be similar to an array.
+
+This is a proposal and should not be confused with normal JavaScript objects and arrays.
