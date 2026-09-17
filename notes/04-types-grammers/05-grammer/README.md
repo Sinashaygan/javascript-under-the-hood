@@ -126,3 +126,31 @@ But:
 Here, `{}` is a **code block**, and `foo:` is a labeled statement.
 
 The meaning of syntax therefore depends on where and how it appears.
+
+## Labels and Blocks
+
+JavaScript supports labeled statements:
+
+```js
+foo: for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
+        if (j === i) {
+            continue foo;
+        }
+    }
+}
+```
+
+A label can be used with `break` and `continue` to control an outer loop.
+
+Labeled statements are valid JavaScript but are uncommon in modern application code.
+
+A standalone `{}` creates a normal block:
+
+```js
+{
+    let value = 42;
+}
+```
+
+Blocks are especially useful with block-scoped declarations such as `let` and `const`.
