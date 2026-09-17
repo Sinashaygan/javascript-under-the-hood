@@ -85,3 +85,25 @@ const !== immutable
 
 ---
 
+## 3. Primitive Assignment
+
+Primitive values are copied when assigned to another variable.
+
+```js
+let age = 42;
+
+let anotherAge = age;
+
+age = 43;
+
+console.log(age);
+// 43
+
+console.log(anotherAge);
+// 42
+```
+
+Changing `age` does not affect `anotherAge`.
+
+---
+
