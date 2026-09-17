@@ -39,3 +39,40 @@ A plain object can also be created with `new Object()`, but object literals are 
 ```js
 const user = {};
 ```
+
+## Prototypes
+
+Objects can access properties and methods through their prototype chain.
+
+Most ordinary objects are connected to:
+
+```js
+Object.prototype
+```
+
+For example:
+
+```js
+const user = {
+    name: "Sina"
+};
+
+user.toString();
+```
+
+We did not define `toString()` ourselves. It is available through the object's prototype chain.
+
+Common methods include:
+
+```js
+toString()
+valueOf()
+isPrototypeOf()
+hasOwnProperty()
+```
+
+Modern JavaScript also provides:
+
+```js
+Object.hasOwn(user, "name");
+```
