@@ -296,3 +296,49 @@ a ? b : (c ? d : e)
 ```
 
 Associativity determines grouping, not necessarily the order in which expressions are evaluated.
+
+## Automatic Semicolon Insertion
+
+JavaScript can automatically insert semicolons in certain situations. This behavior is called **Automatic Semicolon Insertion (ASI)**.
+
+For example:
+
+```js
+var a = 42
+var b = 10
+```
+
+can be interpreted as:
+
+```js
+var a = 42;
+var b = 10;
+```
+
+However, ASI can sometimes produce unexpected behavior.
+
+A classic example is `return`:
+
+```js
+function foo() {
+    return
+    42;
+}
+```
+
+This is interpreted approximately as:
+
+```js
+function foo() {
+    return;
+    42;
+}
+```
+
+Therefore:
+
+```js
+foo(); // undefined
+```
+
+Understanding ASI is important when writing JavaScript without explicit semicolons.
