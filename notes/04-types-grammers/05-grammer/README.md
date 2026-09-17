@@ -100,3 +100,29 @@ This makes chained assignments possible:
 ```js
 a = b = c = 42;
 ```
+
+## Contextual Rules
+
+JavaScript grammar can interpret the same syntax differently depending on its context.
+
+For example, `{}` can represent different things:
+
+```js
+var obj = {
+    foo: bar()
+};
+```
+
+Here, `{}` is an **object literal**.
+
+But:
+
+```js
+{
+    foo: bar();
+}
+```
+
+Here, `{}` is a **code block**, and `foo:` is a labeled statement.
+
+The meaning of syntax therefore depends on where and how it appears.
