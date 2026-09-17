@@ -383,3 +383,72 @@ value == null
 can be used to check for either `null` or `undefined`.
 
 The important lesson is that `==` follows defined coercion rules; its behavior is not random.
+
+# Coercion Gotchas
+
+Some JavaScript expressions look strange until their coercion steps are understood.
+
+For example:
+
+```js
+[] == false; // true
+```
+
+Conceptually:
+
+```text
+[] == false
+     ↓
+[] → ""
+     ↓
+"" == false
+     ↓
+"" → 0
+false → 0
+     ↓
+0 == 0
+     ↓
+true
+```
+
+Another famous example:
+
+```js
+[] == ![]; // true
+```
+
+First:
+
+```js
+![]; // false
+```
+
+because an empty array is truthy.
+
+So the expression becomes:
+
+```js
+[] == false
+```
+
+which follows the coercion process shown above.
+
+However:
+
+```js
+Boolean([]); // true
+```
+
+This is not contradictory.
+
+The two expressions use different rules:
+
+```text
+Boolean([])
+→ true
+
+[] == false
+→ true
+```
+
+The key lesson is to understand the coercion algorithm being used rather than memorizing isolated JavaScript tricks.
