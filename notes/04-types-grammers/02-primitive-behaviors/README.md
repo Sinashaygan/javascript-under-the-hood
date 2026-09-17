@@ -379,3 +379,95 @@ Bitwise operations convert Numbers to **32-bit integers**.
 
 ---
 
+## 10. BigInt
+
+`BigInt` is used for integers larger than the safe Number range.
+
+```js
+let value = 42n;
+
+console.log(typeof value);
+// "bigint"
+```
+
+Number and BigInt should not be mixed directly:
+
+```js
+42n + 1;
+// ❌ TypeError
+```
+
+Instead:
+
+```js
+42n + 1n;
+// 43n
+```
+
+Conversion is possible:
+
+```js
+BigInt(42);
+// 42n
+
+Number(42n);
+// 42
+```
+
+But converting very large BigInts to Numbers can cause precision loss.
+
+---
+
+# Key Takeaways
+
+```text
+Primitive values → immutable
+
+const → prevents reassignment, not mutation
+
+Strings → primitive, immutable, iterable
+
+== → may perform coercion
+
+=== → strict equality, no coercion
+
+Object.is() → special equality semantics
+
+Numbers → IEEE-754 floating point
+
+0.1 + 0.2 → 0.30000000000000004
+
+BigInt → arbitrary-size integers
+
+Number + BigInt → TypeError
+
+Bitwise operations → 32-bit integer operations
+```
+
+## Mental Model
+
+```text
+Primitive Values
+│
+├── Immutable
+│
+├── String
+│   ├── Indexing
+│   ├── Iteration
+│   └── Unicode
+│
+├── Number
+│   ├── Floating Point
+│   ├── NaN
+│   ├── -0
+│   └── Bitwise
+│
+├── BigInt
+│
+└── Equality & Coercion
+    ├── ==
+    ├── ===
+    └── Object.is()
+```
+
+> **Main idea:** Understanding JavaScript means understanding how its values behave, not just memorizing syntax.
