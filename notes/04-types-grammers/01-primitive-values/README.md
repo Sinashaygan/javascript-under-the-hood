@@ -128,3 +128,119 @@ Normally, directly accessing an undeclared identifier throws an error:
 ```js
 undeclaredVariable; // ReferenceError
 ```
+
+## `null` and `undefined`
+
+JavaScript has two primitive values that represent the absence of a value:
+
+* `undefined`
+* `null`
+
+They are **different primitive types**.
+
+```js
+typeof undefined; // "undefined"
+typeof null;      // "object"  // historical quirk
+```
+
+### `undefined`
+
+`undefined` commonly appears when:
+
+* A variable has not been initialized.
+* An object property does not exist.
+* A function does not explicitly return a value.
+* An argument is missing.
+
+```js
+let x;
+
+console.log(x); // undefined
+```
+
+Missing property:
+
+```js
+const user = {};
+
+console.log(user.name); // undefined
+```
+
+Missing argument:
+
+```js
+function greet(name) {
+  console.log(name);
+}
+
+greet(); // undefined
+```
+
+### Checking for Nullish Values
+
+This checks for either `null` or `undefined`:
+
+```js
+value == null;
+```
+
+It is one of the cases where loose equality can be intentional.
+
+The nullish coalescing operator also works with both:
+
+```js
+const name = value ?? "Guest";
+```
+
+The default is used only when `value` is `null` or `undefined`.
+
+### Optional Chaining
+
+Optional chaining safely accesses a property when the left side may be nullish:
+
+```js
+user?.name;
+```
+
+It checks for:
+
+```js
+null
+undefined
+```
+
+It does **not** mean "check whether the property exists in every possible situation."
+
+For example:
+
+```js
+fn?.();
+```
+
+If `fn` is `null` or `undefined`, nothing happens.
+
+But if `fn` contains a non-function value, JavaScript can still throw:
+
+```js
+const fn = 42;
+
+fn?.(); // TypeError
+```
+
+Use optional chaining when the absence of a value is an expected possibility. Overusing it can hide bugs.
+
+### Default Parameters
+
+A default parameter is used when the argument is missing or `undefined`:
+
+```js
+function greet(name = "Guest") {
+  console.log(name);
+}
+
+greet();          // "Guest"
+greet(undefined); // "Guest"
+greet(null);      // null
+```
+
+Notice that `null` does **not** trigger the default value.
