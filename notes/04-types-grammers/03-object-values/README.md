@@ -266,3 +266,17 @@ numbers.includes(2);
 numbers.indexOf(3);
 // 2
 ```
+
+## Functions as Objects
+
+Functions are objects too.
+
+```js
+function hello() {
+    console.log("Hello");
+}
+```
+
+Because functions are objects, they can have properties and participate in the prototype system.
+
+The chapter mentions functions and regular expressions, while leaving their detailed discussion for later parts of the book.
