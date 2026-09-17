@@ -473,3 +473,42 @@ foo(); // 100
 ```
 
 For this reason, returning from `finally` should generally be avoided unless intentionally required.
+
+## `switch`
+
+The `switch` statement compares a value against multiple `case` clauses.
+
+```js
+switch (value) {
+    case 1:
+        console.log("one");
+        break;
+
+    case 2:
+        console.log("two");
+        break;
+
+    default:
+        console.log("other");
+}
+```
+
+`switch` uses strict equality semantics when matching cases.
+
+Therefore:
+
+```js
+switch ("42") {
+    case 42:
+        console.log("matched");
+        break;
+}
+```
+
+does not match because:
+
+```js
+"42" !== 42;
+```
+
+`break` prevents execution from falling through to the next case.
