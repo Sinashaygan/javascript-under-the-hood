@@ -149,3 +149,28 @@ console.log([..."Kyle"]);
 
 ---
 
+
+## 5. String Length & Unicode
+
+`length` does not always represent the number of visible characters.
+
+```js
+let emoji = "📱";
+
+console.log(emoji.length);
+// 2
+```
+
+While:
+
+```js
+console.log([...emoji].length);
+// 1
+```
+
+This happens because JavaScript Strings use **UTF-16 code units**.
+
+Unicode and emoji can therefore behave differently from what we visually consider a single character.
+
+---
+
