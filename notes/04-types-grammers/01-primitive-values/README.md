@@ -522,3 +522,120 @@ JavaScript has both positive zero and negative zero:
 
 Object.is(0, -0); // false
 ```
+
+## BigInt
+
+`bigint` is used for integers larger than the safe range of `number`.
+
+You can create a BigInt using `n`:
+
+```js
+12345678901234567890n
+```
+
+or:
+
+```js
+BigInt("12345678901234567890");
+```
+
+Its type is:
+
+```js
+typeof 10n; // "bigint"
+```
+
+### BigInt and Number
+
+You cannot directly mix `number` and `bigint` in arithmetic:
+
+```js
+10n + 5; // TypeError
+```
+
+Convert explicitly when necessary:
+
+```js
+10n + BigInt(5); // 15n
+```
+
+BigInt is a primitive, so it is not created with `new`:
+
+```js
+BigInt(10); // valid
+```
+
+The string passed to `BigInt()` must represent a valid integer:
+
+```js
+BigInt("123"); // 123n
+```
+
+A string containing the `n` suffix is not the same syntax:
+
+```js
+BigInt("123n"); // SyntaxError
+```
+
+## Symbol
+
+A `symbol` is a unique primitive value.
+
+```js
+const a = Symbol();
+const b = Symbol();
+
+a === b; // false
+```
+
+Even identical descriptions create different symbols:
+
+```js
+const x = Symbol("id");
+const y = Symbol("id");
+
+x === y; // false
+```
+
+The description is only a label:
+
+```js
+Symbol("id");
+```
+
+Symbol values are often used as object property keys:
+
+```js
+const id = Symbol("id");
+
+const user = {
+  [id]: 123
+};
+```
+
+Symbol keys are **not private**. They can still be discovered using appropriate reflection APIs.
+
+### Global Symbol Registry
+
+`Symbol.for()` uses the global symbol registry:
+
+```js
+const a = Symbol.for("id");
+const b = Symbol.for("id");
+
+a === b; // true
+```
+
+The key can be retrieved with:
+
+```js
+Symbol.keyFor(a); // "id"
+```
+
+JavaScript also provides well-known symbols such as:
+
+```js
+Symbol.toStringTag
+```
+
+These allow built-in language behaviors to be customized.
