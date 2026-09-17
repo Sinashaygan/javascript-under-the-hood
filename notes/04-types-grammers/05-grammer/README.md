@@ -35,3 +35,29 @@ b;
 ```
 
 This is called an **expression statement**.
+
+## Statement Completion Values
+
+JavaScript statements have a **completion value**.
+
+Browser consoles often display the completion value of the last executed statement.
+
+For example:
+
+```js
+var a = 42;
+```
+
+The `var` statement produces `undefined` as its completion value.
+
+A block can also have a completion value based on its last statement:
+
+```js
+if (true) {
+    b = 4 + 38;
+}
+```
+
+The block's completion value can be `42`.
+
+Completion values are mostly useful for understanding JavaScript's internal behavior and console output.
