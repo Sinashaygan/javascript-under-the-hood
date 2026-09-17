@@ -452,3 +452,50 @@ Boolean([])
 ```
 
 The key lesson is to understand the coercion algorithm being used rather than memorizing isolated JavaScript tricks.
+
+# Type Awareness
+
+JavaScript is dynamically typed, but types are still extremely important.
+
+Values can be converted between types depending on the operation being performed.
+
+The most important concepts from this chapter are:
+
+```text
+ToBoolean
+ToString
+ToNumber
+ToPrimitive
+implicit coercion
+explicit coercion
+== vs ===
+```
+
+TypeScript can catch many type-related mistakes during development, but runtime behavior is still governed by JavaScript.
+
+Understanding coercion helps explain many seemingly strange JavaScript behaviors.
+
+## Quick Reference
+
+| Operation       | Example             | Result  |
+| --------------- | ------------------- | ------- |
+| ToBoolean       | `Boolean("")`       | `false` |
+| ToBoolean       | `Boolean([])`       | `true`  |
+| ToString        | `String(42)`        | `"42"`  |
+| ToNumber        | `Number("42")`      | `42`    |
+| ToNumber        | `Number("hello")`   | `NaN`   |
+| Loose equality  | `42 == "42"`        | `true`  |
+| Strict equality | `42 === "42"`       | `false` |
+| String +        | `"42" + 2`          | `"422"` |
+| Numeric -       | `"42" - 2`          | `40`    |
+| Null check      | `null == undefined` | `true`  |
+
+## Key Takeaways
+
+1. Coercion converts values between types.
+2. JavaScript performs both explicit and implicit coercion.
+3. `ToBoolean`, `ToString`, `ToNumber`, and `ToPrimitive` explain many conversion behaviors.
+4. Objects can participate in primitive conversion through `valueOf()`, `toString()`, and `Symbol.toPrimitive`.
+5. `+` behaves differently from most mathematical operators because it can concatenate strings.
+6. `==` may perform coercion, while `===` does not.
+7. Understanding coercion is essential for understanding JavaScript's runtime behavior.
