@@ -272,3 +272,36 @@ Primitive value
 ```
 
 If the conversion methods fail to produce a primitive value, JavaScript can throw a `TypeError`.
+
+# Symbol.toPrimitive
+
+Objects can customize their primitive conversion behavior using:
+
+```js
+Symbol.toPrimitive
+```
+
+Example:
+
+```js
+const obj = {
+    [Symbol.toPrimitive](hint) {
+        return 25;
+    }
+};
+
+Number(obj); // 25
+String(obj); // "25"
+```
+
+`Symbol.toPrimitive` receives a `hint` that indicates the kind of conversion being requested.
+
+The common hints are:
+
+```text
+"number"
+"string"
+"default"
+```
+
+This mechanism gives an object direct control over how it is converted into a primitive value.
