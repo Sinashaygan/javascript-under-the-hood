@@ -244,3 +244,141 @@ greet(null);      // null
 ```
 
 Notice that `null` does **not** trigger the default value.
+
+## Boolean
+
+The Boolean type has only two values:
+
+```js
+true
+false
+```
+
+Booleans are commonly used in conditions:
+
+```js
+if (isLoggedIn) {
+  console.log("Welcome!");
+}
+```
+
+They are also used with operators such as:
+
+```js
+!
+```
+
+Example:
+
+```js
+const active = true;
+
+console.log(!active); // false
+```
+
+## String
+
+A string is a sequence of characters.
+
+JavaScript supports:
+
+```js
+"hello"
+'hello'
+`hello`
+```
+
+Examples:
+
+```js
+const firstName = "Sina";
+const message = 'Hello';
+const text = `JavaScript`;
+```
+
+An empty string is also valid:
+
+```js
+const empty = "";
+```
+
+### String Length
+
+```js
+"hello".length; // 5
+```
+
+However, `.length` counts **UTF-16 code units**, not necessarily visible characters.
+
+For example:
+
+```js
+"😀".length; // 2
+```
+
+A single visible character can therefore have a length greater than `1`.
+
+### Unicode and Combining Characters
+
+Two strings can look identical but contain different Unicode sequences:
+
+```js
+"é" === "e\u0301"; // false
+```
+
+Unicode normalization can be used when logically equivalent representations need to be compared.
+
+### Escape Sequences
+
+Common escape sequences include:
+
+```js
+"\n"       // newline
+"\t"       // tab
+"\\"       // backslash
+"\xA9"     // ©
+"\u00A9"   // ©
+"\u{1F386}" // 🎆
+```
+
+### Template Literals
+
+Template literals use backticks and can contain interpolation:
+
+```js
+const name = "Sina";
+
+const message = `Hello, ${name}!`;
+
+console.log(message);
+// Hello, Sina!
+```
+
+They can also contain real line breaks:
+
+```js
+const text = `Line one
+Line two`;
+```
+
+### Tagged Templates
+
+A tagged template calls a function using template-literal syntax:
+
+```js
+tag`Hello ${name}`;
+```
+
+The function can process the template and return any value, not necessarily a string.
+
+Also remember that a strict-mode directive must use a normal string:
+
+```js
+"use strict";
+```
+
+Not:
+
+```js
+`use strict`;
+```
