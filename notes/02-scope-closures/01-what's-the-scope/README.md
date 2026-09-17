@@ -1,122 +1,72 @@
-# Chapter 4: The Bigger Picture
+# Chapter 1: What's the Scope?
 
-> Independent study notes for *You Don't Know JS Yet*, 2nd Edition, Get Started, Chapter 4.
+> Independent study notes for *You Don't Know JS Yet*, 2nd Edition, Scope & Closures, Chapter 1.
 
 ## Chapter Summary
-This chapter organizes deeper JavaScript learning around three pillars:
-scope and closure, prototypes, and types and coercion. It outlines a learning
-approach: investigate popular assumptions, master JS mechanisms, and adopt
-incremental changes in team environments.
 
-## Core Concepts
-- Lexical scope determines variable reference resolution.
-- Closures retain access to surrounding lexical scopes.
-- Objects can be created without class definitions.
-- Prototype links enable behavior delegation (lookup chain).
-- Types and coercion are critical for runtime behavior.
-- Static type tools (TypeScript) supplement, not replace, JS knowledge.
+JavaScript processes a program before executing it. In that preparatory phase, it identifies declarations and maps variable references to lexical scopes. Scope is therefore determined by where functions, blocks, and declarations appear in the source, not by the order in which functions are called.
 
-## Methodology: "Working with the Grain"
-1. **Investigate:** Don't accept myths (like "hoisting means dynamic scope").
-2. **Verify:** Use the language specification to resolve disagreements.
-3. **Increment:** Introduce better practices via small, understandable changes.
+## Compilation and Execution
 
-## Section: Scope and Closure
+The chapter describes three broad compilation stages: tokenizing/lexing (identifying tokens), parsing (building an abstract syntax tree), and code generation (preparing executable instructions). Real JS engines use more sophisticated strategies, including optimization and recompilation; the useful mental model here is **processing first, execution second**.
 
-### Summary
-JavaScript uses lexical scope. Functions retain access to surrounding
-variables through closure, supporting patterns like modules.
+Three observable behaviors illustrate the two phases:
 
-### Frontend Takeaway
-When debugging callbacks, event handlers, or React renders, identify the
-environment in which the function was created to determine accessible variables.
+1. A syntax error later in a program prevents earlier statements in that program from running.
+2. An early error, such as duplicate parameter names in a strict-mode function, is detected before execution.
+3. A later `let` declaration already determines which binding an earlier reference in the same block targets, even though the reference may fail in the temporal dead zone (TDZ).
 
-### Common Mistakes
-- Confusing lexical lookup with `this` binding.
-- Thinking closure preserves a snapshot of a value (rather than a variable reference).
-- Treating hoisting as evidence that JS is not lexically scoped.
+```js
+let greeting = "outer";
 
-### Source
-get-started/ch4.md, lines 12–32.
+{
+  // console.log(greeting); // ReferenceError: inner binding is not initialized yet
+  let greeting = "inner";
+  console.log(greeting); // "inner"
+}
+```
 
-## Section: Prototypes
+The TDZ is covered in detail in Chapter 5; it does not mean the engine failed to recognize the block-scoped declaration ahead of execution.
 
-### Summary
-JavaScript supports direct object creation and links between objects,
-enabling behavior delegation instead of class-based copying.
+## Declaration, Assignment Target, and Value Source
 
-### Frontend Takeaway
-When inspecting objects (e.g., in Browser DevTools), distinguish between
-an object's own properties and those inherited via the prototype chain.
+For `var a = 2`, the declaration of `a` is registered during compilation and the assignment of `2` takes place during execution. Other occurrences of identifiers serve as either **targets** (a value is assigned to them) or **sources** (their value is read). These roles are not always literally left or right of `=`.
 
-### Common Mistakes
-- Assuming every object requires a class.
-- Treating prototype delegation as property copying.
-- Assuming class-based design is the only valid architecture.
+```js
+const students = [{ id: 73, name: "Suzy" }];
 
-### Source
-get-started/ch4.md, lines 34–51.
+function getStudentName(studentID) {
+  for (const student of students) {
+    if (student.id === studentID) return student.name;
+  }
+}
 
-## Section: Types and Coercion
+const nextStudent = getStudentName(73);
+console.log(nextStudent); // "Suzy"
+```
 
-### Summary
-Understanding value types and implicit/explicit conversion rules is essential,
-even when using static analysis tools like TypeScript.
+Here `student` is an assignment target in the `for..of` iteration; `students` is a source. The parameter `studentID` receives the argument, while its use in the comparison is a source. `getStudentName` is bound to its function declaration; its use at the call site is a source. `id`, `name`, and `log` are property names, not variable references. The consequences of failed target/source lookup are discussed in Chapter 2.
 
-### Frontend Takeaway
-Static types do not perform runtime conversion. Handle API responses,
-URL parameters, and form inputs with explicit validation and transformation.
+## Lexical Scope
 
-### Common Mistakes
-- Treating coercion as "random" instead of learning the formal rules.
-- Assuming TypeScript removes the need to understand runtime types.
-- Relying on type assertions to bypass runtime logic errors.
+The location of a declaration determines its scope: `var` belongs to a function scope, while `let` and `const` belong to the nearest enclosing block. An identifier reference is resolved in its current scope or a lexically enclosing scope, continuing outward as needed; it cannot look into an unrelated or inner scope.
 
-### Source
-get-started/ch4.md, lines 52–69.
+Compilation establishes a *plan* for these scopes. The corresponding runtime scopes are created when execution reaches them, not as fully instantiated storage during compilation.
 
-## Section: Learning and the Grain Metaphor
-Investigate assumptions and use specifications to clarify behavior. Use
-concrete "before-and-after" examples to propose team improvements.
+## Runtime Scope Cheats
 
-## Section: Reading Roadmap
-1. Get Started
-2. Scope & Closures
-3. Objects & Classes
-4. Types & Grammar
-5. Sync & Async
-6. ES.Next & Beyond
+In non-strict code, direct `eval()` with declarations can change the surrounding scope at runtime, and `with` can treat an object's properties as names in a temporary scope. Both undermine predictable lexical lookup and should be avoided. Strict mode disallows these particular scope-changing patterns (`with` is a syntax error; declarations inside strict direct `eval()` do not leak into the caller's scope).
 
-**Frontend Tip:** Use this roadmap to identify which underlying JS topic
-a practical bug or architectural issue belongs to.
+## Common Mistakes
 
-### Source
-get-started/ch4.md, lines 70–128.
-
-## Practice Exercises
-1. **Scope:** Define/call a function in nested scopes with shared names.
-2. **Closure:** Create two independent counters via factory function.
-3. **Prototypes:** Create an object with `Object.create` and trace delegation.
-4. **Coercion:** Compare `"5" + 1` vs `"5" - 1`.
-
-## Quiz Questions
-1. What are the three pillars?
-2. Why does hoisting not contradict lexical scope?
-3. What is the difference between behavior delegation and class inheritance?
-4. Why is coercion important in TypeScript projects?
-5. Why should you introduce team practices incrementally?
+- Calling JS merely “line-by-line interpreted” misses its observable pre-execution processing.
+- Thinking `let` is invisible until its declaration confuses recognition of a binding with the time when it becomes usable.
+- Treating a property name such as `student.id` as a variable lookup obscures the distinction between lexical scope and object access.
 
 ## Long-Term Takeaways
-- Explain behavior using language mechanisms, not guesses.
-- Keep `this` (invocation-based) and Lexical Scope (definition-based) distinct.
-- Learn conversion rules rather than memorizing isolated errors.
-- Use static tooling as a supplement to, not a replacement for, runtime knowledge.
 
-## Source Mapping
-| Topic | Source lines |
-| :--- | :--- |
-| Framework & Methodology | 1–11, 70–99 |
-| Scope & Closure | 12–32 |
-| Prototypes | 34–51 |
-| Types & Coercion | 52–69 |
-| Roadmap | 100–128 |
+First identify declarations and their enclosing scopes; then label each variable occurrence as a target or source. This two-phase model is the foundation for the later chapters on scope lookup, hoisting, and closure.
+
+### Source
+
+*scope-closures/ch1.md, “Compiling Code”, “Compiler Speak”, “Cheating: Runtime Scope Modifications”, and “Lexical Scope”.*
