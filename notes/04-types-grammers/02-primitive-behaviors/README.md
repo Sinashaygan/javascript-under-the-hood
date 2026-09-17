@@ -326,3 +326,56 @@ Number.MAX_SAFE_INTEGER
 
 ---
 
+## 9. Math & Bitwise Operations
+
+JavaScript provides mathematical utilities through `Math`:
+
+```js
+Math.PI;
+// 3.141592653589793
+
+Math.abs(-32.6);
+// 32.6
+
+Math.round(-32.6);
+// -33
+
+Math.min(10, 20);
+// 10
+```
+
+`Math.random()` generates a pseudo-random value:
+
+```js
+Math.random();
+// 0 <= value < 1
+```
+
+It should **not** be used for cryptographic purposes.
+
+JavaScript also supports Bitwise operators:
+
+```js
+42 & 36;
+// 32
+
+42 | 36;
+// 46
+
+42 ^ 36;
+// 14
+
+~42;
+// -43
+
+42 << 3;
+// 336
+
+42 >> 3;
+// 5
+```
+
+Bitwise operations convert Numbers to **32-bit integers**.
+
+---
+
