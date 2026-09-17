@@ -266,3 +266,33 @@ true || doSomething();
 This behavior is called **short-circuit evaluation**.
 
 It is commonly used for conditional execution and default values.
+
+## Associativity
+
+When multiple operators have the same precedence, **associativity** determines how they are grouped.
+
+For example:
+
+```js
+a && b && c
+```
+
+is generally grouped from left to right:
+
+```js
+(a && b) && c
+```
+
+Some operators, such as the conditional operator, associate from right to left:
+
+```js
+a ? b : c ? d : e
+```
+
+is interpreted as:
+
+```js
+a ? b : (c ? d : e)
+```
+
+Associativity determines grouping, not necessarily the order in which expressions are evaluated.
