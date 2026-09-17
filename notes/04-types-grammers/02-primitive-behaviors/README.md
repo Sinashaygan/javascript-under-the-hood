@@ -107,3 +107,45 @@ Changing `age` does not affect `anotherAge`.
 
 ---
 
+## 4. Strings
+
+Strings are primitive and immutable.
+
+```js
+let name = "Sina";
+
+console.log(typeof name);
+// "string"
+```
+
+Strings support indexing:
+
+```js
+let greeting = "Hello";
+
+console.log(greeting[0]);
+// "H"
+
+console.log(greeting[4]);
+// "o"
+```
+
+However, a String is **not an Array**.
+
+Strings are also iterable:
+
+```js
+for (let char of "Kyle") {
+    console.log(char);
+}
+```
+
+Or:
+
+```js
+console.log([..."Kyle"]);
+// ["K", "y", "l", "e"]
+```
+
+---
+
