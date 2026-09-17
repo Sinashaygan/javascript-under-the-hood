@@ -60,3 +60,47 @@ Number("42"); // 42
 Conceptually, JavaScript performs a `ToNumber` operation to convert `"42"` into `42`.
 
 These abstract operations help explain what JavaScript is doing internally during coercion.
+
+# ToBoolean()
+
+`ToBoolean()` converts a value into either `true` or `false`.
+
+The main **falsy** values are:
+
+```js
+undefined
+null
+false
++0
+-0
+NaN
+""
+0n
+```
+
+Everything else is generally **truthy**.
+
+For example:
+
+```js
+Boolean("");    // false
+Boolean(0);     // false
+Boolean(null);  // false
+Boolean(NaN);   // false
+```
+
+But empty arrays and objects are truthy:
+
+```js
+Boolean([]); // true
+Boolean({}); // true
+```
+
+This is an important JavaScript rule:
+
+```text
+[]  → truthy
+{}  → truthy
+```
+
+They are objects, and objects are truthy regardless of whether they contain any properties or elements.
