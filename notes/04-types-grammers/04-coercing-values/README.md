@@ -156,3 +156,38 @@ Boolean("hello"); // true
 ```
 
 `!!value` works because it applies the logical NOT operator twice.
+
+# ToString()
+
+`ToString()` converts a value into a string.
+
+Examples:
+
+```js
+String(42);         // "42"
+String(true);       // "true"
+String(false);      // "false"
+String(null);       // "null"
+String(undefined);  // "undefined"
+```
+
+A special case is negative zero:
+
+```js
+String(-0); // "0"
+```
+
+Symbols have special behavior:
+
+```js
+String(Symbol("ok")); // "Symbol(ok)"
+```
+
+However, implicit string coercion of a Symbol can throw an error:
+
+```js
+Symbol("ok") + "";
+// TypeError
+```
+
+So explicit `String()` conversion and implicit string coercion are not always identical.
