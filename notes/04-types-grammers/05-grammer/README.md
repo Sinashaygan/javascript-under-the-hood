@@ -373,3 +373,43 @@ x();
 ```
 
 Understanding error types makes debugging much easier.
+
+## Function Arguments
+
+Function parameters can have default values:
+
+```js
+function foo(a = 42, b = a + 1) {
+    console.log(a, b);
+}
+```
+
+Calling:
+
+```js
+foo();
+```
+
+produces:
+
+```text
+42 43
+```
+
+A default value is used when the argument is `undefined`.
+
+```js
+foo(undefined);
+```
+
+also uses the default.
+
+But `null` does not trigger the default:
+
+```js
+foo(null);
+```
+
+The parameter receives `null`.
+
+This distinction between `undefined` and `null` is important when working with function arguments.
