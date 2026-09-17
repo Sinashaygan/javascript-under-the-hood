@@ -177,3 +177,33 @@ Typed Arrays
 ```
 
 These objects provide specialized behavior beyond ordinary objects.
+
+## Arrays
+
+Arrays are also objects, but they are specialized for ordered collections of values.
+
+```js
+const numbers = [3, 12, 42];
+
+numbers[0];
+// 3
+
+numbers[2];
+// 42
+```
+
+Arrays inherit behavior from:
+
+```js
+Array.prototype
+```
+
+For example:
+
+```js
+numbers.map(v => v * 2);
+// [6, 24, 84]
+
+numbers.includes(42);
+// true
+```
