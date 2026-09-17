@@ -43,6 +43,7 @@ var records = [ /* private state */ ];
 function getName(id) { /* accesses records via closure */ }
 return { getName };
 })();
+```
 
 ### Source
 - *scope-closures/ch8.md, lines 141-210.*

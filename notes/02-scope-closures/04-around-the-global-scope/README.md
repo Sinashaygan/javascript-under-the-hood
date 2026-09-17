@@ -9,7 +9,7 @@
 - Even with modern module systems (ESM, CommonJS), the concept of a "global" space for environment-provided utilities remains essential. The way we *interact* with it has changed, but its existence is a core part of the JS model.
 
 ### Source
-- *get-started/ch4.md, lines 1-54.*
+- *scope-closures/ch4.md, lines 1-54.*
 
 ## Section: The Browser Env
 
@@ -24,7 +24,7 @@
 - Never rely on DOM Globals. Always get element references with `document.querySelector` or similar methods.
 
 ### Source
-- *get-started/ch4.md, lines 55-141.*
+- *scope-closures/ch4.md, lines 55-141.*
 
 ## Section: Web Workers
 
@@ -37,7 +37,7 @@
 - The same `var` vs. `let`/`const` behavior applies: `var` declarations in a worker's top-level scope will create properties on the `self` object, while `let`/`const` will not.
 
 ### Source
-- *get-started/ch4.md, lines 142-160.*
+- *scope-closures/ch4.md, lines 142-160.*
 
 ## Section: ESM & DevTools Console
 
@@ -50,7 +50,7 @@
 - Be cautious when testing scope behavior in the console. It's a useful tool, but not a 100% accurate simulation of file-based execution.
 
 ### Source
-- *get-started/ch4.md, lines 161-196.*
+- *scope-closures/ch4.md, lines 161-196.*
 
 ## Section: The Node.js Env
 
@@ -63,7 +63,7 @@
 - Identifiers like `require`, `module`, `exports`, `__dirname`, and `__filename` seem global but are actually parameters passed to the module-wrapping function.
 
 ### Source
-- *get-started/ch4.md, lines 197-233.*
+- *scope-closures/ch4.md, lines 197-233.*
 
 ## Section: globalThis
 
@@ -78,7 +78,7 @@
 - **Use `globalThis`** whenever you need to reliably access the global object in code that might run in different environments (isomorphic code). This avoids manual checks like `typeof window !== "undefined"`.
 
 ### Source
-- *get-started/ch4.md, lines 234-290.*
+- *scope-closures/ch4.md, lines 234-290.*
 
 ## Section: Globally Aware
 
@@ -95,4 +95,4 @@
 - When writing code that needs to work everywhere, use `globalThis` to interact with the global object.
 
 ### Source
-- *get-started/ch4.md, lines 291-306.*
+- *scope-closures/ch4.md, lines 291-306.*

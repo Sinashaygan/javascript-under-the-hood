@@ -10,7 +10,7 @@
 - `function` and `var` declarations attach to the nearest enclosing **function scope** (or global), bypassing enclosing block scopes.
 
 ### Source
-- *get-started/ch5.md, lines 1-100.*
+- *scope-closures/ch5.md, lines 1-100.*
 
 ## Section: Hoisting: Yet Another Metaphor
 
@@ -23,7 +23,7 @@
 - Thinking of JS as a single-pass interpreter leads to incorrect mental models. Recognizing the distinct **two-phase model (compile/parse, then execute)** clarifies how identifiers are known before execution reaches their lines.
 
 ### Source
-- *get-started/ch5.md, lines 101-165.*
+- *scope-closures/ch5.md, lines 101-165.*
 
 ## Section: Re-declaration?
 
@@ -36,7 +36,7 @@
 - Disallowing `let`/`const` re-declaration prevents accidental variable shadowing collisions and sloppy state resetting within the same scope.
 
 ### Source
-- *get-started/ch5.md, lines 166-260.*
+- *scope-closures/ch5.md, lines 166-260.*
 
 ## Section: Constants
 
@@ -50,7 +50,7 @@
 - `TypeError` occurs at runtime when an invalid operation (like mutating an immutable binding) is attempted during execution.
 
 ### Source
-- *get-started/ch5.md, lines 261-295.*
+- *scope-closures/ch5.md, lines 261-295.*
 
 ## Section: Loops
 
@@ -66,7 +66,7 @@
 - Use `const` in `for..of` / `for..in` when the value is read-only within each iteration.
 
 ### Source
-- *get-started/ch5.md, lines 296-390.*
+- *scope-closures/ch5.md, lines 296-390.*
 
 ## Section: Uninitialized Variables (aka, TDZ)
 
@@ -83,7 +83,7 @@
 - Always place `let` and `const` declarations at the top of their enclosing scope to reduce the TDZ window to near zero.
 
 ### Source
-- *get-started/ch5.md, lines 391-490.*
+- *scope-closures/ch5.md, lines 391-490.*
 
 ## Section: Finally Initialized
 
@@ -98,4 +98,4 @@
 - Distinguish between compilation errors (`SyntaxError`) and execution errors (`TypeError`, `ReferenceError`) when debugging scope and initialization issues.
 
 ### Source
-- *get-started/ch5.md, lines 491-520.*
+- *scope-closures/ch5.md, lines 491-520.*

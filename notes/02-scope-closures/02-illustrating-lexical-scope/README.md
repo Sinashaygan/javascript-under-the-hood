@@ -10,7 +10,7 @@ To reason about scope, we use metaphors:
 Visualizing scope boundaries as colored bubbles helps prevent bugs where you incorrectly assume access to variables from outer or unrelated scopes.
 
 ### Source
-get-started/ch2.md, lines 9–76.
+scope-closures/ch2.md, lines 9–76.
 
 ## Section: Scope Resolution
 
@@ -25,7 +25,7 @@ get-started/ch2.md, lines 9–76.
 - Forgetting that object properties (e.g., `id`, `name`) are not "marbles" and don't follow these scoping rules.
 
 ### Source
-get-started/ch2.md, lines 77–110.
+scope-closures/ch2.md, lines 77–110.
 
 ## Section: The JS Engine Conversations
 
@@ -38,7 +38,7 @@ get-started/ch2.md, lines 77–110.
 Thinking like the "Engine" helps you understand why some variables are available (hoisted) and others result in `ReferenceError`.
 
 ### Source
-get-started/ch2.md, lines 112–153.
+scope-closures/ch2.md, lines 112–153.
 
 ## Section: Processing Statements (var students = [...])
 
@@ -48,7 +48,7 @@ JS processes declarations in two steps:
 2. **Engine:** Executes the assignment at runtime.
 
 ### Source
-get-started/ch2.md, lines 154–209.
+scope-closures/ch2.md, lines 154–209.
 
 ## Section: Nested Scope & Failures
 
@@ -61,7 +61,7 @@ get-started/ch2.md, lines 154–209.
 - `typeof` returning "undefined" for both cases, masking the underlying error.
 
 ### Source
-get-started/ch2.md, lines 210–267.
+scope-closures/ch2.md, lines 210–267.
 
 ## Section: Accidental Globals
 
@@ -72,7 +72,7 @@ In non-strict mode, assigning to a non-existent variable creates it as a global 
 **Always use strict-mode.** It forces the engine to throw a `ReferenceError` instead of creating an accidental global variable, allowing you to catch errors immediately.
 
 ### Source
-get-started/ch2.md, lines 268–301.
+scope-closures/ch2.md, lines 268–301.
 
 ## Exercises
 1. Find code in a project. Speak the "Engine" and "Scope Manager" dialogue out loud for a variable declaration and a variable access.
@@ -85,4 +85,4 @@ get-started/ch2.md, lines 268–301.
 - "Strict mode" is mandatory for safe development.
 
 ### Source
-get-started/ch2.md, lines 302–315.
+scope-closures/ch2.md, lines 302–315.

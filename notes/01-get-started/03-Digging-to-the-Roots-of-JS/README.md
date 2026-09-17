@@ -84,7 +84,7 @@ programming languages.
   the prototype chain.
 ## Suggested Exercises
 
-See [`./exercises.js`](./exercises.js) for runnable examples.
+Runnable examples for these suggested exercises have not been added yet.
 
 1. Create a manual iterator that returns `{ value, done }`.
 2. Consume an iterable with `for..of` and the spread operator.

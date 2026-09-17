@@ -68,8 +68,7 @@ in browser and server environments.
 The following exercises are original study activities based on the
 chapter's themes.
 
-Suggested location for runnable examples:
-[`exercises.js`](./exercises.js).
+Suggested location for runnable examples: `exercises.js` in this chapter directory (not created yet).
 
 The exercise file and completed solutions are not included in this README.
 
