@@ -27,7 +27,7 @@ _To be added._
 
 _To be added._
 
-See [exercises.js](./exercises.js) for runnable examples.
+Runnable examples can be added alongside this overview when the exercises are written.
 
 ## Quiz Questions
 

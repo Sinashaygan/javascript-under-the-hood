@@ -64,8 +64,7 @@ JavaScript primitives include:
 - `bigint`
 - `symbol`
 
-```
-javascript
+```javascript
 const name = "Sara";
 const age = 25;
 const active = true;
@@ -78,8 +77,7 @@ const identifier = Symbol("id");
 ### Objects and Arrays
 Objects and arrays are reference types that hold collections of properties:
 
-```
-javascript
+```javascript
 const user = {
   name: "Sara",
   age: 25,
@@ -91,8 +89,7 @@ const numbers = [1, 2, 3];
 ### The `typeof` Operator
 `typeof` returns a string classifying the type of an operand:
 
-```
-javascript
+```javascript
 typeof "hello";    // "string"
 typeof 42;         // "number"
 typeof true;       // "boolean"
@@ -110,8 +107,7 @@ typeof [];         // "object"
 - `let`: Block-scoped, reassignable.
 - `const`: Block-scoped, prevents reassignment (must be initialized).
 
-```
-text
+```text
 var   → function scope
 let   → block scope
 const → block scope
@@ -122,18 +118,14 @@ const → block scope
 - **Reassignment:** Modifying which value/reference a variable identifier points to.
 - **Mutation:** Modifying the internal contents of an existing object or array.
 
-```
-javascript
+```javascript
 const user = { name: "Sara" };
 user.name = "Mina"; // VALID: Object mutation
 
-user = { name: "Ali" }; // ERROR (TypeError): Variable reassignment
-
-text
-const prevents identifier reassignment.
-const does not make underlying objects immutable.
-
+// user = { name: "Ali" }; // TypeError if executed: variable reassignment
 ```
+
+`const` prevents reassignment, not mutation of the underlying object.
 
 ## 4. Functions
 
@@ -143,6 +135,7 @@ Functions are reusable, callable units of behavior and first-class values.
 ```text
 Parameter → Name defined in function signature
 Argument  → Concrete value passed during invocation
+```
 
 ### Return Values vs. Side Effects
 - `return` yields an explicit value back to the caller.
@@ -152,7 +145,7 @@ Argument  → Concrete value passed during invocation
 Functions can be treated like any other value: assigned to variables, passed
 into other functions (callbacks), and returned.
 
-javascript
+```javascript
 function greet() {
   return "Hello";
 }
@@ -166,8 +159,7 @@ console.log(fn()); // "Hello"
 ### Strict Equality (`===`) vs. Loose Equality (`==`)
 - `===` (Strict): Checks both type and value without implicit coercion.
 - `==` (Loose): Allows implicit type coercion before comparison.
-```
-javascript
+```javascript
 42 === "42"; // false (different types)
 42 == "42";  // true (string coerced to number)
 0 == false;  // true
@@ -177,8 +169,7 @@ javascript
 ### `NaN` (Not a Number)
 `NaN` is of type `number`, but is not equal to anything, including itself:
 
-```
-javascript
+```javascript
 NaN === NaN;           // false
 Object.is(NaN, NaN);   // true
 ```
@@ -186,9 +177,8 @@ Object.is(NaN, NaN);   // true
 ### Object Reference Equality
 Objects are compared by reference identity, not structural content:
 
-```
-javascript
-{} === {}; // false (distinct instances)
+```javascript
+({}) === ({}); // false (distinct instances)
 
 const a = {};
 const b = a;
@@ -199,8 +189,7 @@ a === b;   // true (shared memory reference)
 Relational operators (`<`, `>`) compare numbers numerically and strings
 lexicographically (character code order):
 
-```
-javascript
+```javascript
 10 < 9;     // false (numeric)
 "10" < "9"; // true (lexical: "1" comes before "9")
 ```
@@ -230,18 +219,17 @@ const book = new Book();
 book.print();
 // Publication
 // Book
+```
 
 - **`this`**: Contextually references the active instance at call time.
 - **`extends` & `super`**: Establishes inheritance delegation and enables method overriding.
-```
 
 ## 6.2 Classic Modules (Factory Functions)
 
 Classic modules use factory functions and closures to establish private state
 and expose a selective public API.
 
-```
-javascript
+```javascript
 function createCounter() {
   let count = 0; // Private state via closure
 
@@ -261,13 +249,12 @@ getCount, // Public API
 
 const counter = createCounter();
 counter.increment();
-console.log(counter.getCount()); // 2
+console.log(counter.getCount()); // 1
 console.log(counter.count);      // undefined (hidden from outer scope)
 ```
 
 ### Classes vs. Classic Modules
 
-```
 | Feature | Class | Classic Module |
 | :--- | :--- | :--- |
 | **Primary Goal** | Object template / Shared prototype | Encapsulated state & scope |
@@ -275,7 +262,6 @@ console.log(counter.count);      // undefined (hidden from outer scope)
 | **State Access** | Instance properties (`this`) | Lexical scope & closures |
 | **Result** | Concrete instance | Public API object |
 | **Core Mechanism**| `class`, `extends`, `this` | Closures, function scope |
-```
 
 ## 7. ES Modules (ESM)
 
