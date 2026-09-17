@@ -334,3 +334,52 @@ The `-` operator converts the string into a number.
 The `+` operator can instead choose string concatenation when a string is involved.
 
 Understanding this difference is essential when working with JavaScript coercion.
+
+# Equality: `==` vs `===`
+
+The `===` operator performs strict equality and does not perform type coercion between different types.
+
+```js
+42 === "42"; // false
+```
+
+The `==` operator performs loose equality and can perform coercion when the compared values have different types.
+
+```js
+42 == "42"; // true
+```
+
+Conceptually:
+
+```text
+42 == "42"
+     ↓
+"42" → 42
+     ↓
+42 == 42
+     ↓
+true
+```
+
+An important special case is:
+
+```js
+null == undefined; // true
+```
+
+But:
+
+```js
+null == 0;         // false
+undefined == 0;    // false
+```
+
+Therefore:
+
+```js
+value == null
+```
+
+can be used to check for either `null` or `undefined`.
+
+The important lesson is that `==` follows defined coercion rules; its behavior is not random.
