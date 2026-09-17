@@ -177,3 +177,36 @@ function foo({ name, age }) {
 The same `{}` syntax therefore has different meanings depending on its context.
 
 Destructuring is especially common in modern JavaScript and React code.
+
+## Conditional Blocks
+
+JavaScript allows optional blocks for some control structures:
+
+```js
+if (condition)
+    doSomething();
+```
+
+A block can also be used:
+
+```js
+if (condition) {
+    doSomething();
+}
+```
+
+Multiple conditions can be chained with `else if`:
+
+```js
+if (a) {
+    // ...
+}
+else if (b) {
+    // ...
+}
+else {
+    // ...
+}
+```
+
+Using braces consistently generally makes code easier to read and maintain.
