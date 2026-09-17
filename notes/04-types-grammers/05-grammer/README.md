@@ -154,3 +154,26 @@ A standalone `{}` creates a normal block:
 ```
 
 Blocks are especially useful with block-scoped declarations such as `let` and `const`.
+
+## Object Destructuring
+
+Object destructuring allows properties to be extracted from an object:
+
+```js
+var {
+    a,
+    b
+} = obj;
+```
+
+It can also be used in function parameters:
+
+```js
+function foo({ name, age }) {
+    console.log(name, age);
+}
+```
+
+The same `{}` syntax therefore has different meanings depending on its context.
+
+Destructuring is especially common in modern JavaScript and React code.
