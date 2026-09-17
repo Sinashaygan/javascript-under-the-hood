@@ -413,3 +413,29 @@ foo(null);
 The parameter receives `null`.
 
 This distinction between `undefined` and `null` is important when working with function arguments.
+
+## `arguments` and Parameters
+
+Traditional JavaScript functions have an `arguments` object containing the arguments passed to the function.
+
+```js
+function foo(a) {
+    console.log(arguments[0]);
+}
+
+foo(42);
+```
+
+In older non-strict behavior, parameters and `arguments` can be linked.
+
+Strict mode removes this linkage.
+
+Modern JavaScript usually prefers rest parameters:
+
+```js
+function foo(...args) {
+    console.log(args);
+}
+```
+
+Rest parameters are clearer and more convenient for handling variable numbers of arguments.
