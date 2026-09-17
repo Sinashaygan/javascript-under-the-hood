@@ -1,122 +1,71 @@
-## Section: Deconstructing `class` and `new`
+# Chapter 1 — Primitive Values
 
-### Core Concepts
+## Overview
 
-* **Constructor vs Creation:** A `constructor()` does not create the instance. It initializes an object that has already been created.
+JavaScript has **7 primitive types**:
 
-* **`new` Creates the Instance:** The `new` operator is responsible for creating the new object, linking its prototype, assigning `this`, invoking the constructor, and returning the resulting object.
+* `undefined`
+* `null`
+* `boolean`
+* `number`
+* `bigint`
+* `symbol`
+* `string`
 
-* **Factory Function:** The same basic behavior can be implemented with a regular function that explicitly creates, initializes, and returns an object.
+Primitive values are **not objects**.
 
-```js
-function Point2d(x, y) {
-    var instance = {};
+A key idea in JavaScript is:
 
-    instance.x = x;
-    instance.y = y;
+> **Types belong to values, not variables.**
 
-    return instance;
-}
-```
-
-* **Prototype Linking:** The created object can be connected to another object through its `[[Prototype]]`.
-
-```js
-var prototypeObj = {
-    toString() {
-        return `(${this.x},${this.y})`;
-    }
-};
-
-var point = {
-    __proto__: prototypeObj
-};
-```
-
-* **Four Conceptual Steps of `new`:**
-
-  1. Create a new empty object.
-  2. Link the object's `[[Prototype]]`.
-  3. Invoke the constructor with the new object as `this`.
-  4. Return the resulting object.
-
-### Architectural Takeaway
-
-The `class` and `new` syntax hides several lower-level object operations. Understanding those operations makes JavaScript's prototypal object model much easier to reason about.
-
-### Source
-
-*objects-classes/ch5.md, "What's A Constructor, Anyway?"*
-
-## Section: Factory Functions
-
-### Core Concepts
-
-* **Factory Function:** A factory function is a regular function that creates, initializes, and returns an object.
+A variable does not have a permanent type. Its current value has a type.
 
 ```js
-function Point2d(x, y) {
-    var instance = {};
+let x = 42;
+typeof x; // "number"
 
-    instance.x = x;
-    instance.y = y;
-
-    return instance;
-}
-
-var point = Point2d(3, 4);
+x = "hello";
+typeof x; // "string"
 ```
 
-* **No `class`:** Factory functions do not require the `class` keyword.
-
-* **No `new`:** The factory can be invoked as a normal function.
-
-* **Explicit Creation:** The object is created directly inside the function.
-
-* **Explicit Initialization:** Properties are assigned to the created object.
-
-* **Returned Instance:** The factory returns the newly created object to the caller.
-
-### Architectural Takeaway
-
-JavaScript object construction does not require classes or constructors. A regular function can perform creation and initialization explicitly and return the resulting object.
-
-### Source
-
-*objects-classes/ch5.md, "What's A Constructor, Anyway?"*
-
-## Section: Prototype Linking
-
-### Core Concepts
-
-* **`[[Prototype]]`:** Objects can be linked to other objects through their internal `[[Prototype]]` relationship.
-
-* **Shared Behavior:** An object can delegate method lookup to another object that stores reusable behavior.
+The same variable can hold values of completely different types.
 
 ```js
-var prototypeObj = {
-    toString() {
-        return `(${this.x},${this.y})`;
-    }
-};
-
-var point = {
-    __proto__: prototypeObj,
-    x: 3,
-    y: 4
-};
-
-point.toString(); // (3,4)
+let value = true;
+value = 100;
+value = "JavaScript";
 ```
 
-* **Delegated Lookup:** If a property or method is not found directly on `point`, JavaScript searches through its prototype chain.
+The type changes because the **value changes**.
 
-* **`this` Preservation:** When `point.toString()` is invoked, `this` still refers to `point`, even though `toString()` is found on `prototypeObj`.
+## Primitive vs Object
 
-### Architectural Takeaway
+Primitive values are different from objects.
 
-Prototype linkage separates data from shared behavior. Objects can delegate behavior to other objects while keeping the receiving object as the `this` context.
+Objects can have properties:
 
-### Source
+```js
+const user = {
+  name: "Sina"
+};
 
-*objects-classes/ch5.md, "What's A Constructor, Anyway?" & "Factory Initialization"*
+user.name; // "Sina"
+```
+
+Primitives do not behave like normal objects:
+
+```js
+let value = "hello";
+
+value.name = "Sina";
+
+console.log(value.name); // undefined
+```
+
+However, JavaScript allows some property access on primitives through automatic boxing/wrapping:
+
+```js
+"hello".length; // 5
+```
+
+This behavior will be explained in more detail later.
