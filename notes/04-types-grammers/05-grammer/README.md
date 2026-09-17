@@ -342,3 +342,34 @@ foo(); // undefined
 ```
 
 Understanding ASI is important when writing JavaScript without explicit semicolons.
+
+## Errors
+
+JavaScript has different types of errors that indicate different problems.
+
+### SyntaxError
+
+The code violates JavaScript grammar:
+
+```js
+let a = ;
+```
+
+### ReferenceError
+
+A variable or reference cannot be found:
+
+```js
+console.log(x);
+```
+
+### TypeError
+
+An operation is performed on an incompatible value:
+
+```js
+let x = 10;
+x();
+```
+
+Understanding error types makes debugging much easier.
