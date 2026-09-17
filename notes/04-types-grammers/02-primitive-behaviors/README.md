@@ -278,3 +278,51 @@ String methods do not mutate the original String.
 
 ---
 
+## 8. Numbers & Floating-Point Precision
+
+JavaScript uses **IEEE-754 floating-point numbers**.
+
+This can cause precision issues:
+
+```js
+0.1 + 0.2;
+// 0.30000000000000004
+```
+
+Therefore:
+
+```js
+0.1 + 0.2 === 0.3;
+// false
+```
+
+`Number.EPSILON` can sometimes help with floating-point comparisons, but it is **not a universal solution**.
+
+Useful Number methods:
+
+```js
+Number.isInteger(42);
+// true
+
+Number.isNaN(NaN);
+// true
+
+Number.isFinite(42);
+// true
+
+Number.parseInt("42px");
+// 42
+
+Number.parseFloat("42.5px");
+// 42.5
+```
+
+JavaScript also has a safe integer range:
+
+```js
+Number.MIN_SAFE_INTEGER
+Number.MAX_SAFE_INTEGER
+```
+
+---
+
