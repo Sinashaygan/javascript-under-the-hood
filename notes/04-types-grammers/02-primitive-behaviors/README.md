@@ -174,3 +174,52 @@ Unicode and emoji can therefore behave differently from what we visually conside
 
 ---
 
+## 6. Equality & Type Coercion
+
+### `===`
+
+Strict equality does not perform type coercion:
+
+```js
+"42" === "42";
+// true
+
+"42" === 42;
+// false
+```
+
+### `==`
+
+Loose equality can perform type coercion:
+
+```js
+42 == "42";
+// true
+```
+
+The String can be converted to a Number before comparison.
+
+### `Object.is()`
+
+`Object.is()` behaves differently for some special values:
+
+```js
+Object.is(NaN, NaN);
+// true
+
+Object.is(-0, 0);
+// false
+```
+
+Compare this with:
+
+```js
+NaN === NaN;
+// false
+
+-0 === 0;
+// true
+```
+
+---
+
