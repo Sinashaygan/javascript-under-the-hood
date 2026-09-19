@@ -150,3 +150,276 @@ itself can perform I/O and may perturb timing, especially in hot paths.
    engine used by multiple hosts.
 5. Console output is diagnostic host behavior and may show live objects rather
    than immutable snapshots.
+
+## 2. Engine Runtime Model: Event Loop and Concurrency
+
+### Call stack and execution contexts
+
+When an engine invokes JavaScript, it tracks active execution contexts on a
+**call stack**. A function call pushes a context; returning removes it. Only the
+top context is currently executing JavaScript in an agent.
+
+```js
+function third() {
+  return 42;
+}
+
+function second() {
+  return third();
+}
+
+function first() {
+  return second();
+}
+
+first();
+```
+
+```text
+push script     [script]
+push first      [script, first]
+push second     [script, first, second]
+push third      [script, first, second, third]
+return third    [script, first, second]
+return second   [script, first]
+return first    [script]
+finish script   []
+```
+
+The stack is an engine execution structure, not the event loop. The event loop
+decides *when* a host-scheduled unit of work may enter the engine. Once entered,
+ordinary JavaScript calls create and remove stack frames synchronously until
+that unit of work finishes.
+
+### Host scheduling and the event loop
+
+The chapter uses a single FIFO `eventLoop` array as teaching pseudocode. That is
+a useful first model, but modern browser event loops are more nuanced: an event
+loop owns one or more **task queues**, the browser chooses a runnable task under
+the HTML scheduling rules, runs it, performs a microtask checkpoint, and may
+then render. A task queue is associated with a task source so a browser can
+preserve required source ordering while still prioritize among sources.
+
+At a conceptual level:
+
+```mermaid
+flowchart LR
+    A[Host observes external work] --> B[Host queues an eligible task]
+    B --> C{Engine is available?}
+    C -- no --> C
+    C -- yes --> D[Run one task's JS callback]
+    D --> E[Call stack grows and unwinds]
+    E --> F[Stack becomes empty]
+    F --> G[Drain microtasks]
+    G --> H[Possible rendering / host bookkeeping]
+    H --> B
+```
+
+The host may perform network polling, timer tracking, rendering, or file-system
+work outside the JavaScript call stack and, depending on the implementation,
+on other native threads. This does not imply that callbacks for those operations
+execute simultaneously on the same JavaScript agent. The host schedules an
+entry into the engine when the operation's continuation is ready.
+
+#### Why `setTimeout(fn, 0)` is not immediate
+
+```js
+setTimeout(() => console.log("timer"), 0);
+busyLoopFor(200);
+console.log("script complete");
+```
+
+The timer registers with the host. Even after its minimum delay has elapsed, its
+callback cannot interrupt `busyLoopFor()`. It becomes a candidate for a later
+task and prints only after the current script completes (and after applicable
+microtasks). Real hosts may also clamp nested or background timers.
+
+### Run-to-completion
+
+For ordinary tasks and Jobs within one ECMAScript agent, JavaScript has
+**run-to-completion** semantics: once an execution unit starts, another one does
+not splice statements into the middle of it. A function can synchronously call
+other functions, but an unrelated timer or I/O callback cannot preempt it.
+
+```js
+let a = 20;
+
+function increment() {
+  a = a + 1;
+}
+
+function double() {
+  a = a * 2;
+}
+```
+
+If asynchronous completions schedule both callbacks, there are two relevant
+serial orders:
+
+```text
+increment -> double  produces 42
+double    -> increment produces 41
+```
+
+There is nondeterminism at the **callback ordering** boundary, but not arbitrary
+interleaving between `a = a + 1` and `a = a * 2` on the same agent. This greatly
+reduces the possible outcomes compared with unsynchronized shared-memory
+threads, though it does not remove race conditions.
+
+Run-to-completion is also why a long callback harms responsiveness. While it is
+running, the event loop cannot start another task on that agent; input handling,
+timers, other callbacks, and rendering wait.
+
+### Asynchrony, concurrency, and parallelism
+
+These terms describe different properties:
+
+| Property | Meaning | JavaScript example |
+| --- | --- | --- |
+| Asynchrony | A temporal gap separates initiation from continuation. | Start `fetch()` now; handle its result later. |
+| Concurrency | Multiple logical workflows make progress over overlapping periods. | Scroll events and network responses interleave. |
+| Parallelism | Operations execute at the same physical instant, usually on separate threads/cores. | A Web Worker computes while the main thread executes. |
+
+A single event loop supports concurrency without parallel callback execution:
+
+```text
+Time -------------------------------------------------------------->
+
+scroll workflow:   [request 1]             [request 2]
+network workflow:             [response 1]             [response 2]
+main JS agent:     [task A]    [task B]     [task C]     [task D]
+                   one callback at a time; workflows are interleaved
+```
+
+JavaScript platforms can also use genuine parallelism. Web Workers, Node.js
+worker threads, host I/O threads, garbage collection, and JIT compilation may
+run on additional threads. The important refinement is that run-to-completion
+applies to JavaScript execution within an agent; it is not a claim that the
+entire browser or Node.js process has only one operating-system thread.
+
+### Coordinating concurrent workflows
+
+The callback completion order of independent operations is often unspecified.
+Whether that is a bug depends on whether the operations interact.
+
+#### Noninteracting work
+
+```js
+const results = {};
+
+request("/profile", data => { results.profile = data; });
+request("/settings", data => { results.settings = data; });
+```
+
+Either callback may run first, but they write different properties. If no code
+observes a partial object incorrectly, the ordering nondeterminism is harmless.
+
+#### Ordering interaction
+
+```js
+const results = [];
+
+request("/first", data => results.push(data));
+request("/second", data => results.push(data));
+```
+
+Arrival order now determines array meaning. If positions carry semantic order,
+write by identity rather than completion order:
+
+```js
+request("/first", data => { results[0] = data; });
+request("/second", data => { results[1] = data; });
+```
+
+Never infer a guaranteed ordering from an observed network-speed pattern. Cache
+state, connection reuse, server scheduling, retries, and transport conditions
+can reverse it.
+
+#### Gate: wait for all prerequisites
+
+```js
+let left;
+let right;
+
+function tryCombine() {
+  if (left !== undefined && right !== undefined) {
+    consume(left, right);
+  }
+}
+
+request("/left", value => {
+  left = value;
+  tryCombine();
+});
+
+request("/right", value => {
+  right = value;
+  tryCombine();
+});
+```
+
+The gate opens only when both prerequisites exist. `Promise.all()` is a modern,
+composable expression of this coordination pattern.
+
+#### Latch: only the first completion wins
+
+```js
+let settled = false;
+
+function win(value) {
+  if (settled) return;
+  settled = true;
+  consume(value);
+}
+
+requestFromPrimary(win);
+requestFromReplica(win);
+```
+
+Here the order is intentionally nondeterministic, but the latch makes exactly
+one outcome observable. `Promise.race()` expresses a related first-settlement
+policy, although it does not cancel losing operations.
+
+### Cooperative concurrency and yielding
+
+Run-to-completion makes large synchronous batches monopolize an agent:
+
+```js
+const transformed = tenMillionItems.map(expensiveTransform);
+```
+
+One mitigation is to divide the work into bounded batches and schedule a future
+task between them:
+
+```js
+function transformInBatches(input, output = []) {
+  const batch = input.splice(0, 1_000);
+  output.push(...batch.map(expensiveTransform));
+
+  if (input.length > 0) {
+    setTimeout(() => transformInBatches(input, output), 0);
+  } else {
+    consume(output);
+  }
+}
+```
+
+Each timer boundary yields control so other eligible tasks and rendering can
+run. Batch size is a latency/throughput tradeoff: tiny batches add scheduling
+overhead; large batches create long tasks. Microtasks are usually a poor yielding
+mechanism because the host drains them before selecting the next task, so a
+self-replenishing microtask chain can still starve input and rendering.
+
+### Topic 2 invariants
+
+1. The engine's call stack tracks active JavaScript execution; the host event
+   loop determines when a scheduled unit may enter the engine.
+2. Tasks execute serially on one agent and run to completion, but their relative
+   order can still be nondeterministic.
+3. Concurrency means overlapping logical progress; it does not require parallel
+   execution of JavaScript callbacks.
+4. Single-agent semantics do not mean the whole runtime is single-threaded.
+5. Shared state requires explicit ordering, gating, latching, or another
+   coordination strategy.
+6. Responsiveness depends on keeping each synchronous chunk bounded and yielding
+   to a future task when other work must get an opportunity to run.
