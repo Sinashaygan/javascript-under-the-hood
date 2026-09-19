@@ -126,3 +126,16 @@ function response(err, data) {
 
   console.log(data);
 }
+
+## 9. The Sync vs Async Problem
+
+One dangerous situation occurs when an API sometimes calls a callback synchronously and sometimes asynchronously.
+
+```js
+var a = 0;
+
+someAPI(function () {
+  console.log(a);
+});
+
+a++;
