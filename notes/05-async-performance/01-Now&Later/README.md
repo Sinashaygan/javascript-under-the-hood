@@ -674,3 +674,182 @@ Do not confuse these two forms of ordering:
 5. Node.js adds host-specific ordering, notably its next-tick queue.
 6. Engine optimizations may reorder internals only when the program cannot
    observe a semantic difference.
+
+## 4. Synthesis and Key Takeaways
+
+### Unified mental model
+
+Treat asynchronous JavaScript as cooperation among a language, an engine, and a
+host—not as a magical background mode inside a function.
+
+```mermaid
+flowchart TB
+    subgraph Host[Host environment: browser or Node.js]
+        APIs[Timers / network / input / filesystem APIs]
+        Loop[Event-loop scheduling policy]
+        Tasks[Eligible host tasks]
+    end
+
+    subgraph Engine[JavaScript engine: e.g. V8]
+        Stack[Execution-context call stack]
+        Heap[Heap and runtime state]
+        Micro[Microtask integration]
+        Compiler[Parser / interpreter / optimizing JIT]
+    end
+
+    subgraph Language[ECMAScript semantics]
+        JS[Functions / objects / control flow]
+        Promise[Promises and abstract Jobs]
+        Hooks[Host hooks]
+    end
+
+    JS --> Compiler
+    Promise --> Micro
+    Hooks <--> Loop
+    APIs --> Tasks
+    Tasks -->|enter engine when selected| Stack
+    Stack -->|register async operation| APIs
+    Stack -->|enqueue Promise work| Micro
+    Micro -->|checkpoint after stack empties| Stack
+    Stack <--> Heap
+```
+
+The execution lifecycle of a representative program is:
+
+```mermaid
+flowchart TD
+    A[Host selects initial script task] --> B[Engine executes synchronous code]
+    B --> C[Calls push frames onto call stack]
+    C --> D[Async API registers work with host]
+    D --> E[Current stack unwinds completely]
+    E --> F{Microtasks queued?}
+    F -- yes --> G[Run oldest microtask to completion]
+    G --> F
+    F -- no --> H[Possible render / host bookkeeping]
+    H --> I{Runnable task available?}
+    I -- no --> J[Host waits or performs native work]
+    J --> I
+    I -- yes --> K[Select one task]
+    K --> B
+```
+
+### Worked execution-order trace
+
+```js
+console.log("script:start");
+
+setTimeout(() => {
+  console.log("timer:start");
+  Promise.resolve().then(() => console.log("timer:microtask"));
+  console.log("timer:end");
+}, 0);
+
+Promise.resolve()
+  .then(() => {
+    console.log("promise:1");
+    queueMicrotask(() => console.log("queued:microtask"));
+  })
+  .then(() => console.log("promise:2"));
+
+console.log("script:end");
+```
+
+Browser-oriented trace:
+
+| Step | Queue/stack action | Output |
+| ---: | --- | --- |
+| 1 | Initial script task starts. | `script:start` |
+| 2 | Timer is registered with the host. | — |
+| 3 | First Promise reaction is enqueued. | — |
+| 4 | Initial script reaches its end. | `script:end` |
+| 5 | Microtask checkpoint runs first reaction; it queues both the explicit microtask and the chained reaction. | `promise:1` |
+| 6 | Explicitly queued microtask runs FIFO. | `queued:microtask` |
+| 7 | Chained Promise reaction runs. | `promise:2` |
+| 8 | A later event-loop iteration selects the eligible timer task. | `timer:start`, `timer:end` |
+| 9 | The timer task ends, triggering another checkpoint. | `timer:microtask` |
+
+Final output:
+
+```text
+script:start
+script:end
+promise:1
+queued:microtask
+promise:2
+timer:start
+timer:end
+timer:microtask
+```
+
+The key detail at step 5 is FIFO insertion. While the first `.then()` reaction
+runs, `queueMicrotask(...)` is called before that reaction returns. The Promise
+created by the first `.then()` is fulfilled only as the reaction completes, at
+which point its chained reaction is appended behind the already queued explicit
+microtask.
+
+### Compact comparison
+
+| Question | Synchronous call | Microtask / Promise Job | Host task ("macrotask") |
+| --- | --- | --- | --- |
+| When can it start? | Immediately from currently executing code. | After the current stack is empty, at a microtask checkpoint. | When selected by the host event loop after becoming runnable. |
+| Can it interrupt current JS? | It is nested by an explicit call, not an interruption. | No. | No. |
+| Does it run to completion? | Yes, within the current execution unit. | Yes, before the next microtask begins. | Yes, before another task begins on that agent. |
+| Typical sources | function call, operator, accessor | `.then`, `catch`, `finally`, `await` continuation, `queueMicrotask` | script, timer, many events, I/O callback |
+| Fairness/rendering effect | Extends current task. | Queue drains fully; recursion may starve rendering/tasks. | Returning yields to host scheduling and possible rendering. |
+
+### Reasoning checklist for async bugs
+
+When execution order is surprising, ask these questions in order:
+
+1. **What is the current synchronous chunk?** Draw its call stack and find where
+   it becomes empty.
+2. **Which layer owns each API?** Separate ECMAScript (`Promise`) from the host
+   (`setTimeout`, DOM events, Node.js file I/O) and the engine implementation.
+3. **What is being queued?** A synchronous call, microtask, host task, or a
+   Node-specific next tick are not interchangeable.
+4. **When does the operation merely become eligible?** Timer expiry and I/O
+   completion do not mean the callback has begun executing.
+5. **Which ordering is guaranteed?** Preserve only guarantees from the relevant
+   specification/API; do not infer them from observed speed.
+6. **What state crosses the now/later gap?** Look for mutable closures, globals,
+   DOM nodes, request identities, or cancellation signals.
+7. **Do concurrent workflows interact?** If so, define an ordering, gate, latch,
+   aggregation, serialization, or explicit winner policy.
+8. **Could the current unit starve the loop?** Inspect long synchronous work,
+   recursive microtasks, and recursive `process.nextTick()` calls.
+9. **Is the observation trustworthy?** Snapshot logged objects and use
+   breakpoints before blaming statement reordering.
+
+### Chapter takeaways
+
+- JavaScript programs are sequences of run-to-completion chunks separated by
+  temporal gaps.
+- The current chunk executes on an engine call stack; future chunks are admitted
+  according to host scheduling and ECMAScript Job constraints.
+- A single agent serializes JavaScript callbacks, yet multiple logical workflows
+  can still be concurrent and race through shared state.
+- Timer delays specify minimum eligibility, not exact callback start times.
+- In browsers, Promise reactions and `queueMicrotask()` callbacks drain before
+  the event loop chooses another task.
+- "Macrotask" is informal shorthand for a host task; a Job is an ECMAScript
+  abstraction; a microtask is the host mechanism commonly used to run Promise
+  Jobs.
+- Run-to-completion prevents statement-level preemption but also means long work
+  blocks all other JavaScript and, on a browser main thread, delays rendering.
+- Correct asynchronous design makes ordering and state coordination explicit
+  instead of depending on timing accidents.
+- Engine optimizations may radically transform code internally, but must
+  preserve every behavior the language makes observable.
+
+### References and terminology baseline
+
+- [YDKJS: Async & Performance — Chapter 1](https://ydkj-doc.vercel.app/async_&_performance/ch1)
+- [ECMAScript specification — Jobs and host operations](https://tc39.es/ecma262/#sec-jobs-and-host-operations-to-enqueue-jobs)
+- [WHATWG HTML Standard — Event loops](https://html.spec.whatwg.org/multipage/webappapis.html#event-loops)
+- [V8 API — `MicrotaskQueue`](https://v8.github.io/api/head/classv8_1_1MicrotaskQueue.html)
+- [V8 — Faster async functions and promises](https://v8.dev/blog/fast-async)
+- [Node.js API — `process.nextTick()` and `queueMicrotask()`](https://nodejs.org/api/process.html#when-to-use-queuemicrotask-vs-processnexttick)
+
+The first reference is the chapter summarized here. The remaining primary
+sources refine its conceptual, ES6-era queue model using current specification
+and implementation terminology.
