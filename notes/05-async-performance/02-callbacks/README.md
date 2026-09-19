@@ -112,3 +112,17 @@ ajax(
     console.error(err);
   }
 );
+
+## 8. Error-First Callbacks
+
+Node.js popularized the **error-first callback** pattern.
+
+```js
+function response(err, data) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(data);
+}
