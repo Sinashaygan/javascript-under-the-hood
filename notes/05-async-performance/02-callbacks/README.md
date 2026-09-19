@@ -139,3 +139,14 @@ someAPI(function () {
 });
 
 a++;
+
+## 10. Zalgo
+
+**Zalgo** describes the problematic situation where a function may invoke a callback either synchronously or asynchronously.
+
+```text
+Sometimes:
+API → callback
+
+Sometimes:
+API → later → callback
