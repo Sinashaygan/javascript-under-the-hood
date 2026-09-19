@@ -423,3 +423,254 @@ self-replenishing microtask chain can still starve input and rendering.
    coordination strategy.
 6. Responsiveness depends on keeping each synchronous chunk bounded and yielding
    to a future task when other work must get an opportunity to run.
+
+## 3. Execution Mechanics: Jobs, Microtasks, Tasks, and Ordering
+
+### Terminology mapping
+
+The chapter introduces an ES6 **Job queue** as work that runs after the current
+event-loop item but before the next one. Promise reactions are the key example.
+That mental model remains useful, but the standards vocabulary spans two layers:
+
+| Common term | Standards-oriented term | Examples | Scheduling owner |
+| --- | --- | --- | --- |
+| Macrotask | Usually just **task** in the HTML Standard | initial script, timer callback, many dispatched events, I/O continuation | host event loop |
+| Microtask | microtask in HTML; often executes an ECMAScript Job | Promise reaction, `queueMicrotask()` callback, mutation observer notification | host/engine integration |
+| Job | abstract ECMAScript computation scheduled through a host hook | `PromiseReactionJob`, `PromiseResolveThenableJob` | ECMAScript semantics plus host scheduling |
+
+"Macrotask" is widespread explanatory vocabulary, but it is not the HTML
+Standard's formal counterpart to microtask. Prefer **task** when precision
+matters. Also avoid imagining a universal queue shared identically by every
+JavaScript host: browsers and Node.js integrate ECMAScript Jobs into different
+event-loop policies.
+
+### Browser checkpoint model
+
+For the common browser case, a useful execution algorithm is:
+
+```text
+1. Select one runnable task from a host task queue.
+2. Run that task's JavaScript until its stack is empty.
+3. Perform a microtask checkpoint:
+   a. dequeue the oldest microtask;
+   b. run it to completion;
+   c. repeat, including newly queued microtasks, until empty.
+4. Give the browser an opportunity for rendering and host bookkeeping.
+5. Select another runnable task.
+```
+
+This is why Promise reactions normally outrun timers that became eligible during
+the same script:
+
+```js
+console.log("A");
+
+setTimeout(() => console.log("B: timer task"), 0);
+
+Promise.resolve().then(() => {
+  console.log("C: promise microtask");
+  queueMicrotask(() => console.log("D: nested microtask"));
+});
+
+console.log("E");
+```
+
+Expected browser ordering:
+
+```text
+A
+E
+C: promise microtask
+D: nested microtask
+B: timer task
+```
+
+Reasoning:
+
+1. The initial script is the current task, so `A` and `E` are synchronous.
+2. `setTimeout()` asks the host to make a timer task eligible later.
+3. `.then()` queues a Promise reaction as a microtask.
+4. When the script stack empties, the browser drains the microtask queue.
+5. The first microtask appends another microtask; the same checkpoint continues
+   until both have run.
+6. Only then can the event loop select the timer task.
+
+```mermaid
+sequenceDiagram
+    participant T as Current task
+    participant M as Microtask queue
+    participant Q as Host task queues
+    T->>Q: register eligible timer task
+    T->>M: enqueue Promise reaction C
+    T->>T: finish synchronous script
+    M->>M: run C; enqueue D
+    M->>M: run D; queue becomes empty
+    Q->>T: select and run timer B
+```
+
+### Microtask recursion and starvation
+
+A microtask may enqueue another microtask. Because the checkpoint drains until
+the queue is empty, an unbounded chain can prevent the event loop from reaching
+the next task or rendering opportunity:
+
+```js
+function starve() {
+  queueMicrotask(starve);
+}
+
+starve();
+```
+
+This is asynchronous in the sense that each callback is deferred, but it is not
+cooperative yielding to other task sources. Use a task-scheduling mechanism when
+the objective is fairness to timers, input, I/O, or rendering.
+
+### Promise settlement is not handler execution
+
+A Promise may become fulfilled synchronously, while its reactions still execute
+asynchronously as Jobs/microtasks:
+
+```js
+const promise = Promise.resolve(42);
+let observed = false;
+
+promise.then(() => {
+  observed = true;
+});
+
+console.log(observed); // false
+```
+
+Calling `.then()` registers reactions. Even for an already-settled Promise, the
+reaction is not invoked inline in the current stack. This guaranteed deferral
+prevents the timing ambiguity (sometimes synchronous, sometimes asynchronous)
+that affects poorly designed callback APIs.
+
+### Node.js is similar, not identical
+
+Node.js embeds V8 and drives it through its own event-loop phases. It uses V8's
+microtask queue for Promise handlers and `queueMicrotask()`, and also maintains a
+separate **next-tick queue** for `process.nextTick()`.
+
+In a typical CommonJS turn, Node drains the next-tick queue before the V8
+microtask queue:
+
+```js
+process.nextTick(() => console.log("nextTick"));
+queueMicrotask(() => console.log("microtask"));
+Promise.resolve().then(() => console.log("promise"));
+```
+
+Typical CommonJS output:
+
+```text
+nextTick
+microtask
+promise
+```
+
+However, top-level ES modules are already evaluated through asynchronous module
+machinery, so examples that mix top-level ESM execution and `process.nextTick()`
+can order differently. The durable lessons are:
+
+- `process.nextTick()` is Node-specific and is not the Promise microtask queue;
+- recursive next-tick scheduling can starve both I/O phases and ordinary
+  microtasks;
+- `queueMicrotask()` is the portable choice when Promise-like microtask
+  semantics are intended;
+- browser task/microtask examples must not be copied into Node.js as if the two
+  hosts had identical scheduling algorithms.
+
+### V8's role in microtask execution
+
+V8 exposes a `MicrotaskQueue` integration API to embedders. Contexts can be
+associated with a queue, work can be enqueued, and the embedder can request a
+checkpoint. This illustrates the division of labor:
+
+```text
+ECMAScript specification
+  defines Promise Jobs and constraints such as run-to-completion
+        |
+        v
+V8 engine
+  implements Promises, execution contexts, and a microtask queue API
+        |
+        v
+Chromium or Node.js embedder
+  decides host event-loop integration and when checkpoints occur
+```
+
+It is therefore imprecise to say either "V8 owns the whole event loop" or "V8
+has nothing to do with scheduling." The host owns the platform event-loop
+policy, while V8 implements engine machinery and provides integration points
+used to run microtasks at host-defined checkpoints.
+
+### Statement ordering and compiler optimization
+
+Source order is the programmer-visible contract, but it is not necessarily the
+literal order of machine instructions emitted by an optimizing engine. Parsing,
+bytecode generation, just-in-time compilation, constant folding, dead-code
+elimination, inlining, register allocation, and instruction scheduling may
+transform the program.
+
+```js
+let a = 10;
+let b = 30;
+
+a = a + 1;
+b = b + 1;
+
+console.log(a + b); // 42
+```
+
+An optimizer may reason as though this were:
+
+```js
+console.log(42);
+```
+
+provided no program-observable behavior changes. This is the critical rule:
+**optimization may alter implementation order, but not ECMAScript-observable
+semantics**.
+
+The engine cannot freely cross operations with observable side effects:
+
+```js
+let a = 10;
+let b = 30;
+
+console.log(a * b); // must observe 300
+
+a++;
+b++;
+
+console.log(a + b); // must observe 42
+```
+
+Function calls, accessors, Proxies, exceptions, module bindings, and many other
+operations may be observable. An optimizer must either prove a transformation
+safe or preserve the required ordering. If application code can observe an
+illegal reorder, that is an engine bug; far more commonly, surprising output is
+caused by an application-level race or a misleading debugger/console view.
+
+Do not confuse these two forms of ordering:
+
+| Ordering question | Controlled by | Programmer-visible? |
+| --- | --- | --- |
+| Which callback/task/microtask runs next? | Host scheduling plus ECMAScript Job constraints | Yes |
+| Which optimized machine instruction runs first inside equivalent code? | Engine compiler/JIT | Not if the implementation is correct |
+
+### Topic 3 invariants
+
+1. A browser runs one selected task, then drains microtasks before selecting the
+   next task; rendering opportunities occur between these execution periods.
+2. Promise reactions and `queueMicrotask()` callbacks are microtasks; timers are
+   tasks, informally called macrotasks.
+3. Microtasks added during a checkpoint run in that checkpoint, so recursive
+   microtasks can starve tasks and rendering.
+4. Promise settlement and Promise reaction execution are separate events; a
+   registered reaction never runs inline with the current call stack.
+5. Node.js adds host-specific ordering, notably its next-tick queue.
+6. Engine optimizations may reorder internals only when the program cannot
+   observe a semantic difference.
