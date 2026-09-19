@@ -64,3 +64,21 @@ When we pass a callback to another function, we give that function control over 
 someLibrary(data, function callback(result) {
   // continuation
 });
+
+## 5. Callback Trust Issues
+
+A callback-based API can potentially cause several problems.
+
+The callback might:
+
+```text
+Never be called
+Be called too early
+Be called too late
+Be called more than once
+Receive incorrect data
+Fail to report errors
+
+analytics.trackPurchase(data, function () {
+  chargeCreditCard();
+});
