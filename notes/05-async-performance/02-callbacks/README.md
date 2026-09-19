@@ -40,3 +40,18 @@ doA()
 doC()
   ↓
 doB()
+
+## 3. Callback Hell
+
+Callback Hell is not simply about deeply nested callbacks.
+
+The deeper problem is that asynchronous control flow becomes difficult to understand and maintain.
+
+```js
+doA(function () {
+  doB(function () {
+    doC(function () {
+      doD();
+    });
+  });
+});
