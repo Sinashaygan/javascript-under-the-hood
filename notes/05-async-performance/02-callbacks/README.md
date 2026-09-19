@@ -82,3 +82,18 @@ Fail to report errors
 analytics.trackPurchase(data, function () {
   chargeCreditCard();
 });
+
+## 6. Protecting Against Multiple Calls
+
+One possible workaround is a **latch**:
+
+```js
+var called = false;
+
+someAsyncOperation(function () {
+  if (!called) {
+    called = true;
+
+    doSomething();
+  }
+});
