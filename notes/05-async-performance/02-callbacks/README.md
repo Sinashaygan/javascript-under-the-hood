@@ -97,3 +97,18 @@ someAsyncOperation(function () {
     doSomething();
   }
 });
+
+## 7. Success and Failure Callbacks
+
+A common pattern is to provide separate callbacks for success and failure.
+
+```js
+ajax(
+  "http://some.url",
+  function success(data) {
+    console.log(data);
+  },
+  function failure(err) {
+    console.error(err);
+  }
+);
