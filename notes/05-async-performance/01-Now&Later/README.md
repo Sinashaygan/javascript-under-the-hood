@@ -16,3 +16,27 @@ The key idea is:
 
 ```text
 Now → time gap → Later
+
+## 2. A Program in Chunks
+
+A JavaScript program can be thought of as a collection of chunks, most commonly functions.
+
+Some chunks execute immediately, while others are scheduled to execute later.
+
+Example:
+
+```js
+function now() {
+  return 21;
+}
+
+function later() {
+  answer = answer * 2;
+  console.log("Meaning of life:", answer);
+}
+
+var answer = now();
+
+setTimeout(later, 1000);
+```
+
