@@ -55,3 +55,12 @@ doA(function () {
     });
   });
 });
+
+## 4. Inversion of Control
+
+When we pass a callback to another function, we give that function control over **when and how** our callback will be executed.
+
+```js
+someLibrary(data, function callback(result) {
+  // continuation
+});
