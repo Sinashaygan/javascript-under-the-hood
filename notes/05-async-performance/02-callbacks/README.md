@@ -19,3 +19,24 @@ The callback does not execute immediately. The program continues, and the callba
 
 Key idea
 Current execution → Async operation → Callback / Continuation
+
+## 2. Sequential Thinking vs Asynchronous Flow
+
+Humans usually think about programs sequentially:
+
+```text
+A → B → C
+
+
+## 2. Sequential Thinking vs Asynchronous Flow
+
+Humans usually think about programs sequentially:
+
+```text
+A → B → C
+
+doA()
+  ↓
+doC()
+  ↓
+doB()
