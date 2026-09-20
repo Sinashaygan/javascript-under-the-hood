@@ -319,3 +319,41 @@ Promise.resolve(someValue)
 This is useful when working with values that may or may not already be Promises.
 
 ---
+
+## 12. Promise.reject()
+
+`Promise.reject()` creates an already-rejected Promise.
+
+```js
+const p = Promise.reject("Something went wrong");
+
+p.catch(error => {
+    console.error(error);
+});
+```
+
+It is useful when an API needs to return a rejected Promise immediately.
+
+---
+
+## 13. Thenables
+
+A **thenable** is an object that has a `then()` method.
+
+```js
+const thenable = {
+    then(resolve) {
+        resolve(42);
+    }
+};
+```
+
+Promise APIs can recognize thenables and adopt their eventual state.
+
+This is based on **duck typing**:
+
+> If an object behaves like a Promise, it can be treated as Promise-like.
+
+`Promise.resolve()` is commonly used to normalize thenables.
+
+---
