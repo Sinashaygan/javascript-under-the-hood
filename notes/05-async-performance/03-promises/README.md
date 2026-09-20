@@ -418,3 +418,89 @@ P2 ────┐   │
 `Promise.race()` does **not** cancel the losing Promises.
 
 ---
+
+## 16. Promise.all() vs Promise.race()
+
+### Promise.all()
+
+Use when you need **all operations** to complete.
+
+```js
+Promise.all([p1, p2, p3]);
+```
+
+Concept:
+
+```text
+Wait for ALL
+```
+
+### Promise.race()
+
+Use when you care about the **first operation to settle**.
+
+```js
+Promise.race([p1, p2, p3]);
+```
+
+Concept:
+
+```text
+First settled wins
+```
+
+---
+
+## 17. Multiple Observers
+
+A single Promise can have multiple observers.
+
+```js
+const p = fetchData();
+
+p.then(result => {
+    console.log("Observer 1:", result);
+});
+
+p.then(result => {
+    console.log("Observer 2:", result);
+});
+```
+
+Both observers can receive the same eventual result.
+
+This is different from chaining:
+
+```js
+p.then(first)
+ .then(second);
+```
+
+Here, `second` observes the Promise produced by `first`.
+
+---
+
+## 18. Promises and Asynchrony
+
+Promise callbacks are not invoked synchronously, even when the Promise is already fulfilled.
+
+```js
+const p = Promise.resolve(42);
+
+p.then(value => {
+    console.log(value);
+});
+
+console.log("After");
+```
+
+Output:
+
+```text
+After
+42
+```
+
+This provides predictable asynchronous behavior and prevents callbacks from unexpectedly executing too early.
+
+---
