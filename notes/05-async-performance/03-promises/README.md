@@ -357,3 +357,64 @@ This is based on **duck typing**:
 `Promise.resolve()` is commonly used to normalize thenables.
 
 ---
+
+## 14. Promise.all()
+
+`Promise.all()` waits for multiple Promises to fulfill.
+
+```js
+Promise.all([
+    fetchUsers(),
+    fetchPosts(),
+    fetchComments()
+])
+.then(([users, posts, comments]) => {
+    console.log(users);
+    console.log(posts);
+    console.log(comments);
+});
+```
+
+All Promises must fulfill.
+
+If any Promise rejects, the resulting Promise rejects.
+
+```text
+P1 ───┐
+P2 ───┼──→ Promise.all() → result
+P3 ───┘
+```
+
+The results are returned in the same order as the input Promises, not in the order they finish.
+
+---
+
+## 15. Promise.race()
+
+`Promise.race()` settles when the first Promise settles.
+
+```js
+Promise.race([
+    fetchData(),
+    timeout()
+])
+.then(result => {
+    console.log(result);
+})
+.catch(error => {
+    console.error(error);
+});
+```
+
+The first Promise to either fulfill or reject determines the result.
+
+```text
+P1 ────────┐
+           ├──→ Promise.race() → first settled result
+P2 ────┐   │
+       └───┘
+```
+
+`Promise.race()` does **not** cancel the losing Promises.
+
+---
