@@ -49,3 +49,31 @@ p.then(data => {
 The Promise acts as a placeholder for the future result.
 
 ---
+
+## 3. Promise States
+
+A Promise starts in the **pending** state.
+
+It can then transition to one of two final states:
+
+```text
+pending
+   |
+   +-- fulfilled
+   |
+   +-- rejected
+```
+
+Once a Promise has been fulfilled or rejected, its state cannot change again.
+
+```js
+const p = new Promise((resolve, reject) => {
+    resolve(42);
+
+    reject("Oops"); // ignored
+});
+```
+
+Only the first resolution matters.
+
+---
