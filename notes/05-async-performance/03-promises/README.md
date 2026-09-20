@@ -270,3 +270,52 @@ Promise.resolve(42)
 The returned Promise becomes rejected, allowing `.catch()` to handle the error.
 
 ---
+
+## 10. `.catch()`
+
+`.catch()` is used to handle Promise rejections.
+
+```js
+promise
+    .then(value => {
+        console.log(value);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+```
+
+Conceptually, `.catch()` is equivalent to:
+
+```js
+promise.then(null, error => {
+    console.error(error);
+});
+```
+
+Using `.catch()` at the end of a chain is a common way to handle errors from previous asynchronous steps.
+
+---
+
+## 11. Promise.resolve()
+
+`Promise.resolve()` creates or normalizes a Promise.
+
+```js
+const p = Promise.resolve(42);
+```
+
+This produces an already-fulfilled Promise.
+
+It can also normalize a Promise or thenable:
+
+```js
+Promise.resolve(someValue)
+    .then(value => {
+        console.log(value);
+    });
+```
+
+This is useful when working with values that may or may not already be Promises.
+
+---
