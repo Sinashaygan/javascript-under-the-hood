@@ -77,3 +77,37 @@ const p = new Promise((resolve, reject) => {
 Only the first resolution matters.
 
 ---
+
+## 4. Fulfillment and Rejection
+
+A Promise can represent both success and failure.
+
+```js
+const p = new Promise((resolve, reject) => {
+    if (success) {
+        resolve("Success!");
+    } else {
+        reject("Something went wrong");
+    }
+});
+```
+
+Fulfillment provides a value:
+
+```js
+p.then(value => {
+    console.log(value);
+});
+```
+
+Rejection provides a reason:
+
+```js
+p.catch(error => {
+    console.error(error);
+});
+```
+
+---
+
+    
