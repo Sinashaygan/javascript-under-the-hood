@@ -143,3 +143,34 @@ foo() → returns Promise → you control continuation
 Promises therefore provide more predictable composition and control.
 
 ---
+
+## 6. `.then()`
+
+The `.then()` method registers handlers for a Promise.
+
+```js
+promise.then(
+    value => {
+        console.log(value);
+    },
+    error => {
+        console.error(error);
+    }
+);
+```
+
+The first callback handles fulfillment.
+
+The second callback handles rejection.
+
+Most importantly, `.then()` returns a **new Promise**.
+
+```js
+const p2 = p1.then(value => {
+    return value * 2;
+});
+```
+
+This is what makes Promise chaining possible.
+
+---
