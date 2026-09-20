@@ -206,3 +206,67 @@ new Promise
 This creates a readable asynchronous flow.
 
 ---
+
+## 8. Returning Promises from `.then()`
+
+A critical rule is:
+
+> If a `.then()` handler returns a Promise, the next Promise waits for it.
+
+```js
+fetchUser()
+    .then(user => {
+        return fetchPosts(user.id);
+    })
+    .then(posts => {
+        console.log(posts);
+    });
+```
+
+The `return` is important.
+
+Without it:
+
+```js
+fetchUser()
+    .then(user => {
+        fetchPosts(user.id);
+    })
+    .then(posts => {
+        console.log(posts);
+    });
+```
+
+The second `.then()` does not wait for `fetchPosts()`.
+
+---
+
+## 9. Error Handling
+
+Promises provide structured error propagation.
+
+```js
+doSomething()
+    .then(result => {
+        return doNext(result);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+```
+
+If an error is thrown inside a `.then()` handler:
+
+```js
+Promise.resolve(42)
+    .then(value => {
+        throw new Error("Boom!");
+    })
+    .catch(error => {
+        console.error(error);
+    });
+```
+
+The returned Promise becomes rejected, allowing `.catch()` to handle the error.
+
+---
