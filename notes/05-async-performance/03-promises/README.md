@@ -28,3 +28,24 @@ Promise
 ```
 
 ---
+
+
+## 2. Future Values
+
+Synchronous JavaScript normally works with values that are available immediately.
+
+Asynchronous operations deal with values that will become available later.
+
+A Promise provides a way to work with these **future values** without manually managing when the value becomes available.
+
+```js
+const p = fetchData();
+
+p.then(data => {
+    console.log(data);
+});
+```
+
+The Promise acts as a placeholder for the future result.
+
+---
