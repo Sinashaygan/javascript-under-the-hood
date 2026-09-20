@@ -612,3 +612,107 @@ Important limitations include:
 Promises improve asynchronous programming, but they do not eliminate every problem related to async behavior.
 
 ---
+
+## 23. Key Promise Rules
+
+The most important rules to remember are:
+
+### Rule 1
+
+A Promise starts as:
+
+```text
+pending
+```
+
+and eventually becomes:
+
+```text
+fulfilled
+```
+
+or:
+
+```text
+rejected
+```
+
+### Rule 2
+
+A Promise can settle only once.
+
+### Rule 3
+
+`.then()` returns a new Promise.
+
+### Rule 4
+
+Returning a value from `.then()` fulfills the next Promise with that value.
+
+```js
+.then(value => {
+    return value * 2;
+});
+```
+
+### Rule 5
+
+Returning a Promise makes the next Promise wait for it.
+
+```js
+.then(value => {
+    return someAsyncOperation();
+});
+```
+
+### Rule 6
+
+Throwing an error causes the next Promise to reject.
+
+```js
+.then(() => {
+    throw new Error("Oops");
+});
+```
+
+### Rule 7
+
+`.catch()` handles rejected Promises.
+
+```js
+.catch(error => {
+    console.error(error);
+});
+```
+
+---
+
+## 24. Final Mental Model
+
+Promises provide an abstraction for managing **future values and asynchronous control flow**.
+
+```text
+Callback
+   ↓
+Inversion of Control
+   ↓
+Trust Problems
+   ↓
+Promise
+   ↓
+Future Value
+   ↓
+Fulfillment / Rejection
+   ↓
+.then()
+   ↓
+Promise Chain
+   ↓
+Promise.all() / Promise.race()
+```
+
+The key idea is:
+
+> A Promise represents a future value and provides a predictable way to compose asynchronous operations.
+
+Promises do not remove asynchronous behavior. Instead, they provide a cleaner and more reliable abstraction for controlling it.
