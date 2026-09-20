@@ -569,3 +569,46 @@ click → click → click → click
 For multiple future values or event streams, other abstractions such as Observables or Streams may be more appropriate.
 
 ---
+
+## 21. Promise Cancellation
+
+Promises themselves are not inherently cancelable.
+
+For example:
+
+```js
+const p = fetchData();
+
+Promise.race([
+    p,
+    timeout(3000)
+]);
+```
+
+If the timeout wins, the Promise returned by `race()` settles, but `fetchData()` may still continue running.
+
+```text
+fetchData() ───────────────→ still running
+timeout ─────→ winner
+```
+
+Cancellation therefore requires a separate mechanism, such as `AbortController` for APIs that support it.
+
+---
+
+## 22. Promise Limitations
+
+Promises solve many problems associated with callbacks, but they are not a universal solution.
+
+Important limitations include:
+
+* A Promise represents one eventual resolution.
+* Promises do not inherently support cancellation.
+* Promise chains can still contain poorly handled errors.
+* Converting callback-based APIs may require additional wrappers.
+* Promises have some runtime overhead.
+* Promises are not ideal for repeated event streams.
+
+Promises improve asynchronous programming, but they do not eliminate every problem related to async behavior.
+
+---
