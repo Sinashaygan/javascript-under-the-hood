@@ -16,8 +16,8 @@ The Promise represents the future result of the `fetch()` operation.
 
 A Promise can eventually become:
 
-* **fulfilled** with a value
-* **rejected** with a reason
+- **fulfilled** with a value
+- **rejected** with a reason
 
 ```text
 Promise
@@ -28,7 +28,6 @@ Promise
 ```
 
 ---
-
 
 ## 2. Future Values
 
@@ -41,8 +40,8 @@ A Promise provides a way to work with these **future values** without manually m
 ```js
 const p = fetchData();
 
-p.then(data => {
-    console.log(data);
+p.then((data) => {
+  console.log(data);
 });
 ```
 
@@ -68,9 +67,9 @@ Once a Promise has been fulfilled or rejected, its state cannot change again.
 
 ```js
 const p = new Promise((resolve, reject) => {
-    resolve(42);
+  resolve(42);
 
-    reject("Oops"); // ignored
+  reject("Oops"); // ignored
 });
 ```
 
@@ -84,30 +83,63 @@ A Promise can represent both success and failure.
 
 ```js
 const p = new Promise((resolve, reject) => {
-    if (success) {
-        resolve("Success!");
-    } else {
-        reject("Something went wrong");
-    }
+  if (success) {
+    resolve("Success!");
+  } else {
+    reject("Something went wrong");
+  }
 });
 ```
 
 Fulfillment provides a value:
 
 ```js
-p.then(value => {
-    console.log(value);
+p.then((value) => {
+  console.log(value);
 });
 ```
 
 Rejection provides a reason:
 
 ```js
-p.catch(error => {
-    console.error(error);
+p.catch((error) => {
+  console.error(error);
 });
 ```
 
 ---
 
-    
+## 5. Promises and Inversion of Control
+
+Callbacks can create **Inversion of Control**:
+
+```js
+foo(function (result) {
+    // continuation
+});
+```
+
+The `foo()` function controls when and how the callback is invoked.
+
+With Promises:
+
+```js
+foo()
+    .then(result => {
+        // continuation
+    });
+```
+
+The function returns a Promise, and the caller controls how the continuation is attached.
+
+```text
+Callback:
+You give control → foo()
+
+Promise:
+foo() → returns Promise → you control continuation
+```
+
+Promises therefore provide more predictable composition and control.
+
+---
