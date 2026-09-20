@@ -174,3 +174,35 @@ const p2 = p1.then(value => {
 This is what makes Promise chaining possible.
 
 ---
+
+## 7. Promise Chaining
+
+Promises can be chained to represent sequential asynchronous operations.
+
+```js
+fetchUser()
+    .then(user => {
+        return fetchPosts(user.id);
+    })
+    .then(posts => {
+        console.log(posts);
+    });
+```
+
+The result returned from one `.then()` becomes the fulfillment value of the next Promise.
+
+```text
+Promise
+   ↓
+then()
+   ↓
+new Promise
+   ↓
+then()
+   ↓
+new Promise
+```
+
+This creates a readable asynchronous flow.
+
+---
