@@ -504,3 +504,68 @@ After
 This provides predictable asynchronous behavior and prevents callbacks from unexpectedly executing too early.
 
 ---
+
+## 19. Promisifying Callback APIs
+
+Older APIs often use callbacks:
+
+```js
+someAsyncOperation((error, data) => {
+    if (error) {
+        // handle error
+    } else {
+        // use data
+    }
+});
+```
+
+Such APIs can be wrapped with Promises:
+
+```js
+function request(url) {
+    return new Promise((resolve, reject) => {
+        ajax(url, (error, data) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+```
+
+Now the API can be used with Promise chains:
+
+```js
+request("/users")
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+```
+
+This process is commonly called **promisifying**.
+
+---
+
+## 20. Promises Are Not Event Streams
+
+A Promise represents a single future resolution.
+
+```text
+Promise:
+future value → one resolution
+```
+
+It is not designed for repeated events:
+
+```text
+click → click → click → click
+```
+
+For multiple future values or event streams, other abstractions such as Observables or Streams may be more appropriate.
+
+---
