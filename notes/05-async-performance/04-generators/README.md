@@ -487,3 +487,71 @@ Promises support:
 * `Promise.race()`
 * Single settlement
 * Easier composition
+
+## 14. From Generators to async/await
+
+Generators introduced an important model for asynchronous programming:
+
+```text
+pause
+  ↓
+wait for async result
+  ↓
+resume
+```
+
+With a Generator:
+
+```js
+function* main() {
+  const user = yield getUser();
+
+  const posts = yield getPosts(user);
+
+  console.log(posts);
+}
+```
+
+Modern JavaScript uses `async/await`:
+
+```js
+async function main() {
+  const user = await getUser();
+
+  const posts = await getPosts(user);
+
+  console.log(posts);
+}
+```
+
+The syntax is different, and `async/await` is not simply a direct implementation of Generators, but the mental model of suspending asynchronous flow and resuming later is closely related.
+
+An `async` function always returns a Promise:
+
+```js
+async function foo() {
+  return 42;
+}
+
+foo().then(value => {
+  console.log(value);
+});
+```
+
+Output:
+
+```text
+42
+```
+
+The key conceptual progression is:
+
+```text
+Callbacks
+    ↓
+Promises
+    ↓
+Generators + Promises + Runner
+    ↓
+async/await
+```
