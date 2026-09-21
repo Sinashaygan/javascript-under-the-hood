@@ -329,3 +329,38 @@ function* bar() {
   console.log(result);
 }
 ```
+
+## 10. Generators and Asynchronous Programming
+
+Generators become especially interesting when combined with Promises.
+
+A Generator can yield a Promise and pause while the asynchronous operation is running.
+
+```js
+function* main() {
+  const user = yield getUser();
+
+  const posts = yield getPosts(user);
+
+  console.log(posts);
+}
+```
+
+Conceptually:
+
+```text
+Generator
+    │
+    │ yield Promise
+    ↓
+Pause
+    │
+    │ Promise resolves
+    ↓
+next(result)
+    │
+    ↓
+Generator resumes
+```
+
+The Generator itself does not automatically understand Promises. A separate runner is needed to coordinate the Generator and the asynchronous operations.
