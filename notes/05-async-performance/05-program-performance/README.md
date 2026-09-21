@@ -362,3 +362,54 @@ rather than written manually.
 
 Tools such as Emscripten can compile lower-level languages into
 asm.js-style JavaScript.
+
+## Review
+
+The main performance concepts from this chapter are:
+
+1. Asynchrony can improve performance by allowing independent work
+   to proceed concurrently.
+
+2. Asynchrony and parallelism are not the same thing.
+
+3. CPU-intensive work can block the main JavaScript thread.
+
+4. Web Workers allow work to run on separate threads.
+
+5. Workers communicate through postMessage() and message events.
+
+6. Workers do not share normal JavaScript scope or DOM resources.
+
+7. Structured Cloning copies data between execution contexts.
+
+8. Transferable Objects transfer ownership instead of copying
+   certain data.
+
+9. Shared Workers allow multiple pages or tabs to communicate
+   with a common Worker.
+
+10. SIMD provides data parallelism by applying one instruction to
+    multiple values.
+
+11. Web Workers provide task parallelism.
+
+12. asm.js is a highly optimizable JavaScript subset/style that
+    historically targeted low-level performance optimization.
+
+The key distinction is:
+
+Async Programming
+    ↓
+Concurrency
+
+Web Workers
+    ↓
+Task Parallelism
+
+SIMD
+    ↓
+Data Parallelism
+
+asm.js
+    ↓
+Low-level JavaScript Optimization
