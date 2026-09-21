@@ -49,3 +49,41 @@ A Worker is created with:
 const worker = new Worker("./worker.js");
 
 The Worker runs independently from the main program.
+
+## Worker Communication
+
+Workers do not share scope or resources with the main JavaScript
+program.
+
+Instead, they communicate through message passing.
+
+Main thread:
+
+worker.postMessage("Hello Worker");
+
+worker.addEventListener("message", (event) => {
+    console.log(event.data);
+});
+
+Worker:
+
+addEventListener("message", (event) => {
+    console.log(event.data);
+
+    postMessage("Hello Main Thread");
+});
+
+The communication model is symmetrical:
+
+Main Thread
+    │
+    │ postMessage()
+    ↓
+ Worker
+    │
+    │ postMessage()
+    ↓
+Main Thread
+
+This avoids the shared-memory problems commonly associated with
+traditional multithreaded programming.
