@@ -87,3 +87,43 @@ iterator.next();
 
 * `value` contains the yielded or returned value.
 * `done` indicates whether the Generator has finished.
+
+## 4. Two-Way Communication
+
+`yield` can send a value out of the Generator, while `next(value)` can send a value back into the Generator.
+
+```js
+function* foo() {
+  const name = yield "What is your name?";
+
+  console.log("Hello", name);
+}
+
+const iterator = foo();
+
+console.log(iterator.next());
+// { value: "What is your name?", done: false }
+
+iterator.next("Sina");
+// Hello Sina
+```
+
+The value passed to `next("Sina")` becomes the result of the paused `yield` expression.
+
+Conceptually:
+
+```text
+Generator
+    │
+    │ yield value
+    ↓
+Outside Code
+    │
+    │ next(value)
+    ↓
+Generator
+```
+
+The first `next()` normally starts the Generator. The value passed to the first `next()` is not received by a `yield`.
+
+---
