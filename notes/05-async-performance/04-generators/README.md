@@ -414,3 +414,41 @@ The runner:
 6. Repeats until `done` becomes `true`.
 
 For rejected Promises, a proper runner can use `throw()` to inject the error into the Generator.
+
+## 12. Generator Concurrency
+
+Generators can be used to coordinate multiple execution flows.
+
+However, yielding Promises sequentially does not make them concurrent:
+
+```js
+const a = yield request("/a");
+const b = yield request("/b");
+```
+
+The second request starts after the first one completes.
+
+To start operations concurrently:
+
+```js
+const p1 = request("/a");
+const p2 = request("/b");
+
+const results = yield Promise.all([
+  p1,
+  p2
+]);
+```
+
+Conceptually:
+
+```text
+request /a ───────┐
+                  ├── Promise.all()
+request /b ───────┘
+          │
+          ↓
+       results
+```
+
+Generators can also interleave multiple execution flows, creating a form of cooperative concurrency.
