@@ -225,3 +225,27 @@ Shared Worker:
 
 Both types provide the same general Worker execution model,
 but Shared Workers introduce connection management through ports.
+
+## Polyfilling Web Workers
+
+Web Workers are an API provided by the browser environment,
+not a JavaScript language feature.
+
+Because of this, parts of the Worker API can be polyfilled.
+
+However, a polyfill cannot truly reproduce multithreading.
+
+Timers such as:
+
+setTimeout(...)
+
+can simulate asynchronous behavior, but they do not create
+a real parallel execution thread.
+
+Therefore:
+
+Async simulation ≠ real parallelism
+
+A Worker polyfill may reproduce the API and messaging behavior,
+but it cannot provide the same performance benefits as a real
+multithreaded Worker.
