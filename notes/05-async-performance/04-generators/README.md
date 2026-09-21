@@ -206,3 +206,63 @@ next(value)     → Resume execution
 throw(error)    → Inject an error
 return(value)   → Terminate execution
 ```
+
+## 7. Generators as Iterators
+
+Generators produce Iterator objects.
+
+```js
+function* numbers() {
+  yield 10;
+  yield 20;
+  yield 30;
+}
+
+const iterator = numbers();
+
+iterator.next(); // 10
+iterator.next(); // 20
+iterator.next(); // 30
+```
+
+Generators can also be used with `for...of`.
+
+```js
+for (const number of numbers()) {
+  console.log(number);
+}
+```
+
+Output:
+
+```text
+10
+20
+30
+```
+
+Generators can produce values lazily, meaning values are generated only when requested.
+
+---
+
+## 8. Infinite Generators
+
+A Generator can produce values indefinitely.
+
+```js
+function* infinite() {
+  let i = 0;
+
+  while (true) {
+    yield i++;
+  }
+}
+
+const iterator = infinite();
+
+iterator.next().value; // 0
+iterator.next().value; // 1
+iterator.next().value; // 2
+```
+
+Because execution is paused at each `yield`, an infinite Generator does not continuously run.
