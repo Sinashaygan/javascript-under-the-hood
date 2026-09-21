@@ -127,3 +127,82 @@ Generator
 The first `next()` normally starts the Generator. The value passed to the first `next()` is not received by a `yield`.
 
 ---
+
+## 5. `throw()` — Injecting Errors
+
+The `throw()` method injects an error into the Generator at its current paused position.
+
+```js
+function* foo() {
+  try {
+    const value = yield "Waiting...";
+
+    console.log(value);
+  }
+  catch (error) {
+    console.log("Error:", error.message);
+  }
+}
+
+const iterator = foo();
+
+iterator.next();
+
+iterator.throw(new Error("Something went wrong"));
+```
+
+The error enters the Generator at the point where it was paused and can be handled with `try/catch`.
+
+---
+
+## 6. `return()` — Terminating a Generator
+
+The `return()` method immediately terminates a Generator.
+
+```js
+function* foo() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const iterator = foo();
+
+iterator.next();
+// { value: 1, done: false }
+
+iterator.return("Finished");
+// { value: "Finished", done: true }
+
+iterator.next();
+// { value: undefined, done: true }
+```
+
+`return()` can also trigger a `finally` block, making it useful for cleanup.
+
+```js
+function* foo() {
+  try {
+    yield 1;
+    yield 2;
+  }
+  finally {
+    console.log("Cleanup");
+  }
+}
+
+const iterator = foo();
+
+iterator.next();
+iterator.return();
+
+// Cleanup
+```
+
+The three important control operations are:
+
+```text
+next(value)     → Resume execution
+throw(error)    → Inject an error
+return(value)   → Terminate execution
+```
