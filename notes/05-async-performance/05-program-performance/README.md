@@ -306,3 +306,33 @@ apply more aggressive optimizations.
 It does not introduce a completely new programming language.
 Instead, it uses valid JavaScript syntax with specific patterns
 that engines can optimize.
+
+## asm.js Type Optimization
+
+JavaScript is dynamically typed, which means variables can contain
+values of different types.
+
+This can make optimization more difficult.
+
+asm.js-style code can provide type hints.
+
+For example:
+
+var a = 42;
+var b = a | 0;
+
+The:
+
+| 0
+
+operation forces the value to a 32-bit integer.
+
+Another example:
+
+(a + b) | 0
+
+This indicates that the result should be treated as a 32-bit
+integer.
+
+These patterns reduce the amount of type and coercion tracking
+the engine needs to perform.
