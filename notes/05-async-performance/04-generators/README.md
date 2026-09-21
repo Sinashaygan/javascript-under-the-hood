@@ -266,3 +266,66 @@ iterator.next().value; // 2
 ```
 
 Because execution is paused at each `yield`, an infinite Generator does not continuously run.
+
+## 9. Generator Delegation with `yield*`
+
+`yield*` delegates execution to another Generator or iterable.
+
+```js
+function* foo() {
+  yield "A";
+  yield "B";
+  yield "C";
+}
+
+function* bar() {
+  yield* foo();
+
+  yield "D";
+}
+```
+
+Using `bar()` produces:
+
+```text
+A
+B
+C
+D
+```
+
+Conceptually:
+
+```text
+bar()
+  │
+  ├── yield* foo()
+  │      ├── A
+  │      ├── B
+  │      └── C
+  │
+  └── D
+```
+
+`yield*` can also delegate to normal iterables:
+
+```js
+function* foo() {
+  yield* [1, 2, 3];
+}
+```
+
+The final return value of a delegated Generator can also be captured:
+
+```js
+function* foo() {
+  yield "A";
+  return "Finished";
+}
+
+function* bar() {
+  const result = yield* foo();
+
+  console.log(result);
+}
+```
