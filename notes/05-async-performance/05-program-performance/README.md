@@ -207,3 +207,21 @@ worker.port.start();
 
 Inside the Worker, the "connect" event provides the port associated
 with each connection.
+
+## Dedicated vs Shared Workers
+
+Dedicated Worker:
+
+- One-to-one relationship
+- Created for a specific page
+- Simpler communication model
+- Terminates when its initiating connection ends
+
+Shared Worker:
+
+- Can serve multiple pages or tabs
+- Uses ports for communication
+- Can remain alive while other connections still exist
+
+Both types provide the same general Worker execution model,
+but Shared Workers introduce connection management through ports.
