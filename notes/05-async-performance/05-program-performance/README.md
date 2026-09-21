@@ -285,3 +285,24 @@ SIMD → Data Parallelism
 SIMD is especially useful for data-intensive operations such as
 mathematical calculations, graphics, signal processing, and
 matrix operations.
+
+## asm.js
+
+asm.js is a highly optimizable subset and coding style of JavaScript.
+
+It was designed to make JavaScript easier for engines to optimize
+at a low level.
+
+The main idea was to avoid patterns that make optimization difficult,
+such as:
+
+- Excessive type changes
+- Dynamic coercion
+- Garbage collection pressure
+
+asm.js allows JavaScript engines to recognize predictable code and
+apply more aggressive optimizations.
+
+It does not introduce a completely new programming language.
+Instead, it uses valid JavaScript syntax with specific patterns
+that engines can optimize.
