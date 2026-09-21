@@ -170,3 +170,40 @@ The important distinction is:
 Structured Clone → Copy the data
 
 Transferable Object → Transfer ownership of the data
+
+## Shared Workers
+
+A Dedicated Worker belongs to a single page or program instance.
+
+A SharedWorker can instead be shared by multiple pages or tabs.
+
+Dedicated Workers:
+
+Tab A → Worker A
+Tab B → Worker B
+Tab C → Worker C
+
+Shared Worker:
+
+Tab A ─┐
+Tab B ─┼──→ Shared Worker
+Tab C ─┘
+
+Shared Workers can reduce duplicated resources and can be useful
+when multiple tabs need to communicate through a common Worker.
+
+Because multiple connections can exist, Shared Workers communicate
+through ports.
+
+Example:
+
+const worker = new SharedWorker("./worker.js");
+
+worker.port.postMessage("Hello");
+
+worker.port.addEventListener("message", handler);
+
+worker.port.start();
+
+Inside the Worker, the "connect" event provides the port associated
+with each connection.
