@@ -555,3 +555,71 @@ Generators + Promises + Runner
     ↓
 async/await
 ```
+
+## 15. Final Summary
+
+### Core Generator Concepts
+
+```js
+function* foo() {
+  yield 1;
+  yield 2;
+}
+```
+
+A Generator:
+
+* Can pause with `yield`.
+* Can resume with `next()`.
+* Produces an Iterator.
+* Can communicate values in both directions.
+* Can handle injected errors with `throw()`.
+* Can be terminated with `return()`.
+* Can delegate execution with `yield*`.
+* Can be used with `for...of`.
+* Can generate values lazily.
+
+### Generator Control Methods
+
+```text
+next()          → Resume
+next(value)     → Resume + send value
+throw(error)    → Inject error
+return(value)   → Terminate
+```
+
+### Async Generator Pattern
+
+```text
+Generator
+    ↓
+yield Promise
+    ↓
+Runner waits
+    ↓
+Promise resolves/rejects
+    ↓
+next(value) / throw(error)
+    ↓
+Generator resumes
+```
+
+### Most Important Mental Model
+
+The most important idea of this chapter is not memorizing Generator syntax.
+
+It is understanding **pause → wait → resume**:
+
+```text
+yield
+  ↓
+Pause
+  ↓
+Async operation
+  ↓
+Result
+  ↓
+Resume
+```
+
+This model is essential for understanding how modern asynchronous JavaScript evolved toward `async/await`.
