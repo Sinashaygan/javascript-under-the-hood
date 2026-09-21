@@ -113,3 +113,26 @@ importScripts("foo.js", "bar.js");
 
 importScripts() loads scripts synchronously inside the Worker,
 so the Worker waits until they have been loaded and executed.
+
+## Data Transfer
+
+Because Workers do not share memory with the main thread,
+data must be transferred between them.
+
+Older approaches serialized data into strings:
+
+JSON.stringify(data);
+JSON.parse(data);
+
+This introduced serialization overhead and required the data
+to be duplicated.
+
+Modern Workers can use the Structured Cloning Algorithm:
+
+worker.postMessage(data);
+
+Structured cloning creates a copy of the data in the receiving
+execution context.
+
+This avoids manual serialization but still requires additional
+memory because the data is duplicated.
