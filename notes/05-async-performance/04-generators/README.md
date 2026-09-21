@@ -452,3 +452,38 @@ request /b ───────┘
 ```
 
 Generators can also interleave multiple execution flows, creating a form of cooperative concurrency.
+
+## 13. Thunks
+
+A thunk is a function that postpones an operation until later.
+
+A simplified example:
+
+```js
+function thunk(callback) {
+  doSomethingAsync(callback);
+}
+```
+
+A Generator can yield a thunk:
+
+```js
+function* main() {
+  const result = yield thunk;
+
+  console.log(result);
+}
+```
+
+A runner can execute the thunk and resume the Generator when the callback completes.
+
+However, Promises provide stronger composition and error-handling guarantees than simple callback-based thunks.
+
+Promises support:
+
+* Chaining
+* Error propagation
+* `Promise.all()`
+* `Promise.race()`
+* Single settlement
+* Easier composition
