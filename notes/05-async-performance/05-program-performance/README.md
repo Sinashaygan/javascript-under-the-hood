@@ -87,3 +87,29 @@ Main Thread
 
 This avoids the shared-memory problems commonly associated with
 traditional multithreaded programming.
+
+## Worker Environment
+
+A Worker has its own JavaScript environment.
+
+It cannot directly access:
+
+- The main program's variables
+- The main program's scope
+- The page DOM
+- Other main-thread resources
+
+However, Workers can perform several useful operations such as:
+
+- Network requests
+- WebSockets
+- Timers
+- JSON operations
+- Accessing their own navigator and location objects
+
+Additional scripts can be loaded with:
+
+importScripts("foo.js", "bar.js");
+
+importScripts() loads scripts synchronously inside the Worker,
+so the Worker waits until they have been loaded and executed.
