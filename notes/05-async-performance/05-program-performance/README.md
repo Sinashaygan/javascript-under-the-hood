@@ -136,3 +136,37 @@ execution context.
 
 This avoids manual serialization but still requires additional
 memory because the data is duplicated.
+
+## Transferable Objects
+
+For large data sets, copying data can still be expensive.
+
+Transferable Objects provide another option.
+
+Instead of copying the data, ownership of the underlying data
+is transferred to the Worker.
+
+Example:
+
+const buffer = new ArrayBuffer(1024);
+
+worker.postMessage(buffer, [buffer]);
+
+The second argument specifies which objects should be transferred.
+
+After transferring ownership, the original context can no longer
+use the transferred data normally.
+
+This makes transferring large binary data much more efficient
+than copying it.
+
+Typed arrays such as Uint8Array can transfer their underlying
+ArrayBuffer:
+
+worker.postMessage(data.buffer, [data.buffer]);
+
+The important distinction is:
+
+Structured Clone → Copy the data
+
+Transferable Object → Transfer ownership of the data
