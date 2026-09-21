@@ -249,3 +249,39 @@ Async simulation ≠ real parallelism
 A Worker polyfill may reproduce the API and messaging behavior,
 but it cannot provide the same performance benefits as a real
 multithreaded Worker.
+
+## SIMD
+
+SIMD stands for:
+
+Single Instruction, Multiple Data
+
+SIMD is a form of data parallelism.
+
+Unlike Web Workers, which divide different tasks between threads,
+SIMD applies the same operation to multiple pieces of data at once.
+
+Example:
+
+Normal processing:
+
+1 × 2
+2 × 2
+3 × 2
+4 × 2
+
+SIMD concept:
+
+[1, 2, 3, 4] × 2
+        ↓
+[2, 4, 6, 8]
+
+The main difference is:
+
+Web Workers → Task Parallelism
+
+SIMD → Data Parallelism
+
+SIMD is especially useful for data-intensive operations such as
+mathematical calculations, graphics, signal processing, and
+matrix operations.
