@@ -364,3 +364,53 @@ Generator resumes
 ```
 
 The Generator itself does not automatically understand Promises. A separate runner is needed to coordinate the Generator and the asynchronous operations.
+
+## 11. Promise-Aware Generator Runner
+
+A runner can control a Generator and wait for yielded Promises.
+
+A simplified runner looks like this:
+
+```js
+function run(generator) {
+  const iterator = generator();
+
+  function step(value) {
+    const result = iterator.next(value);
+
+    if (result.done) {
+      return;
+    }
+
+    Promise.resolve(result.value)
+      .then(step);
+  }
+
+  step();
+}
+```
+
+Now asynchronous code can be written like this:
+
+```js
+function* main() {
+  const user = yield getUser();
+
+  const posts = yield getPosts(user);
+
+  console.log(posts);
+}
+
+run(main);
+```
+
+The runner:
+
+1. Starts the Generator.
+2. Receives the yielded Promise.
+3. Waits for the Promise.
+4. Passes the resolved value to `next()`.
+5. Resumes the Generator.
+6. Repeats until `done` becomes `true`.
+
+For rejected Promises, a proper runner can use `throw()` to inject the error into the Generator.
