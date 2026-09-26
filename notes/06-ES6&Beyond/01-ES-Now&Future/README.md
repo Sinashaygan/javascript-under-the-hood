@@ -154,3 +154,33 @@ if (!feature) {
 ```
 
 A polyfill normally checks whether the feature already exists before providing an alternative implementation.
+
+## 7. Transpiler vs Polyfill
+
+The key difference between a transpiler and a polyfill is what they solve.
+
+| Transpiler             | Polyfill                       |
+| ---------------------- | ------------------------------ |
+| Handles newer syntax   | Handles missing APIs           |
+| Transforms source code | Provides missing functionality |
+| `const`                | `Object.is()`                  |
+| Arrow functions        | New Array/Object APIs          |
+| Classes                | Other missing APIs             |
+
+In short:
+
+```text
+New Syntax
+    ↓
+Transpiler
+```
+
+while:
+
+```text
+Missing API
+    ↓
+Polyfill
+```
+
+Understanding this distinction is important when working with modern JavaScript and browser compatibility.
