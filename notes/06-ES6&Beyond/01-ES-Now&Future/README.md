@@ -90,3 +90,35 @@ Individual Features
        ↓
 Environment Support
 ```
+
+## 5. Transpilers
+
+A **transpiler** transforms newer JavaScript syntax into older syntax that can run in environments that do not understand the newer syntax.
+
+For example:
+
+```js
+const add = (a, b) => a + b;
+```
+
+can be transformed into something similar to:
+
+```js
+var add = function(a, b) {
+    return a + b;
+};
+```
+
+The general process is:
+
+```text
+Modern JavaScript Syntax
+          ↓
+       Transpiler
+          ↓
+Older JavaScript Syntax
+```
+
+Tools such as **Babel** can perform this type of transformation.
+
+Transpilers are mainly useful for dealing with newer language syntax.
