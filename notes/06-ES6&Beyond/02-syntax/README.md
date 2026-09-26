@@ -729,3 +729,49 @@ They can be retrieved with:
 ```js
 Object.getOwnPropertySymbols(user);
 ```
+
+## 19. Symbol Registry
+
+`Symbol.for()` uses the global symbol registry.
+
+```js
+const a = Symbol.for("foo");
+const b = Symbol.for("foo");
+
+console.log(a === b);
+// true
+```
+
+This differs from:
+
+```js
+Symbol("foo") === Symbol("foo");
+// false
+```
+
+The registry key can be retrieved using:
+
+```js
+Symbol.keyFor(a);
+// "foo"
+```
+
+JavaScript also provides built-in Symbols that define special language behaviors.
+
+One important example is:
+
+```js
+Symbol.iterator
+```
+
+It is closely related to iterables and the `for..of` loop.
+
+```text
+Iterable
+   ↓
+Symbol.iterator
+   ↓
+Iterator
+   ↓
+for..of
+```
