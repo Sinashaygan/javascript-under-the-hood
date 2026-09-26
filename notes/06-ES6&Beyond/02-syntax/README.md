@@ -221,3 +221,48 @@ const [a, , c] = [10, 20, 30];
 console.log(a); // 10
 console.log(c); // 30
 ```
+
+## 7. Destructuring Assignment
+
+Destructuring can also be used during assignment:
+
+```js
+let a, b;
+
+[a, b] = [10, 20];
+
+console.log(a); // 10
+console.log(b); // 20
+```
+
+It can also be used to swap values:
+
+```js
+let a = 10;
+let b = 20;
+
+[a, b] = [b, a];
+
+console.log(a); // 20
+console.log(b); // 10
+```
+
+### Rest with Destructuring
+
+Rest can collect the remaining values:
+
+```js
+const [first, ...rest] = [1, 2, 3, 4];
+
+console.log(first);
+// 1
+
+console.log(rest);
+// [2, 3, 4]
+```
+
+The same concept works with objects:
+
+```js
+const { name, ...otherInfo } = user;
+```
