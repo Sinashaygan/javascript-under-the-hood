@@ -775,3 +775,87 @@ Iterator
    ↓
 for..of
 ```
+
+# Key Takeaways
+
+The major ES6 syntax improvements introduced in this chapter include:
+
+```text
+let / const
+      ↓
+Block scoping
+
+Spread / Rest
+      ↓
+Expanding and collecting values
+
+Default Parameters
+      ↓
+Cleaner function defaults
+
+Destructuring
+      ↓
+Extracting values from objects and arrays
+
+Object Literal Enhancements
+      ↓
+Shorter and more expressive objects
+
+Template Literals
+      ↓
+Interpolation and multiline strings
+
+Arrow Functions
+      ↓
+Concise functions + lexical this
+
+for..of
+      ↓
+Iteration over iterable values
+
+RegExp u / y
+      ↓
+Unicode and sticky matching
+
+Symbols
+      ↓
+Unique primitive values and special object keys
+```
+
+## Important Distinctions
+
+```text
+var       → function scope
+let       → block scope
+const     → block scope + no reassignment
+
+Spread    → expands
+Rest      → collects
+
+for..in   → keys
+for..of   → values
+
+function  → dynamic this
+arrow     → lexical this
+
+Symbol()      → unique Symbol
+Symbol.for()  → registry-based Symbol
+```
+
+## Final Perspective
+
+ES6 did more than add new syntax. It introduced more direct ways to express common JavaScript patterns.
+
+The most important concepts to master from this chapter are:
+
+* `let` / `const`
+* Temporal Dead Zone
+* Spread / Rest
+* Default Parameters
+* Destructuring
+* Object Literal Enhancements
+* Template Literals
+* Arrow Functions and lexical `this`
+* `for..of`
+* Unicode-aware RegExp
+* Symbols
