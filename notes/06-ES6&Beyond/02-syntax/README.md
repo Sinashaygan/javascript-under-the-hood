@@ -171,3 +171,53 @@ foo(0);         // 0
 ```
 
 Falsy values such as `0`, `false`, `""`, and `null` do not trigger the default.
+
+## 6. Destructuring
+
+Destructuring provides a convenient way to extract values from objects and arrays.
+
+### Object Destructuring
+
+```js
+const user = {
+    name: "Sina",
+    age: 22
+};
+
+const { name, age } = user;
+
+console.log(name); // Sina
+console.log(age);  // 22
+```
+
+Properties can also be assigned to differently named variables:
+
+```js
+const { name: username } = user;
+
+console.log(username);
+// Sina
+```
+
+### Array Destructuring
+
+Array destructuring is based on position:
+
+```js
+const numbers = [10, 20, 30];
+
+const [a, b, c] = numbers;
+
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 30
+```
+
+Values can be skipped:
+
+```js
+const [a, , c] = [10, 20, 30];
+
+console.log(a); // 10
+console.log(c); // 30
+```
