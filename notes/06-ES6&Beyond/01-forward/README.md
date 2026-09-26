@@ -127,3 +127,35 @@ async / await
 Understanding these connections makes the new features much easier to learn.
 
 ---
+
+## 5. The Purpose of ES6 & Beyond
+
+The main purpose of this book is to understand **modern JavaScript at a deeper level**.
+
+It is not simply about becoming familiar with new keywords and syntax.
+
+The goal is to understand:
+
+```text
+New Syntax
+     +
+New Semantics
+     +
+New Capabilities
+     +
+Connection to Existing JavaScript
+```
+
+This mindset allows us to keep learning as JavaScript continues to evolve.
+
+---
+
+## Key Takeaways
+
+* ES6 introduced major changes to JavaScript.
+* ES6 is more than a collection of new syntax features.
+* Syntax describes how code is written, while semantics describe how it behaves.
+* JavaScript continues to evolve beyond ES6.
+* Understanding the reasoning and behavior behind features is more valuable than memorizing syntax.
+* New ES6 features are closely connected to existing JavaScript concepts.
+* The goal of YDKJS is **deep understanding of JavaScript**, not just practical usage.
