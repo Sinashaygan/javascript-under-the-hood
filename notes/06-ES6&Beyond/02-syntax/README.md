@@ -681,3 +681,51 @@ Character
 ```
 
 ES6 improves Unicode handling in several areas, including regular expressions through the `u` flag.
+
+## 18. Symbols
+
+`Symbol` is a new primitive type introduced in ES6.
+
+```js
+const id = Symbol("id");
+```
+
+Every call to `Symbol()` creates a unique value:
+
+```js
+const a = Symbol("foo");
+const b = Symbol("foo");
+
+console.log(a === b);
+// false
+```
+
+The string passed to `Symbol()` is only a description.
+
+### Symbols as Object Properties
+
+Symbols can be used as object property keys:
+
+```js
+const id = Symbol("id");
+
+const user = {
+    name: "Sina",
+    [id]: 123
+};
+
+console.log(user[id]);
+// 123
+```
+
+Symbol properties are not returned by normal `Object.keys()`:
+
+```js
+Object.keys(user);
+```
+
+They can be retrieved with:
+
+```js
+Object.getOwnPropertySymbols(user);
+```
