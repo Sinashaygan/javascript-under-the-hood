@@ -482,3 +482,41 @@ The tag function receives:
 Tagged templates can be used for custom formatting, localization, styling systems, and domain-specific syntax.
 
 Template strings also provide access to their raw representation through `strings.raw`.
+
+## 13. Arrow Functions
+
+Arrow functions provide a concise syntax for functions.
+
+```js
+const add = (a, b) => {
+    return a + b;
+};
+```
+
+If the function contains only one expression, the return can be implicit:
+
+```js
+const add = (a, b) => a + b;
+```
+
+With one parameter:
+
+```js
+const square = x => x * x;
+```
+
+Without parameters:
+
+```js
+const greet = () => {
+    console.log("Hello");
+};
+```
+
+When returning an object implicitly, parentheses are required:
+
+```js
+const getUser = () => ({
+    name: "Sina"
+});
+```
