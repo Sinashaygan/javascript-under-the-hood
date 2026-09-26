@@ -458,3 +458,27 @@ const message = `
     World
 `;
 ```
+
+## 12. Tagged Template Literals
+
+A template literal can be passed to a function as a tagged template.
+
+```js
+function tag(strings, ...values) {
+    console.log(strings);
+    console.log(values);
+}
+
+const name = "Sina";
+
+tag`Hello ${name}!`;
+```
+
+The tag function receives:
+
+* Static string portions
+* Interpolated values
+
+Tagged templates can be used for custom formatting, localization, styling systems, and domain-specific syntax.
+
+Template strings also provide access to their raw representation through `strings.raw`.
