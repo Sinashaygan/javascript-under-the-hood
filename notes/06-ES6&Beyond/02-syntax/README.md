@@ -598,3 +598,37 @@ for (const value of arr) {
 ```
 
 `for..of` works with iterable objects such as Arrays, Strings, Maps, Sets, and other iterable structures.
+
+## 16. Regular Expression Improvements
+
+ES6 adds two important regular expression flags:
+
+```text
+u → Unicode
+y → Sticky
+```
+
+### Unicode Flag
+
+```js
+/foo/u
+```
+
+The `u` flag enables Unicode-aware regular expression behavior.
+
+### Sticky Flag
+
+```js
+/foo/y
+```
+
+The `y` flag requires matching to begin at the regex's current `lastIndex`.
+
+Conceptually:
+
+```text
+/g → search forward for a match
+/y → match exactly at lastIndex
+```
+
+Sticky matching can be useful when processing structured input or building parsers.
