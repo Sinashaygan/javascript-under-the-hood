@@ -60,3 +60,23 @@ ES6 was a major milestone, but it was not the end of JavaScript's evolution.
 The book therefore focuses on **ES6 and beyond**, rather than treating ES6 as the final version of the language.
 
 ---
+
+## 3. Understanding, Not Memorization
+
+The YDKJS approach is focused on deep understanding.
+
+Instead of only asking:
+
+> "How do I use this feature?"
+
+we should also ask:
+
+* Why was this feature introduced?
+* What problem does it solve?
+* How does it actually work?
+* How is it different from older approaches?
+* How does it relate to JavaScript concepts we already know?
+
+This approach helps us understand JavaScript instead of simply memorizing its syntax.
+
+---
