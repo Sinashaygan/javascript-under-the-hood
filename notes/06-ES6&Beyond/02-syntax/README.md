@@ -143,3 +143,31 @@ Rest parameters must appear last:
 ```js
 function foo(a, b, ...rest) {}
 ```
+
+## 5. Default Parameters
+
+ES6 allows functions to define default parameter values.
+
+```js
+function foo(x = 10, y = 20) {
+    console.log(x + y);
+}
+
+foo();       // 30
+foo(5);      // 25
+foo(5, 6);   // 11
+```
+
+Default parameters are used when the argument is `undefined`.
+
+```js
+function foo(x = 10) {
+    console.log(x);
+}
+
+foo(undefined); // 10
+foo(null);      // null
+foo(0);         // 0
+```
+
+Falsy values such as `0`, `false`, `""`, and `null` do not trigger the default.
