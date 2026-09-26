@@ -184,3 +184,24 @@ Polyfill
 ```
 
 Understanding this distinction is important when working with modern JavaScript and browser compatibility.
+
+## 8. Syntax Cannot Simply Be Polyfilled
+
+Polyfills work at runtime, but JavaScript syntax must first be understood by the engine's parser.
+
+For example:
+
+```js
+const x = 10;
+```
+
+If an old JavaScript engine cannot parse `const`, a runtime polyfill cannot simply teach its parser to understand it.
+
+Therefore:
+
+```text
+New Syntax → Transpilation
+New API    → Polyfill
+```
+
+This is one of the most important distinctions in JavaScript compatibility.
