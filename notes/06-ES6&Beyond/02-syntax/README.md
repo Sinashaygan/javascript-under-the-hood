@@ -316,3 +316,72 @@ function UserCard({ name, age }) {
     return `${name} - ${age}`;
 }
 ```
+
+## 9. Object Literal Extensions
+
+ES6 makes object literals shorter and more expressive.
+
+### Concise Properties
+
+Instead of:
+
+```js
+const name = "Sina";
+const age = 22;
+
+const user = {
+    name: name,
+    age: age
+};
+```
+
+We can write:
+
+```js
+const user = {
+    name,
+    age
+};
+```
+
+### Concise Methods
+
+Instead of:
+
+```js
+const user = {
+    sayHello: function() {
+        console.log("Hello");
+    }
+};
+```
+
+We can write:
+
+```js
+const user = {
+    sayHello() {
+        console.log("Hello");
+    }
+};
+```
+
+### Computed Property Names
+
+Property names can be generated dynamically:
+
+```js
+const prop = "name";
+
+const user = {
+    [prop]: "Sina"
+};
+```
+
+Result:
+
+```js
+{
+    name: "Sina"
+}
+```
