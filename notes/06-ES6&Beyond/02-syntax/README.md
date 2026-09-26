@@ -266,3 +266,53 @@ The same concept works with objects:
 ```js
 const { name, ...otherInfo } = user;
 ```
+
+## 8. Nested Destructuring and Parameters
+
+Destructuring can be nested.
+
+```js
+const user = {
+    name: "Sina",
+    address: {
+        city: "Baku",
+        country: "Azerbaijan"
+    }
+};
+
+const {
+    address: {
+        city,
+        country
+    }
+} = user;
+```
+
+Now:
+
+```js
+console.log(city);
+console.log(country);
+```
+
+Destructuring can also be used directly in function parameters:
+
+```js
+function printUser({ name, age }) {
+    console.log(name);
+    console.log(age);
+}
+
+printUser({
+    name: "Sina",
+    age: 22
+});
+```
+
+This pattern is especially common in modern React components:
+
+```js
+function UserCard({ name, age }) {
+    return `${name} - ${age}`;
+}
+```
