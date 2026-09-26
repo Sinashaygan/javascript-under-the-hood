@@ -422,3 +422,39 @@ const child = {
 
 child.hello();
 ```
+
+## 11. Template Literals
+
+Template literals use backticks:
+
+```js
+const name = "Sina";
+
+const message = `Hello ${name}!`;
+```
+
+They provide:
+
+* String interpolation
+* Multiline strings
+* Expression evaluation
+* Tagged templates
+
+Expressions can be placed inside `${...}`:
+
+```js
+const a = 10;
+const b = 20;
+
+console.log(`Sum: ${a + b}`);
+// Sum: 30
+```
+
+Multiline strings are also supported:
+
+```js
+const message = `
+    Hello
+    World
+`;
+```
