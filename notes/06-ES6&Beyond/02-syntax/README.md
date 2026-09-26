@@ -632,3 +632,52 @@ Conceptually:
 ```
 
 Sticky matching can be useful when processing structured input or building parsers.
+
+## 17. Number Literal Extensions
+
+ES6 introduces binary and octal literal syntax.
+
+### Binary
+
+```js
+const binary = 0b1010;
+
+console.log(binary);
+// 10
+```
+
+### Octal
+
+```js
+const octal = 0o755;
+```
+
+Hexadecimal literals continue to use:
+
+```js
+const hex = 0xFF;
+```
+
+---
+
+## Unicode
+
+JavaScript strings are based on UTF-16 code units.
+
+This means the number returned by:
+
+```js
+"😀".length
+```
+
+does not necessarily represent the number of human-perceived characters.
+
+It is important to distinguish between:
+
+```text
+Code unit
+Code point
+Character
+```
+
+ES6 improves Unicode handling in several areas, including regular expressions through the `u` flag.
