@@ -205,3 +205,21 @@ New API    → Polyfill
 ```
 
 This is one of the most important distinctions in JavaScript compatibility.
+
+## 9. Shims
+
+**Shims** and **polyfills** are closely related concepts.
+
+They provide compatibility layers or alternative implementations that allow newer functionality to work in environments that do not natively support it.
+
+The general idea is:
+
+```text
+New Feature
+     ↓
+Compatibility Layer
+     ↓
+Older Environment
+```
+
+The goal is to provide compatibility without requiring the environment itself to natively implement the feature.
