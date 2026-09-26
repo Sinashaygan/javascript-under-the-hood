@@ -92,3 +92,54 @@ console.log(i); // ReferenceError
 This prevents the loop variable from leaking into the surrounding scope.
 
 `let` also provides the expected behavior when closures are created inside loops because each iteration can have its own binding.
+
+## 4. Spread and Rest
+
+The `...` syntax has two different meanings depending on its position.
+
+### Spread
+
+Spread expands an iterable into individual values.
+
+```js
+const numbers = [2, 3, 4];
+
+const result = [1, ...numbers, 5];
+
+console.log(result);
+// [1, 2, 3, 4, 5]
+```
+
+It can also be used when passing function arguments:
+
+```js
+const values = [1, 2, 3];
+
+Math.max(...values);
+```
+
+### Rest
+
+Rest collects multiple values into an array.
+
+```js
+function foo(...args) {
+    console.log(args);
+}
+
+foo(1, 2, 3);
+// [1, 2, 3]
+```
+
+The key distinction is:
+
+```text
+Spread → expands values
+Rest   → collects values
+```
+
+Rest parameters must appear last:
+
+```js
+function foo(a, b, ...rest) {}
+```
