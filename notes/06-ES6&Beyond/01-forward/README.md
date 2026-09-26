@@ -39,3 +39,24 @@ user.name = "Ali"; // Allowed
 ```
 
 ---
+
+
+## 2. JavaScript Is Continuously Evolving
+
+JavaScript is not a static language. It continues to evolve through new versions of ECMAScript.
+
+```text
+ES5
+ ↓
+ES6 / ES2015
+ ↓
+ES2016+
+ ↓
+Modern JavaScript
+```
+
+ES6 was a major milestone, but it was not the end of JavaScript's evolution.
+
+The book therefore focuses on **ES6 and beyond**, rather than treating ES6 as the final version of the language.
+
+---
