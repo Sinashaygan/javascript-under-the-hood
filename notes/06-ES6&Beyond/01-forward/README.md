@@ -80,3 +80,50 @@ we should also ask:
 This approach helps us understand JavaScript instead of simply memorizing its syntax.
 
 ---
+
+
+## 4. Connecting New Features to Existing Concepts
+
+Many ES6 features build upon concepts that already exist in JavaScript.
+
+### Scope
+
+```text
+Scope
+  ↓
+let / const
+  ↓
+Block Scope
+```
+
+### `this`
+
+```text
+this
+  ↓
+Arrow Functions
+  ↓
+Lexical `this`
+```
+
+### Prototypes
+
+```text
+Prototypes
+  ↓
+class
+  ↓
+extends / super
+```
+
+### Asynchronous JavaScript
+
+```text
+Promises
+  ↓
+async / await
+```
+
+Understanding these connections makes the new features much easier to learn.
+
+---
