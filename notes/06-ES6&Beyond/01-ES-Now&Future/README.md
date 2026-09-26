@@ -122,3 +122,35 @@ Older JavaScript Syntax
 Tools such as **Babel** can perform this type of transformation.
 
 Transpilers are mainly useful for dealing with newer language syntax.
+
+## 6. Polyfills
+
+A **polyfill** provides an implementation of a newer API when the current JavaScript environment does not support it.
+
+For example:
+
+```js
+if (!Object.is) {
+    Object.is = function(v1, v2) {
+        if (v1 === 0 && v2 === 0) {
+            return 1 / v1 === 1 / v2;
+        }
+
+        if (v1 !== v1) {
+            return v2 !== v2;
+        }
+
+        return v1 === v2;
+    };
+}
+```
+
+The general pattern is:
+
+```js
+if (!feature) {
+    // provide a fallback
+}
+```
+
+A polyfill normally checks whether the feature already exists before providing an alternative implementation.
