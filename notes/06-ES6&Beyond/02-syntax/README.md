@@ -545,3 +545,56 @@ Arrow functions are therefore not simply shorter versions of normal functions.
 Normal function → dynamic `this`
 Arrow function  → lexical `this`
 ```
+
+## 15. `for..of`
+
+ES6 introduces `for..of` for iterating over iterable values.
+
+```js
+const numbers = [10, 20, 30];
+
+for (const number of numbers) {
+    console.log(number);
+}
+```
+
+Output:
+
+```text
+10
+20
+30
+```
+
+### `for..in` vs `for..of`
+
+```text
+for..in → property keys
+for..of → iterable values
+```
+
+Example:
+
+```js
+const arr = ["a", "b", "c"];
+
+for (const key in arr) {
+    console.log(key);
+}
+
+// 0
+// 1
+// 2
+```
+
+```js
+for (const value of arr) {
+    console.log(value);
+}
+
+// a
+// b
+// c
+```
+
+`for..of` works with iterable objects such as Arrays, Strings, Maps, Sets, and other iterable structures.
