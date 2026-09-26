@@ -36,3 +36,26 @@ Proxy
 ```
 
 ES6 was therefore much more than a collection of new APIs. It introduced significant changes to JavaScript syntax and the way developers structure their programs.
+
+## 3. JavaScript Is Continuously Evolving
+
+JavaScript should not be viewed as a language that receives a completely new version every few years.
+
+Instead, JavaScript continuously evolves by adding new features.
+
+Rather than thinking only in terms of:
+
+```text
+ES6 → ES7 → ES8 → ...
+```
+
+it is more useful to think about individual language features:
+
+```text
+Feature A
+Feature B
+Feature C
+Feature D
+```
+
+Each feature can have different levels of support across browsers and JavaScript environments.
