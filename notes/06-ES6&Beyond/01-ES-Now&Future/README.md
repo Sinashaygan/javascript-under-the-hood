@@ -59,3 +59,34 @@ Feature D
 ```
 
 Each feature can have different levels of support across browsers and JavaScript environments.
+
+## 4. Feature-Based Thinking
+
+Instead of simply saying:
+
+> "My project uses ES6."
+
+it is better to understand exactly which JavaScript features the project uses and whether the target environment supports them.
+
+For example:
+
+```text
+let
+const
+arrow functions
+Promises
+async/await
+modules
+```
+
+Each feature should be considered independently in terms of environment support.
+
+The important mindset is:
+
+```text
+JavaScript Version
+       ↓
+Individual Features
+       ↓
+Environment Support
+```
