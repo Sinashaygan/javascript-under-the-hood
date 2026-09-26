@@ -223,3 +223,36 @@ Older Environment
 ```
 
 The goal is to provide compatibility without requiring the environment itself to natively implement the feature.
+
+## 10. Main Idea of the Chapter
+
+The main lesson of this chapter is that modern JavaScript development should not be based only on version numbers.
+
+Instead of thinking:
+
+```text
+"I use ES6."
+```
+
+think:
+
+```text
+"What JavaScript features am I using?"
+"Which environments support them?"
+"Do I need transpilation?"
+"Do I need polyfills?"
+```
+
+Modern JavaScript development can combine:
+
+```text
+Modern JavaScript
+       ↓
+Transpilation
+       +
+Polyfills
+       ↓
+Compatible Environment
+```
+
+This approach allows developers to use modern JavaScript features while maintaining compatibility with environments that may not support every feature natively.
