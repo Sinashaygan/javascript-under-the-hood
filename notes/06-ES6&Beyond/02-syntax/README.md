@@ -385,3 +385,40 @@ Result:
     name: "Sina"
 }
 ```
+
+## 10. `super` and Prototype Syntax
+
+ES6 provides improved syntax for working with prototypes and `super`.
+
+```js
+const parent = {
+    foo() {
+        console.log("parent");
+    }
+};
+
+const child = {
+    foo() {
+        super.foo();
+        console.log("child");
+    }
+};
+```
+
+`super` allows a method to access functionality from its prototype.
+
+ES6 also provides object literal syntax for setting a prototype:
+
+```js
+const parent = {
+    hello() {
+        console.log("Hello");
+    }
+};
+
+const child = {
+    __proto__: parent
+};
+
+child.hello();
+```
