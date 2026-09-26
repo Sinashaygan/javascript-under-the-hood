@@ -520,3 +520,28 @@ const getUser = () => ({
     name: "Sina"
 });
 ```
+
+## 14. Lexical `this` in Arrow Functions
+
+Arrow functions do not create their own `this`.
+
+Instead, they capture `this` from their surrounding lexical scope.
+
+```js
+function Timer() {
+    this.seconds = 0;
+
+    setInterval(() => {
+        this.seconds++;
+    }, 1000);
+}
+```
+
+This makes arrow functions particularly useful for callbacks where the surrounding `this` should be preserved.
+
+Arrow functions are therefore not simply shorter versions of normal functions.
+
+```text
+Normal function → dynamic `this`
+Arrow function  → lexical `this`
+```
