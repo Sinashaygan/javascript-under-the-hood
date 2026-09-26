@@ -54,3 +54,25 @@ user.name = "Ali"; // Allowed
 ```
 
 The reference cannot be reassigned, but the object's contents can still be mutated.
+
+## 2. Temporal Dead Zone (TDZ)
+
+`let` and `const` declarations are not accessible before their declaration is evaluated.
+
+```js
+console.log(a); // ReferenceError
+
+let a = 10;
+```
+
+This period between entering the scope and reaching the declaration is called the **Temporal Dead Zone**.
+
+Unlike `var`:
+
+```js
+console.log(a); // undefined
+
+var a = 10;
+```
+
+The TDZ helps prevent accidental access to variables before they are initialized.
