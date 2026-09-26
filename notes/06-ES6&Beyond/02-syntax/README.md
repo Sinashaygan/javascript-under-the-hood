@@ -76,3 +76,19 @@ var a = 10;
 ```
 
 The TDZ helps prevent accidental access to variables before they are initialized.
+
+## 3. `let` in Loops
+
+`let` is especially useful in loops because the variable belongs to the loop's block scope.
+
+```js
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+
+console.log(i); // ReferenceError
+```
+
+This prevents the loop variable from leaking into the surrounding scope.
+
+`let` also provides the expected behavior when closures are created inside loops because each iteration can have its own binding.
