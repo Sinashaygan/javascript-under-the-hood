@@ -140,3 +140,28 @@ some()       → true / false
 find()       → matching value
 findIndex()  → matching index
 ```
+
+## Array Iterators
+
+ES6 provides several Array iterator methods:
+
+```js
+const arr = [10, 20, 30];
+
+[...arr.keys()];
+// [0, 1, 2]
+
+[...arr.values()];
+// [10, 20, 30]
+
+[...arr.entries()];
+// [[0, 10], [1, 20], [2, 30]]
+```
+
+The default Array iterator is the `values()` iterator:
+
+```js
+arr[Symbol.iterator]();
+```
+
+These methods connect Arrays directly with the ES6 Iterator protocol.
