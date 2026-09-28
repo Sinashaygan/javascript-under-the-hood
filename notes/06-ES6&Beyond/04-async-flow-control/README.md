@@ -658,3 +658,32 @@ entries()
 ```
 
 It is also not iterable.
+
+# Collection Comparison
+
+| Collection   | Main Purpose               | Object Keys/Values | Weak References | Iterable |
+| ------------ | -------------------------- | -----------------: | --------------: | -------: |
+| `Array`      | Ordered list               |                Yes |              No |      Yes |
+| `TypedArray` | Binary data                |                Yes |              No |      Yes |
+| `Map`        | Key/value pairs            |                Yes |              No |      Yes |
+| `WeakMap`    | Object → value association |          Keys only |             Yes |       No |
+| `Set`        | Unique values              |                Yes |              No |      Yes |
+| `WeakSet`    | Unique objects             |       Objects only |             Yes |       No |
+
+## Mental Model
+
+```text
+                    Collections
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+        ▼                ▼                ▼
+   TypedArray           Map              Set
+        │                │                │
+ Binary Data        key → value       unique values
+        │                │                │
+        ▼                ▼                ▼
+   ArrayBuffer       WeakMap          WeakSet
+        │                │                │
+      Views        weak object keys   weak objects
+```
