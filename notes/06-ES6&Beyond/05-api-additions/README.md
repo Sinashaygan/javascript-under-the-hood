@@ -232,3 +232,42 @@ child.hello();
 Property lookup can continue through the prototype chain.
 
 Changing prototypes after objects are already heavily used can have performance implications, so this API should be used carefully.
+
+## Object.assign()
+
+`Object.assign()` copies own enumerable properties from one or more source objects into a target object.
+
+```js
+const target = {};
+
+Object.assign(
+    target,
+    { name: "Sina" },
+    { age: 20 }
+);
+
+console.log(target);
+// { name: "Sina", age: 20 }
+```
+
+If multiple sources contain the same property, later sources overwrite earlier ones.
+
+```js
+Object.assign(
+    {},
+    { name: "Sina" },
+    { name: "Ali" }
+);
+
+// { name: "Ali" }
+```
+
+`Object.assign()` copies:
+
+```text
+Own properties
++
+Enumerable properties
+```
+
+It does not copy inherited or non-enumerable properties.
