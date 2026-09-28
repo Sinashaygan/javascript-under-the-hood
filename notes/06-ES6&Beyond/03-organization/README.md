@@ -125,3 +125,7 @@ console.log(count); // 0
 Imports are live, read-only bindings: exporter updates remain visible, but importers cannot reassign them. Exported objects may still be mutable. Cyclic dependencies are supported, although reading an uninitialized binding can fail.
 
 `export default count` captures an expression value; `export { count as default }` exposes the live variable binding.
+
+## 13. Module Loading
+
+Hosts resolve specifiers and load dependencies; static syntax describes the dependency graph. Within a module graph, consumers share an evaluated module instance. The chapter's `Reflect.Loader` discussion describes historical proposals, not a standardized ES6 API.
