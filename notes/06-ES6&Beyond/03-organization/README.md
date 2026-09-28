@@ -27,3 +27,17 @@ for (const color of colors) console.log(color);
 ## 3. Custom Iterators and Cleanup
 
 Custom iterators can preserve state in closures and organize values or tasks. Returning `this` from `[Symbol.iterator]()` makes an iterator iterable. Optional `return()` supports cleanup when consumers stop early; `throw()` signals errors.
+
+## 4. Generator Functions
+
+Calling `function*` creates an iterable iterator without executing its body. `next()` starts or resumes execution; `yield` pauses it. Each call creates independent execution state.
+
+```js
+function* stages() {
+    yield "draft";
+    yield "review";
+    return "complete";
+}
+const workflow = stages();
+workflow.next(); // { value: "draft", done: false }
+```
