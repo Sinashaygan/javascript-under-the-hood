@@ -119,3 +119,9 @@ console.log(count, counter.count); // 1 1
 reset();
 console.log(count); // 0
 ```
+
+## 12. Live Bindings and Cycles
+
+Imports are live, read-only bindings: exporter updates remain visible, but importers cannot reassign them. Exported objects may still be mutable. Cyclic dependencies are supported, although reading an uninitialized binding can fail.
+
+`export default count` captures an expression value; `export { count as default }` exposes the live variable binding.
