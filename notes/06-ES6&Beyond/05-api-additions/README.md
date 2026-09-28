@@ -460,3 +460,43 @@ Number.isSafeInteger(42);
 Number.isSafeInteger(Math.pow(2, 53));
 // false
 ```
+
+## Unicode APIs
+
+ES6 improved Unicode support with:
+
+```js
+String.fromCodePoint()
+String.prototype.codePointAt()
+String.prototype.normalize()
+```
+
+### fromCodePoint()
+
+Creates a String from a Unicode code point.
+
+```js
+String.fromCodePoint(0x1D49E);
+```
+
+### codePointAt()
+
+Returns the Unicode code point at a specific position.
+
+```js
+"𝒞".codePointAt(0);
+// 119966
+```
+
+### normalize()
+
+Normalizes Unicode strings into a standard representation.
+
+Common normalization forms include:
+
+```text
+NFC
+NFD
+NFKC
+NFKD
+```
