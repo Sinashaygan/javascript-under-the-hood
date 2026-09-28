@@ -90,3 +90,7 @@ for (const value of guarded()) break; // logs "cleanup"
 ## 8. Generator Uses and Transpilation
 
 Generators simplify lazy sequences and stepwise execution. Asynchronous workflows require a runner to coordinate yielded operations. Older targets can use a transpiler that converts generator execution into a state machine.
+
+## 9. Modules and Earlier Patterns
+
+Closure-based factories hide state and expose an API. CommonJS uses `require()` and `module.exports`. ES6 introduces explicit module syntax, private module scope, strict mode, and statically discoverable dependencies.
