@@ -159,3 +159,48 @@ new Uint8Array(buffer, byteOffset, length);
 ```
 
 This allows a view to start at a specific byte offset and cover only part of the buffer.
+
+## 4. TypedArray Constructors
+
+TypedArrays support several construction forms.
+
+### Create from length
+
+```js
+const a = new Uint8Array(4);
+```
+
+### Create from another TypedArray
+
+```js
+const a = new Uint8Array([10, 20, 30]);
+
+const b = new Uint8Array(a);
+```
+
+The contents are copied into a new buffer.
+
+### Create from an array
+
+```js
+const a = new Uint8Array([10, 20, 30]);
+```
+
+TypedArrays have fixed length and their values are constrained by their declared representation.
+
+They share many methods with regular arrays:
+
+```js
+a.map(...);
+a.join(...);
+```
+
+However, methods that change the length such as:
+
+```text
+push()
+pop()
+splice()
+```
+
+are not generally applicable.
