@@ -561,3 +561,46 @@ const unique = [...new Set(numbers)];
 console.log(unique);
 // [1, 2, 3, 4]
 ```
+
+## 11. Set Iterators
+
+Set provides:
+
+```js
+set.keys();
+set.values();
+set.entries();
+```
+
+Unlike Map, `keys()` and `values()` return the same values:
+
+```js
+const s = new Set(["a", "b"]);
+
+console.log([...s.keys()]);
+// ["a", "b"]
+
+console.log([...s.values()]);
+// ["a", "b"]
+```
+
+`entries()` returns pairs where both elements are the same:
+
+```js
+console.log([...s.entries()]);
+// [["a", "a"], ["b", "b"]]
+```
+
+The default iterator of Set is `values()`.
+
+Therefore:
+
+```js
+[...s]
+```
+
+is equivalent to:
+
+```js
+[...s.values()]
+```
