@@ -182,3 +182,26 @@ const doubled = scores.map(value => value * 2);
 doubled instanceof Scores; // false
 doubled instanceof Array;  // true
 ```
+
+## 18. Static Methods and Review
+
+Static methods belong to constructors, are inherited by subclasses, and are unavailable directly on instances.
+
+```js
+class LabelFactory extends Label {
+    static create(text) { return new this(text); }
+}
+LabelFactory.create("ready").describe(); // "ready"
+```
+
+- Iterators standardize sequential consumption.
+- Generators preserve execution between steps.
+- Modules define boundaries and dependencies.
+- Classes organize behavior through prototype delegation.
+
+### References
+
+- [Chapter 3: Organization](https://ydkj-doc.vercel.app/es6_&_beyond/ch3)
+- [ECMAScript: iteration and generators](https://tc39.es/ecma262/multipage/control-abstraction-objects.html)
+- [ECMAScript: scripts and modules](https://tc39.es/ecma262/multipage/ecmascript-language-scripts-and-modules.html)
+- [ECMAScript: functions and classes](https://tc39.es/ecma262/multipage/ecmascript-language-functions-and-classes.html)
