@@ -84,3 +84,44 @@ Float64Array
 ```
 
 `Uint8ClampedArray` clamps values to the `0–255` range.
+
+## 2. Endianness
+
+When working with binary data, byte order matters.
+
+The two common formats are:
+
+```text
+Big Endian
+Little Endian
+```
+
+For example, the 16-bit value `3085` is:
+
+```text
+0c0d
+```
+
+In Big Endian:
+
+```text
+0c 0d
+```
+
+In Little Endian:
+
+```text
+0d 0c
+```
+
+JavaScript provides `DataView` for more precise control over binary data and endianness.
+
+```js
+const buffer = new ArrayBuffer(2);
+
+const view = new DataView(buffer);
+
+view.setInt16(0, 256, true);
+```
+
+The third argument controls the desired endian format.
