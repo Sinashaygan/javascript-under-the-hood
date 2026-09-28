@@ -86,3 +86,7 @@ function* guarded() {
 }
 for (const value of guarded()) break; // logs "cleanup"
 ```
+
+## 8. Generator Uses and Transpilation
+
+Generators simplify lazy sequences and stepwise execution. Asynchronous workflows require a runner to coordinate yielded operations. Older targets can use a transpiler that converts generator execution into a state machine.
