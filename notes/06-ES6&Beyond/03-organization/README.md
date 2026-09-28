@@ -55,3 +55,19 @@ const request = doubleInput();
 request.next();  // { value: "number?", done: false }
 request.next(6); // { value: 12, done: true }
 ```
+
+## 6. Delegation with `yield*`
+
+`yield*` delegates iteration to another iterable. Its expression result is the delegate's completion value, allowing generators to compose execution and results.
+
+```js
+function* inner() {
+    yield "step";
+    return "finished";
+}
+function* outer() {
+    const result = yield* inner();
+    yield result;
+}
+[...outer()]; // ["step", "finished"]
+```
