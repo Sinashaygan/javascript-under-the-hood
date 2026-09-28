@@ -71,3 +71,18 @@ function* outer() {
 }
 [...outer()]; // ["step", "finished"]
 ```
+
+## 7. Early Completion and Errors
+
+For a suspended generator, `return(value)` requests completion; `throw(error)` injects an exception at the pause. `catch` may recover and continue. `finally` runs during cleanup; yielding there can postpone completion.
+
+```js
+function* guarded() {
+    try {
+        yield "working";
+    } finally {
+        console.log("cleanup");
+    }
+}
+for (const value of guarded()) break; // logs "cleanup"
+```
