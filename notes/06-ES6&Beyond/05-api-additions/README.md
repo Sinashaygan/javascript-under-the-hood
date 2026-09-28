@@ -165,3 +165,29 @@ arr[Symbol.iterator]();
 ```
 
 These methods connect Arrays directly with the ES6 Iterator protocol.
+
+## Object.is()
+
+`Object.is()` performs a precise value comparison.
+
+Two important differences from `===` are:
+
+```js
+NaN === NaN;
+// false
+
+Object.is(NaN, NaN);
+// true
+```
+
+And:
+
+```js
+0 === -0;
+// true
+
+Object.is(0, -0);
+// false
+```
+
+For most other values, `Object.is()` behaves similarly to `===`.
