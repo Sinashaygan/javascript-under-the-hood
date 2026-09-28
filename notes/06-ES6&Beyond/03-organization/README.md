@@ -167,3 +167,18 @@ class TaggedLabel extends Label {
 }
 new TaggedLabel("ready", "status").createdBy; // "TaggedLabel"
 ```
+
+## 17. Native Subclasses and `Symbol.species`
+
+ES6 supports subclassing built-ins such as `Array` and `Error`. A static `Symbol.species` getter selects the constructor used by species-aware methods such as `Array.prototype.map()`.
+
+```js
+class Scores extends Array {
+    static get [Symbol.species]() { return Array; }
+    first() { return this[0]; }
+}
+const scores = new Scores(4, 8);
+const doubled = scores.map(value => value * 2);
+doubled instanceof Scores; // false
+doubled instanceof Array;  // true
+```
