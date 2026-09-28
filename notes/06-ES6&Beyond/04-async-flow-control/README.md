@@ -604,3 +604,57 @@ is equivalent to:
 ```js
 [...s.values()]
 ```
+
+## 12. WeakSet
+
+`WeakSet` is the weak counterpart of `Set`.
+
+It stores unique objects using weak references.
+
+```js
+const ws = new WeakSet();
+
+let user = {
+    id: 1
+};
+
+ws.add(user);
+
+console.log(ws.has(user));
+// true
+
+user = null;
+```
+
+If there are no other references to the object, it can be garbage collected.
+
+Unlike Set, WeakSet does not accept primitive values:
+
+```js
+const ws = new WeakSet();
+
+ws.add("hello");
+// TypeError
+```
+
+Only objects can be stored.
+
+### WeakSet API
+
+```js
+ws.add(object);
+ws.has(object);
+ws.delete(object);
+```
+
+WeakSet does not provide:
+
+```text
+size
+clear()
+keys()
+values()
+entries()
+```
+
+It is also not iterable.
