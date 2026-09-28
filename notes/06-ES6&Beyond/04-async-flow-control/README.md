@@ -403,3 +403,75 @@ for...of
 spread syntax
 Array.from()
 ```
+
+## 9. WeakMap
+
+`WeakMap` is similar to `Map`, but its keys are held **weakly**.
+
+A WeakMap only accepts objects as keys:
+
+```js
+const wm = new WeakMap();
+
+const user = {
+    name: "Sina"
+};
+
+wm.set(user, "metadata");
+
+console.log(wm.get(user));
+// "metadata"
+```
+
+Unlike a normal Map, the key does not prevent the object from being garbage collected.
+
+```text
+Object
+   ↓
+WeakMap
+   ↓
+weak reference
+   ↓
+GC can reclaim the object
+```
+
+If the object has no other references, it can become eligible for garbage collection.
+
+### WeakMap API
+
+```js
+wm.set(key, value);
+wm.get(key);
+wm.has(key);
+wm.delete(key);
+```
+
+WeakMap does not provide:
+
+```text
+size
+clear()
+keys()
+values()
+entries()
+```
+
+It is also not iterable.
+
+The restricted API prevents garbage-collection behavior from becoming observable through enumeration.
+
+### Use Case
+
+WeakMap is useful for associating metadata with objects:
+
+```js
+const metadata = new WeakMap();
+
+const button = document.querySelector("button");
+
+metadata.set(button, {
+    clicked: true
+});
+```
+
+If the DOM element is later discarded and no other references exist, the WeakMap does not prevent it from being garbage collected.
