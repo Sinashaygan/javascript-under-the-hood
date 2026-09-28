@@ -13,7 +13,6 @@ cursor.next(); // { value: 9, done: false }
 cursor.next(); // { value: undefined, done: true }
 ```
 
-
 ## 2. Consuming Iterables
 
 `for...of`, array spread, and array destructuring consume iterables. `for...of` ignores completion values with `done: true`. Spread exhausts its input; an infinite iterable therefore needs bounded consumption.
@@ -24,3 +23,7 @@ const [first] = colors;
 const copy = [...colors];
 for (const color of colors) console.log(color);
 ```
+
+## 3. Custom Iterators and Cleanup
+
+Custom iterators can preserve state in closures and organize values or tasks. Returning `this` from `[Symbol.iterator]()` makes an iterator iterable. Optional `return()` supports cleanup when consumers stop early; `throw()` signals errors.
