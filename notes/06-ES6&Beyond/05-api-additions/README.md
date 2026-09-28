@@ -534,3 +534,55 @@ Another example:
 "*".repeat(5);
 // "*****"
 ```
+
+## String Search Methods
+
+### startsWith()
+
+Checks whether a String starts with a specified substring.
+
+```js
+const text = "JavaScript";
+
+text.startsWith("Java");
+// true
+```
+
+It can also receive a starting position:
+
+```js
+"Hello World".startsWith("World", 6);
+// true
+```
+
+### endsWith()
+
+Checks whether a String ends with a specified substring.
+
+```js
+const text = "JavaScript";
+
+text.endsWith("Script");
+// true
+```
+
+### includes()
+
+Checks whether a String contains another String.
+
+```js
+const text = "JavaScript";
+
+text.includes("Script");
+// true
+
+text.includes("Python");
+// false
+```
+
+It can also receive a starting position:
+
+```js
+"JavaScript".includes("Script", 4);
+// true
+```
