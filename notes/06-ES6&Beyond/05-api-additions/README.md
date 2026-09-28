@@ -500,3 +500,21 @@ NFD
 NFKC
 NFKD
 ```
+
+## String.raw()
+
+`String.raw()` provides access to the raw contents of a template literal.
+
+```js
+String.raw`\n`;
+```
+
+Unlike:
+
+```js
+"\n";
+```
+
+the escape sequence remains raw rather than being interpreted as a newline.
+
+`String.raw()` is especially useful with tagged template literals.
