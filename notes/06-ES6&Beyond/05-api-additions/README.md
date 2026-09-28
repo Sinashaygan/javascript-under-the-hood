@@ -19,3 +19,30 @@ Array.of(1, 2, 3);
 Array(3);    // Creates an Array with length 3
 Array.of(3); // Creates an Array containing 3
 ```
+
+## Array.from()
+
+`Array.from()` creates a real Array from an iterable or array-like value.
+
+```js
+const arrLike = {
+    length: 3,
+    0: "foo",
+    1: "bar"
+};
+
+Array.from(arrLike);
+// ["foo", "bar", undefined]
+```
+
+It can also perform mapping during conversion:
+
+```js
+Array.from([1, 2, 3], function mapper(value) {
+    return value * 2;
+});
+
+// [2, 4, 6]
+```
+
+`Array.from()` is useful for converting array-like objects and iterables into real Arrays.
