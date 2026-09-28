@@ -271,3 +271,78 @@ Enumerable properties
 ```
 
 It does not copy inherited or non-enumerable properties.
+
+## Math API Additions
+
+ES6 added several mathematical utilities.
+
+### Trigonometric
+
+```js
+Math.cosh()
+Math.acosh()
+Math.sinh()
+Math.asinh()
+Math.tanh()
+Math.atanh()
+Math.hypot()
+```
+
+Example:
+
+```js
+Math.hypot(3, 4);
+// 5
+```
+
+### Arithmetic
+
+```js
+Math.cbrt()
+Math.clz32()
+Math.expm1()
+Math.log2()
+Math.log10()
+Math.log1p()
+Math.imul()
+```
+
+Examples:
+
+```js
+Math.cbrt(8);
+// 2
+
+Math.log2(8);
+// 3
+```
+
+### Other Useful Methods
+
+```js
+Math.sign()
+Math.trunc()
+Math.fround()
+```
+
+`Math.sign()` returns the sign of a number.
+
+```js
+Math.sign(10);
+// 1
+
+Math.sign(-10);
+// -1
+```
+
+`Math.trunc()` removes the fractional part without rounding.
+
+```js
+Math.trunc(4.9);
+// 4
+
+Math.trunc(-4.9);
+// -4
+```
+
+`Math.fround()` converts a number to the nearest 32-bit floating-point representation.
