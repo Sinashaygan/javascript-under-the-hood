@@ -104,3 +104,39 @@ array.fill(value, start, end);
 ```
 
 `start` is included and `end` is excluded.
+
+## find() and findIndex()
+
+`find()` searches an Array using a callback and returns the first matching value.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+numbers.find(function(value) {
+    return value > 3;
+});
+// 4
+```
+
+If no value matches, `find()` returns `undefined`.
+
+`findIndex()` returns the index of the first matching element.
+
+```js
+const numbers = [10, 20, 30, 40];
+
+numbers.findIndex(function(value) {
+    return value > 25;
+});
+// 2
+```
+
+If nothing matches, `findIndex()` returns `-1`.
+
+### Comparison
+
+```text
+some()       → true / false
+find()       → matching value
+findIndex()  → matching index
+```
