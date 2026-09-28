@@ -46,3 +46,17 @@ Array.from([1, 2, 3], function mapper(value) {
 ```
 
 `Array.from()` is useful for converting array-like objects and iterables into real Arrays.
+
+## Empty Slots
+
+`Array.from()` produces actual values instead of empty slots.
+
+```js
+Array(3);
+// [empty × 3]
+
+Array.from({ length: 3 });
+// [undefined, undefined, undefined]
+```
+
+Empty slots can behave differently from explicit `undefined` values, so `Array.from()` can be useful when a real value is needed at every index.
