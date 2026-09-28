@@ -430,3 +430,33 @@ isNaN() / isFinite()
 Number.isNaN() / Number.isFinite()
 → do not perform coercion
 ```
+
+## Number.isInteger()
+
+Checks whether a value is an integer.
+
+```js
+Number.isInteger(10);
+// true
+
+Number.isInteger(10.5);
+// false
+
+Number.isInteger(NaN);
+// false
+
+Number.isInteger(Infinity);
+// false
+```
+
+### Number.isSafeInteger()
+
+Checks whether a value is both an integer and within the safe integer range.
+
+```js
+Number.isSafeInteger(42);
+// true
+
+Number.isSafeInteger(Math.pow(2, 53));
+// false
+```
