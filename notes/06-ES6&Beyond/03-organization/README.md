@@ -41,3 +41,17 @@ function* stages() {
 const workflow = stages();
 workflow.next(); // { value: "draft", done: false }
 ```
+
+## 5. Two-Way Communication
+
+`yield` sends a value out; the next `next(value)` supplies its expression result. The first `next()` argument is ignored. A generator's `return` produces a completion value, not another yielded item.
+
+```js
+function* doubleInput() {
+    const input = yield "number?";
+    return input * 2;
+}
+const request = doubleInput();
+request.next();  // { value: "number?", done: false }
+request.next(6); // { value: 12, done: true }
+```
