@@ -105,3 +105,17 @@ export let count = 0;
 export function increment() { count++; }
 export default function reset() { count = 0; }
 ```
+
+## 11. Imports
+
+Static imports use literal specifiers at module top level. Named imports can be aliased; default imports choose a local name. Namespace imports group exports. Bare imports execute module side effects.
+
+```js
+// app.js
+import reset, { count, increment as add } from "./counter.js";
+import * as counter from "./counter.js";
+add();
+console.log(count, counter.count); // 1 1
+reset();
+console.log(count); // 0
+```
