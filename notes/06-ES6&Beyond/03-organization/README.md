@@ -94,3 +94,14 @@ Generators simplify lazy sequences and stepwise execution. Asynchronous workflow
 ## 9. Modules and Earlier Patterns
 
 Closure-based factories hide state and expose an API. CommonJS uses `require()` and `module.exports`. ES6 introduces explicit module syntax, private module scope, strict mode, and statically discoverable dependencies.
+
+## 10. Exports
+
+Named exports expose declarations or existing bindings, optionally under aliases. A module has at most one default export. Re-exports forward another module's API; `export *` excludes its default export.
+
+```js
+// counter.js
+export let count = 0;
+export function increment() { count++; }
+export default function reset() { count = 0; }
+```
