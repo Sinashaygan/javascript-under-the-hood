@@ -346,3 +346,34 @@ Math.trunc(-4.9);
 ```
 
 `Math.fround()` converts a number to the nearest 32-bit floating-point representation.
+
+## Number API Additions
+
+ES6 added several useful Number properties and methods.
+
+### Number.EPSILON
+
+`Number.EPSILON` represents the smallest difference between `1` and the next representable floating-point number.
+
+It is useful when dealing with floating-point precision.
+
+```js
+0.1 + 0.2 === 0.3;
+// false
+```
+
+### Safe Integers
+
+```js
+Number.MAX_SAFE_INTEGER;
+// 9007199254740991
+
+Number.MIN_SAFE_INTEGER;
+// -9007199254740991
+```
+
+These represent the safe integer range:
+
+```text
+-(2^53 - 1) → 2^53 - 1
+```
