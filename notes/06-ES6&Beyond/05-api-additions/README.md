@@ -191,3 +191,21 @@ Object.is(0, -0);
 ```
 
 For most other values, `Object.is()` behaves similarly to `===`.
+
+## Object.getOwnPropertySymbols()
+
+`Object.getOwnPropertySymbols()` returns the Symbol properties directly defined on an object.
+
+```js
+const sym = Symbol("foo");
+
+const obj = {
+    name: "Sina",
+    [sym]: 42
+};
+
+Object.getOwnPropertySymbols(obj);
+// [Symbol(foo)]
+```
+
+Only own Symbol properties are returned.
