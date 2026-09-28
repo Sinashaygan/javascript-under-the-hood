@@ -12,3 +12,15 @@ cursor.next(); // { value: 7, done: false }
 cursor.next(); // { value: 9, done: false }
 cursor.next(); // { value: undefined, done: true }
 ```
+
+
+## 2. Consuming Iterables
+
+`for...of`, array spread, and array destructuring consume iterables. `for...of` ignores completion values with `done: true`. Spread exhausts its input; an infinite iterable therefore needs bounded consumption.
+
+```js
+const colors = ["red", "blue"];
+const [first] = colors;
+const copy = [...colors];
+for (const color of colors) console.log(color);
+```
