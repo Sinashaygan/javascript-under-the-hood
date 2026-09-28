@@ -518,3 +518,19 @@ Unlike:
 the escape sequence remains raw rather than being interpreted as a newline.
 
 `String.raw()` is especially useful with tagged template literals.
+
+## repeat()
+
+`repeat()` creates a new String by repeating the original String.
+
+```js
+"foo".repeat(3);
+// "foofoofoo"
+```
+
+Another example:
+
+```js
+"*".repeat(5);
+// "*****"
+```
