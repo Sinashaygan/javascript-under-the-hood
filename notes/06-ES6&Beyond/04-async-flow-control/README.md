@@ -687,3 +687,62 @@ It is also not iterable.
         │                │                │
       Views        weak object keys   weak objects
 ```
+
+# Key Takeaways
+
+### TypedArray
+
+Use TypedArrays when working with structured binary data.
+
+```text
+ArrayBuffer → raw binary memory
+TypedArray  → typed view over that memory
+DataView    → low-level control over the memory
+```
+
+### Map
+
+Use Map for key/value collections, especially when keys can be objects.
+
+```js
+map.set(key, value);
+map.get(key);
+map.has(key);
+map.delete(key);
+```
+
+### WeakMap
+
+Use WeakMap when associating data with objects without preventing those objects from being garbage collected.
+
+```js
+weakMap.set(object, value);
+```
+
+### Set
+
+Use Set when values must be unique.
+
+```js
+const unique = [...new Set(array)];
+```
+
+### WeakSet
+
+Use WeakSet for a collection of unique objects where weak references are desirable.
+
+```js
+weakSet.add(object);
+```
+
+## Final Idea
+
+ES6 introduced specialized native data structures instead of forcing developers to build everything on top of `Array` and `Object`.
+
+```text
+TypedArray → Binary Data
+Map        → Key/Value
+WeakMap    → Weak Object Keys
+Set        → Unique Values
+WeakSet    → Weak Unique Objects
+```
