@@ -152,3 +152,18 @@ class HighlightedLabel extends Label {
 }
 new HighlightedLabel("ready").describe(); // "[ready]"
 ```
+
+## 16. Derived Constructors and `new.target`
+
+A derived constructor must call `super()` before accessing `this`. Its default constructor forwards arguments. `new.target` identifies the constructor invoked by `new`, including through parent constructor calls.
+
+```js
+class TaggedLabel extends Label {
+    constructor(text, tag) {
+        super(text);
+        this.tag = tag;
+        this.createdBy = new.target.name;
+    }
+}
+new TaggedLabel("ready", "status").createdBy; // "TaggedLabel"
+```
