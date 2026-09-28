@@ -266,3 +266,48 @@ b.sort();
 console.log(b);
 // [1, 2, 10]
 ```
+
+## 7. Map
+
+A `Map` stores key/value pairs.
+
+Unlike regular objects, a Map can use **any value as a key**, including objects.
+
+With an ordinary object:
+
+```js
+const m = {};
+
+const x = { id: 1 };
+const y = { id: 2 };
+
+m[x] = "foo";
+m[y] = "bar";
+
+console.log(m[x]);
+// "bar"
+```
+
+Both objects become the same string property key:
+
+```text
+"[object Object]"
+```
+
+`Map` solves this problem:
+
+```js
+const m = new Map();
+
+const x = { id: 1 };
+const y = { id: 2 };
+
+m.set(x, "foo");
+m.set(y, "bar");
+
+console.log(m.get(x));
+// "foo"
+
+console.log(m.get(y));
+// "bar"
+```
