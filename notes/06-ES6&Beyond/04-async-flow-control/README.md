@@ -311,3 +311,95 @@ console.log(m.get(x));
 console.log(m.get(y));
 // "bar"
 ```
+
+## 8. Map API
+
+The main Map methods and properties are:
+
+```js
+map.set(key, value);
+map.get(key);
+map.has(key);
+map.delete(key);
+map.clear();
+
+map.size;
+```
+
+Example:
+
+```js
+const users = new Map();
+
+users.set("Sina", 20);
+users.set("Ali", 25);
+
+console.log(users.get("Sina"));
+// 20
+
+console.log(users.has("Ali"));
+// true
+
+console.log(users.size);
+// 2
+```
+
+A Map can also be created from an iterable containing key/value pairs:
+
+```js
+const x = { id: 1 };
+const y = { id: 2 };
+
+const m = new Map([
+    [x, "foo"],
+    [y, "bar"]
+]);
+```
+
+Maps provide three important iterator methods:
+
+```js
+map.keys();
+map.values();
+map.entries();
+```
+
+### Values
+
+```js
+const values = [...m.values()];
+```
+
+### Keys
+
+```js
+const keys = [...m.keys()];
+```
+
+### Entries
+
+```js
+const entries = [...m.entries()];
+```
+
+The default Map iterator is `entries()`.
+
+Therefore:
+
+```js
+[...m]
+```
+
+is equivalent to:
+
+```js
+[...m.entries()]
+```
+
+Maps work naturally with:
+
+```text
+for...of
+spread syntax
+Array.from()
+```
