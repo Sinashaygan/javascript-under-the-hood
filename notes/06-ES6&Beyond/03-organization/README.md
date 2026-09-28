@@ -141,3 +141,14 @@ class Label {
 }
 new Label("ready").describe(); // "ready"
 ```
+
+## 15. Inheritance and `super`
+
+`extends` links both instance prototypes and constructors. `super.method()` starts lookup from the method's home object's prototype while retaining the current `this`. Copying a method does not change that home object.
+
+```js
+class HighlightedLabel extends Label {
+    describe() { return `[${super.describe()}]`; }
+}
+new HighlightedLabel("ready").describe(); // "[ready]"
+```
