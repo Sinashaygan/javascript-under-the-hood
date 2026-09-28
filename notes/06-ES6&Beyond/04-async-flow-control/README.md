@@ -475,3 +475,89 @@ metadata.set(button, {
 ```
 
 If the DOM element is later discarded and no other references exist, the WeakMap does not prevent it from being garbage collected.
+
+## 10. Set
+
+A `Set` is a collection of **unique values**.
+
+```js
+const s = new Set();
+
+s.add(10);
+s.add(20);
+s.add(10);
+
+console.log(s.size);
+// 2
+```
+
+The duplicate `10` is ignored.
+
+You can also create a Set from an array:
+
+```js
+const s = new Set([
+    1,
+    2,
+    3,
+    2,
+    1
+]);
+```
+
+The resulting collection contains only:
+
+```text
+1
+2
+3
+```
+
+### Set API
+
+```js
+set.add(value);
+set.has(value);
+set.delete(value);
+set.clear();
+
+set.size;
+```
+
+Example:
+
+```js
+const numbers = new Set();
+
+numbers.add(10);
+numbers.add(20);
+
+console.log(numbers.has(10));
+// true
+
+numbers.delete(10);
+
+console.log(numbers.has(10));
+// false
+```
+
+Set does not have `get()` because it does not associate keys with values.
+
+It simply answers:
+
+```text
+"Does this value exist?"
+```
+
+### Removing Duplicates
+
+A common real-world pattern is:
+
+```js
+const numbers = [1, 2, 2, 3, 3, 4];
+
+const unique = [...new Set(numbers)];
+
+console.log(unique);
+// [1, 2, 3, 4]
+```
