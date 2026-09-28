@@ -129,3 +129,15 @@ Imports are live, read-only bindings: exporter updates remain visible, but impor
 ## 13. Module Loading
 
 Hosts resolve specifiers and load dependencies; static syntax describes the dependency graph. Within a module graph, consumers share an evaluated module instance. The chapter's `Reflect.Loader` discussion describes historical proposals, not a standardized ES6 API.
+
+## 14. Class Syntax
+
+Classes organize constructors and shared prototype methods. They retain JavaScript's prototype delegation model. Class bodies use strict mode; constructors require `new`, and class declarations cannot be accessed before initialization.
+
+```js
+class Label {
+    constructor(text) { this.text = text; }
+    describe() { return this.text; }
+}
+new Label("ready").describe(); // "ready"
+```
