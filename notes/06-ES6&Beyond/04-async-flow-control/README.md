@@ -125,3 +125,37 @@ view.setInt16(0, 256, true);
 ```
 
 The third argument controls the desired endian format.
+
+## 3. Multiple Views
+
+A single `ArrayBuffer` can have multiple views.
+
+```js
+const buf = new ArrayBuffer(2);
+
+const view8 = new Uint8Array(buf);
+const view16 = new Uint16Array(buf);
+
+view16[0] = 3085;
+
+console.log(view8[0]);
+console.log(view8[1]);
+```
+
+Both views operate on the **same underlying buffer**.
+
+```text
+             ArrayBuffer
+                  │
+          ┌───────┴───────┐
+          ↓               ↓
+      Uint8Array      Uint16Array
+```
+
+TypedArray constructors can also receive:
+
+```js
+new Uint8Array(buffer, byteOffset, length);
+```
+
+This allows a view to start at a specific byte offset and cover only part of the buffer.
