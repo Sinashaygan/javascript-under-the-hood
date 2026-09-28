@@ -377,3 +377,56 @@ These represent the safe integer range:
 ```text
 -(2^53 - 1) → 2^53 - 1
 ```
+
+## Number.isNaN()
+
+`Number.isNaN()` checks whether a value is actually `NaN` without performing type coercion.
+
+```js
+Number.isNaN(NaN);
+// true
+
+Number.isNaN("NaN");
+// false
+
+Number.isNaN(42);
+// false
+```
+
+Unlike the global `isNaN()`:
+
+```js
+isNaN("hello");
+// true
+
+Number.isNaN("hello");
+// false
+```
+
+### Number.isFinite()
+
+`Number.isFinite()` checks whether a value is a finite Number without coercion.
+
+```js
+Number.isFinite(42);
+// true
+
+Number.isFinite(Infinity);
+// false
+
+Number.isFinite(NaN);
+// false
+
+Number.isFinite("42");
+// false
+```
+
+### Key Difference
+
+```text
+isNaN() / isFinite()
+→ perform coercion
+
+Number.isNaN() / Number.isFinite()
+→ do not perform coercion
+```
