@@ -586,3 +586,72 @@ It can also receive a starting position:
 "JavaScript".includes("Script", 4);
 // true
 ```
+
+# Key Takeaways
+
+ES6 introduced many useful APIs for working with JavaScript's built-in types.
+
+### Arrays
+
+```js
+Array.of()
+Array.from()
+
+array.find()
+array.findIndex()
+array.copyWithin()
+array.fill()
+
+array.keys()
+array.values()
+array.entries()
+```
+
+### Objects
+
+```js
+Object.is()
+Object.assign()
+Object.getOwnPropertySymbols()
+Object.setPrototypeOf()
+```
+
+### Math
+
+```js
+Math.hypot()
+Math.cbrt()
+Math.log2()
+Math.sign()
+Math.trunc()
+Math.fround()
+```
+
+### Numbers
+
+```js
+Number.EPSILON
+Number.MAX_SAFE_INTEGER
+Number.MIN_SAFE_INTEGER
+
+Number.isNaN()
+Number.isFinite()
+Number.isInteger()
+Number.isSafeInteger()
+```
+
+### Strings
+
+```js
+String.fromCodePoint()
+String.raw()
+
+str.codePointAt()
+str.normalize()
+str.repeat()
+str.startsWith()
+str.endsWith()
+str.includes()
+```
+
+The main goal is not to memorize every API, but to understand **what problem each API solves and when it should be used**.
