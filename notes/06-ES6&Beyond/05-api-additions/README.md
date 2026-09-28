@@ -60,3 +60,26 @@ Array.from({ length: 3 });
 ```
 
 Empty slots can behave differently from explicit `undefined` values, so `Array.from()` can be useful when a real value is needed at every index.
+
+## copyWithin()
+
+`copyWithin()` copies part of an Array into another position within the same Array.
+
+```js
+const arr = [1, 2, 3, 4, 5];
+
+arr.copyWithin(3, 0);
+
+console.log(arr);
+// [1, 2, 3, 1, 2]
+```
+
+Syntax:
+
+```js
+array.copyWithin(target, start, end);
+```
+
+`start` is included and `end` is excluded.
+
+`copyWithin()` modifies the original Array.
