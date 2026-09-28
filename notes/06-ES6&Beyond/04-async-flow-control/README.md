@@ -204,3 +204,65 @@ splice()
 ```
 
 are not generally applicable.
+
+## 5. TypedArray Overflow
+
+TypedArray values are constrained by their bit size.
+
+```js
+const a = new Uint8Array(3);
+
+a[0] = 10;
+a[1] = 20;
+a[2] = 30;
+
+const b = a.map(v => v * v);
+
+console.log(b);
+// [100, 144, 132]
+```
+
+The expected values are:
+
+```text
+100
+400
+900
+```
+
+But `Uint8Array` can only represent values in the `0–255` range, so `400` and `900` overflow.
+
+To avoid this, use a larger TypedArray:
+
+```js
+const a = new Uint8Array([10, 20, 30]);
+
+const b = Uint16Array.from(a, v => v * v);
+
+console.log(b);
+// [100, 400, 900]
+```
+
+## 6. TypedArray Sorting
+
+Regular arrays perform string-based sorting by default:
+
+```js
+const a = [10, 1, 2];
+
+a.sort();
+
+console.log(a);
+// [1, 10, 2]
+```
+
+TypedArrays use numeric sorting by default:
+
+```js
+const b = new Uint8Array([10, 1, 2]);
+
+b.sort();
+
+console.log(b);
+// [1, 2, 10]
+```
