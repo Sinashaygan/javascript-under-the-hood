@@ -209,3 +209,26 @@ Object.getOwnPropertySymbols(obj);
 ```
 
 Only own Symbol properties are returned.
+
+## Object.setPrototypeOf()
+
+`Object.setPrototypeOf()` changes the prototype of an existing object.
+
+```js
+const parent = {
+    hello() {
+        console.log("Hello");
+    }
+};
+
+const child = {};
+
+Object.setPrototypeOf(child, parent);
+
+child.hello();
+// Hello
+```
+
+Property lookup can continue through the prototype chain.
+
+Changing prototypes after objects are already heavily used can have performance implications, so this API should be used carefully.
